@@ -19,6 +19,6 @@ class Admin extends BaseController
             'title' => 'data siswa',
             'siswa' => $this->AdminModel->findAll()
         ];
-        echo view('v_admin', $data);
+        echo view('admin/v_dashboard', $data);
     }
 }

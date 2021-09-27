@@ -76,7 +76,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="font-weight-bold text-warning text-uppercase mb-1">
-                                Periode Pemilihan
+                                Periode
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">2021/2022</div>
                         </div>

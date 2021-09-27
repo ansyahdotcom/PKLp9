@@ -13,8 +13,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item <?php $uri = service('uri'); if($uri->getSegment(1) == 'admin') { echo 'active'; } ?>">
+        <a class="nav-link" href="/admin">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -40,8 +40,8 @@
             <span>Manajemen Kelas</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+    <li class="nav-item <?php $uri = service('uri'); if($uri->getSegment(1) == 'kandidat') { echo 'active'; } ?>">
+        <a class="nav-link" href="/kandidat">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Manajemen Kandidat</span>
         </a>
