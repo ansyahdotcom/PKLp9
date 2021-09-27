@@ -6,9 +6,15 @@
         <i class="fa fa-bars"></i>
     </button>
 
+    <div class="sidebar-brand d-flex align-items-center justify-content-center">
+        <div class="sidebar-brand-icon">
+            <img src="/assets/img/logo.png" alt="" width="40px">
+        </div>
+        <h3 class="text-primary font-weight-bold mx-3">SMAN 4 Surakarta</h3>
+    </div>
+
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
-
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
         <li class="nav-item dropdown no-arrow d-sm-none">
             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
