@@ -2,23 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
+use App\Models\AdminModel;
 
-class User extends BaseController
+class Admin extends BaseController
 {
     // protected $loginModel;
-    protected $UserModel;
+    protected $AdminModel;
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
-        $this->UserModel = new UserModel;
+        $this->AdminModel = new AdminModel;
     }
     public function index()
     {
         $data = [
             'title' => 'data siswa',
-            'siswa' => $this->UserModel->findAll()
+            'siswa' => $this->AdminModel->findAll()
         ];
-        echo view('v_user', $data);
+        echo view('v_admin', $data);
     }
 }
