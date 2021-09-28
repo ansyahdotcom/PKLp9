@@ -12,6 +12,7 @@ class User extends BaseController
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
+        helper(['form']);
         $this->UserModel = new UserModel;
     }
 
@@ -81,9 +82,9 @@ class User extends BaseController
         // PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
         $object = new PHPExcel();
 
-        $object->getProperties()->setCreator("");
-        $object->getProperties()->setLastModifiedBy("Workshop JTI");
-        $object->getProperties()->setTitle("Template Import Mahasiswa");
+        $object->getProperties()->setCreator("Duxeos Software House");
+        $object->getProperties()->setLastModifiedBy("Duxeos");
+        $object->getProperties()->setTitle("Template Import Siswa");
 
         $object->setActiveSheetIndex(0);
 
@@ -227,8 +228,7 @@ class User extends BaseController
     {
         $data = [
             'title' => 'Manajemen User',
-            'train' => $this->UserModel->findAll(),
-            'class' => $this->classModel->findAll()
+            'train' => $this->UserModel->findAll()
         ];
         $hapus = $this->UserModel->deleteData($nis);
         // mengirim pesan berhasil dihapus

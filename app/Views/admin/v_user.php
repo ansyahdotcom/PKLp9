@@ -9,9 +9,9 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="" class="btn btn-success btn-sm">
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#TambahModal" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i>
-                Add data
+                Add Data
             </a>
             <a href="javascript:void(0)" data-toggle="modal" data-target="#modalImport" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i>&nbsp;&nbsp;Import Data
@@ -50,7 +50,7 @@
                                 <td class="d-flex">
                                     <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
                                     <a href="#" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm mr-2" title="hapus data"><i class="fas fa-trash"></i></a>
+                                    <button data-tooltip="tooltip" title="Hapus Data" type="button" data-id="<?= $k['nis'] ?>" data-link="/user/delete/" data-nama=" Siswa <?= $k['nama_usr'] ?>" id="hapus_crud" class="btn btn-danger btn-sm hapus_crud"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -59,9 +59,95 @@
             </div>
         </div>
     </div>
-
 </div>
 
+<!-- Modal Tambah -->
+<div class="modal fade" id="TambahModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class=" modal-lg modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-bd">
+                <h4 class="modal-title">
+                    <span class="">
+                        Tambah Data Siswa</span>
+                </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url() ?>/user/insert" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default mx-0">
+                                <label>Nama Siswa</label>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
+                            </div>
+                            <div class="form-group form-group-default mx-0">
+                                <label>Nama Siswa</label>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
+                            </div>
+                            <div class="form-group form-group-default mx-0">
+                                <label>Nama Siswa</label>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
+                            </div>
+                            <div class="form-group form-group-default mx-0">
+                                <label>Nama Siswa</label>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
+                            </div>
+                            <div class="form-group form-group-default mx-0">
+                                <label>Nama Siswa</label>
+                                <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div class="form-group form-group-default mx-0">
+                                <label>Alpha</label>
+                                <input id="alpha" type="number" name="alpha" pattern="^(?:0*(?:\.\d+)?|1(\.0*)?)$" class="form-control" placeholder="Masukkan nilai antara 0.0 - 0.1" required>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="modal-footer no-bd">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail -->
+<?php
+foreach ($user as $data) { ?>
+    <div class="modal fade" id="DetailModal<?= $data['nis'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h3 class="modal-title">
+                        <span class="fw-mediumbold">
+                            Detail Data Siswa</span>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?= base_url() ?>/user" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" name="nama" class="form-control" value="<?= set_value('nama_usr') ?>" id="nama" placeholder="Masukkan Nama Lengkap">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer no-bd">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+<!-- Modal Import Data -->
 <div class="modal fade" id="modalImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
