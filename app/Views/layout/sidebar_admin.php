@@ -13,7 +13,10 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item <?php $uri = service('uri'); if($uri->getSegment(1) == 'admin') { echo 'active'; } ?>">
+    <li class="nav-item <?php $uri = service('uri');
+                        if ($uri->getSegment(1) == 'admin') {
+                            echo 'active';
+                        } ?>">
         <a class="nav-link" href="/admin">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -28,19 +31,28 @@
     </div>
 
     <!-- List Master Menu -->
-    <li class="nav-item">
+    <li class="nav-item <?php $uri = service('uri');
+                        if ($uri->getSegment(1) == 'user') {
+                            echo 'active';
+                        } ?>">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-users"></i>
             <span>Manajemen User</span>
         </a>
     </li>
-    <li class="nav-item <?php $uri = service('uri'); if($uri->getSegment(1) == 'kelas') { echo 'active'; } ?>">
+    <li class="nav-item <?php $uri = service('uri');
+                        if ($uri->getSegment(1) == 'kelas') {
+                            echo 'active';
+                        } ?>">
         <a class="nav-link" href="/kelas">
             <i class="fas fa-fw fa-building"></i>
             <span>Manajemen Kelas</span>
         </a>
     </li>
-    <li class="nav-item <?php $uri = service('uri'); if($uri->getSegment(1) == 'kandidat') { echo 'active'; } ?>">
+    <li class="nav-item <?php $uri = service('uri');
+                        if ($uri->getSegment(1) == 'kandidat') {
+                            echo 'active';
+                        } ?>">
         <a class="nav-link" href="/kandidat">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Manajemen Kandidat</span>
