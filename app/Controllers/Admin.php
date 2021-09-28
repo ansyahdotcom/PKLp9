@@ -16,7 +16,7 @@ class Admin extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'data siswa',
+            'title' => 'Dashboard Admin',
             'siswa' => $this->AdminModel->findAll()
         ];
         echo view('admin/v_dashboard', $data);
