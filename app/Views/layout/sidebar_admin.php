@@ -35,7 +35,7 @@
                         if ($uri->getSegment(1) == 'user') {
                             echo 'active';
                         } ?>">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/user">
             <i class="fas fa-fw fa-users"></i>
             <span>Manajemen User</span>
         </a>

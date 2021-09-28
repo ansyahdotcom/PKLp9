@@ -16,8 +16,9 @@ class Kelas extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Data Kelas',
-            'kelas' => $this->KelasModel->getKelas()->getResultArray()
+            'title'     => 'Data Kelas',
+            'kelas'     => $this->KelasModel->getKelas()->getResultArray(),
+            'jm_siswa'  => $this->KelasModel->getJumlahSiswa()
         ];
         echo view('admin/v_kelas', $data);
     }

@@ -12,8 +12,14 @@ class KelasModel extends Model
     public function getKelas()
     {
         $this->select('*');
-        // $this->join('user', 'kelas.id_kelas=user.id_kelas');
-        $this->orderBy('id_kelas', 'DESC');
+        $this->orderBy('id_kelas', 'ASC');
         return $this->get();
+    }
+
+    public function getJumlahSiswa()
+    {
+        $this->select('*');
+        $this->join('user', 'user.id_kelas=kelas.id_kelas');
+        return $this->db->table('user')->countAll();
     }
 }

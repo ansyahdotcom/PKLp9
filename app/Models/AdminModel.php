@@ -17,4 +17,11 @@ class AdminModel extends Model
     // }
     protected $table      = 'user';
     // protected $primaryKey = 'id_user';
+
+    public function getJumlahKandidat()
+    {
+        $this->select('*');
+        $this->join('kandidat', 'kandidat.id_kandidat');
+        return $this->db->table('kandidat')->countAll();
+    }
 }

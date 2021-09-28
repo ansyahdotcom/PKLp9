@@ -60,7 +60,7 @@
                             <div class="font-weight-bold text-info text-uppercase mb-1">
                                 Jumlah Kandidat
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jm_kandidat; ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user-tie fa-2x text-gray-300"></i>

@@ -9,39 +9,40 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="" class="btn btn-success btn-sm">
+            <a href="#" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i>
                 Add data
             </a>
-        </div>
+    </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID Kelas</th>
+                            <th>No</th>
                             <th>Nama Kelas</th>
-                            <!-- <th>Jumlah Siswa</th> -->
+                            <th>Jumlah Siswa</th>
                             <th>Last Update</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>ID Kelas</th>
+                            <th>No</th>
                             <th>Nama Kelas</th>
-                            <!-- <th>Jumlah Siswa</th> -->
+                            <th>Jumlah Siswa</th>
                             <th>Last Update</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <?php foreach($kelas as $kls) : ?>
+                        <?php foreach($kelas as $k) : ?>
                         <?php $no = 1; ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $kls['nama_kelas']; ?></td>
-                            <td><?= $kls['updated_at']; ?></td>
+                            <td><?= $k['nama_kelas']; ?></td>
+                            <td><?= $jm_siswa; ?></td>
+                            <td><?= $k['updated_at']; ?></td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i
                                         class="fas fa-eye"></i></a>

@@ -17,7 +17,8 @@ class Admin extends BaseController
     {
         $data = [
             'title' => 'Dashboard Admin',
-            'siswa' => $this->AdminModel->findAll()
+            'siswa' => $this->AdminModel->findAll(),
+            'jm_kandidat'  => $this->AdminModel->getJumlahKandidat()
         ];
         echo view('admin/v_dashboard', $data);
     }
