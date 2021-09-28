@@ -19,4 +19,12 @@ class KandidatModel extends Model
         $this->orderBy('id_kandidat', 'DESC');
         return $this->findAll();
     }
+
+    public function pemilihan()
+    {
+        $data = $this->db->query("SELECT * FROM kandidat, user, kelas, periode 
+            WHERE kandidat.ketua = user.nis AND user.id_kelas = kelas.id_kelas 
+            AND periode.id_periode = kandidat.id_periode");
+        return $data;
+    }
 }

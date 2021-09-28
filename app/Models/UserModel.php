@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'user';
-    protected $useTimestamps = true;
-    protected $allowedFields = ['nis', 'st_kandidat'];
+    protected $table      = 'user';
+    protected $primaryKey = 'nis';
 
-    public function getUser()
+    protected $useAutoIncrement = true;
+    protected $allowedFields = ['nis', 'nama_usr', 'id_kelas', 'jk', 'st_pemilih', 'st_kandidat', 'password', 'created_at', 'updated_at'];
+
+    public function deleteData($nis)
     {
-        return $this->getWhere([
-            'st_kandidat' => '0'
-        ]);
+        return $this->db->table($this->table)->delete(['nis' => $nis]);
+    }
+
+    public function add($insert)
+    {
+        $this->db->table('user')->insert($insert);
     }
 }

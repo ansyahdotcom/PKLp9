@@ -18,8 +18,10 @@ class DashboardModel extends Model
     protected $table      = 'user';
     // protected $primaryKey = 'id_user';
 
-    public function getDashboard()
+    public function getJumlahKandidat()
     {
-        return $this->findAll();
+        $this->select('*');
+        $this->join('kandidat', 'kandidat.id_kandidat');
+        return $this->db->table('kandidat')->countAll();
     }
 }
