@@ -9,11 +9,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Pemilos | <?= $title; ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- style CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <!-- Summer Note -->
+    <link rel="stylesheet" href="/assets/vendor/summernote/summernote-bs4.min.css">
+
+    <!-- Select Picker -->
+    <link rel="stylesheet" href="/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
 
     <!-- Custom styles for this template-->
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -99,6 +108,44 @@
 
     <!-- Page level custom scripts -->
     <script src="/assets/js/demo/datatables-demo.js"></script>
+
+    <!-- Summer Note -->
+    <script src="/assets/vendor/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $('#visi').summernote({
+            placeholder: 'visi kandidat',
+            tabsize: 2,
+            height: 100
+        });
+
+        $('#misi').summernote({
+            placeholder: 'visi kandidat',
+            tabsize: 2,
+            height: 100
+        });
+    </script>
+
+    <!-- Select Picker -->
+    <script src="/assets/vendor/selectpicker/dist/js/bootstrap-select.min.js"></script>
+    <script src="/assets/vendor/selectpicker/dist/js/defaults-*.min.js"></script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('.selectpicker').selectpicker();
+
+            $('#ketua').change(function() {
+                $('#hide_ketua').val($('#ketua').val());
+            });
+
+            $('#wakil').change(function() {
+                $('#hide_wakil').val($('#wakil').val());
+            });
+
+            $('#periode').change(function() {
+                $('#hide_periode').val($('#periode').val());
+            });
+        });
+    </script> -->
+
 </body>
 
 </html>

@@ -2,22 +2,22 @@
 
 namespace App\Controllers;
 
-use App\Models\AdminModel;
+use App\Models\DashboardModel;
 
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
     // protected $loginModel;
-    protected $AdminModel;
+    protected $DashboardModel;
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
-        $this->AdminModel = new AdminModel;
+        $this->DashboardModel = new DashboardModel();
     }
     public function index()
     {
         $data = [
             'title' => 'data siswa',
-            'siswa' => $this->AdminModel->findAll()
+            'siswa' => $this->DashboardModel->getDashboard()
         ];
         echo view('admin/v_dashboard', $data);
     }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AdminModel extends Model
+class DashboardModel extends Model
 {
     // public function deleteData($id_user)
     // {
@@ -17,4 +17,9 @@ class AdminModel extends Model
     // }
     protected $table      = 'user';
     // protected $primaryKey = 'id_user';
+
+    public function getDashboard()
+    {
+        return $this->findAll();
+    }
 }
