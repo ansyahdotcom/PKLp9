@@ -99,6 +99,11 @@
 
     <!-- Page level custom scripts -->
     <script src="/assets/js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+    </script>
 </body>
 
 </html>
