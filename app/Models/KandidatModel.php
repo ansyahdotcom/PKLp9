@@ -7,17 +7,29 @@ use CodeIgniter\Model;
 class KandidatModel extends Model
 {
     protected $table = 'kandidat';
+    protected $primaryKey = 'id_kandidat';
     protected $useTimestamps = true;
     protected $allowedFields = ['ketua', 'wakil', 'nama_pasangan', 'foto', 'visi', 'misi', 'periode'];
 
     public function getKandidat()
     {
-        $this->select('*');
-        $this->join('user as u1', 'u1.nis=kandidat.ketua');
-        $this->join('user as u2', 'u2.nis=kandidat.wakil');
-        $this->join('periode', 'periode.id_periode=kandidat.periode');
-        $this->orderBy('id_kandidat', 'DESC');
-        return $this->findAll();
+        return $this->select('*')
+                    ->join('user as u1', 'u1.nis=kandidat.ketua')
+                    ->join('user as u2', 'u2.nis=kandidat.wakil')
+                    ->join('periode', 'periode.id_periode=kandidat.periode')
+                    ->orderBy('id_kandidat', 'DESC')
+                    ->findAll();
+    }
+
+    public function editKandidat($id)
+    {
+        return $this->select('*')
+                    ->join('user as u1', 'u1.nis=kandidat.ketua')
+                    ->join('user as u2', 'u2.nis=kandidat.wakil')
+                    ->join('periode', 'periode.id_periode=kandidat.periode')
+                    ->where('id_kandidat', $id)
+                    ->orderBy('id_kandidat', 'DESC')
+                    ->first();
     }
 
     public function pemilihan()

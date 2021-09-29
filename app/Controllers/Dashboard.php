@@ -17,8 +17,8 @@ class Dashboard extends BaseController
     {
         $data = [
             'title' => 'Dashboard Admin',
-            'siswa' => $this->AdminModel->findAll(),
-            'jm_kandidat'  => $this->AdminModel->getJumlahKandidat()
+            'siswa' => $this->DashboardModel->findAll(),
+            'jm_kandidat'  => $this->DashboardModel->getJumlahKandidat()
         ];
         echo view('admin/v_dashboard', $data);
     }

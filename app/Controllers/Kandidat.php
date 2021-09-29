@@ -93,7 +93,7 @@ class Kandidat extends BaseController
                     'required' => 'field misi harus diisi.'
                 ]
             ],
-            
+
         ])) {
             $validation = \Config\Services::validate();
             return redirect()->to('/kandidat/addKandidat')->withInput()->with('validation', $validation);
@@ -137,7 +137,12 @@ class Kandidat extends BaseController
          * Mengirim flashdata
          * ===========================================================
          */
-        session()->setFlashdata('message', 'Data berhasil ditambahkan.');
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil ditambahkan.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
 
         /**
          * ===========================================================
@@ -145,5 +150,68 @@ class Kandidat extends BaseController
          * ===========================================================
          */
         return redirect()->to('/kandidat');
+    }
+
+    /**
+     * ===========================================================
+     * Fungsi delete data kandidat
+     * ===========================================================
+     */
+    public function delete($id)
+    {
+        /**
+         * ===========================================================
+         * Query builder delete kandidat
+         * ===========================================================
+         */
+        $this->KandidatModel->delete($id);
+
+        /**
+         * ===========================================================
+         * Query builder update user
+         * ===========================================================
+         */
+        $dataUser = [
+            [
+                'nis' => $this->request->getVar('ketua'),
+                'st_kandidat' => '0'
+            ],
+            [
+                'nis' => $this->request->getVar('wakil'),
+                'st_kandidat' => '0'
+            ]
+        ];
+
+        $this->UserModel->updateBatch($dataUser, 'nis');
+
+        /**
+         * ===========================================================
+         * Mengirim flashdata
+         * ===========================================================
+         */
+        session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Data berhasil dihapus.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+        return redirect()->to('/kandidat');
+    }
+
+    /**
+     * ===========================================================
+     * Fungsi edit data kandidat
+     * ===========================================================
+     */
+    public function editKandidat($id)
+    {
+        $data = [
+            'title' => 'Edit Kandidat',
+            'user' => $this->UserModel->getUser2(),
+            'validation' => \Config\Services::validation(),
+            'kandidat' => $this->KandidatModel->editKandidat($id)
+        ];
+        echo view('admin/v_editKandidat', $data);
     }
 }

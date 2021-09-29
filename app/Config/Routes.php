@@ -34,7 +34,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'User::index');
 $routes->get('/admin', 'Admin::index');
 $routes->get('/kelas', 'Kelas::index');
-$routes->get('logout', 'Login::logout');
+$routes->get('/logout', 'Login::logout');
+$routes->delete('/kandidat/(:num)', 'Kandidat::delete/$1');
 
 /*
  * --------------------------------------------------------------------

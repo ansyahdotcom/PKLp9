@@ -15,7 +15,7 @@ class DashboardModel extends Model
     // {
     //     $this->db->table('user')->insert($insert);
     // }
-    protected $table      = 'user';
+    protected $table  = 'user';
     // protected $primaryKey = 'id_user';
 
     public function getJumlahKandidat()
