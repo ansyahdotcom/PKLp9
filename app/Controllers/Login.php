@@ -18,9 +18,8 @@ class Login extends BaseController
     public function index()
     {
         if (session()->get('username') != NULL) {
-            // session()->setFlashdata('pesan', $this->notify('Peringatan!', 'Anda sudah login!', 'warning', 'error'));
-            // return redirect()->to("/dashboard");
-            echo 'anda sudah login';
+            session()->setFlashdata('pesan', $this->notify('Peringatan!', 'Anda sudah login!', 'warning', 'error'));
+            return redirect()->to("/dashboard_user");
         }
         $data = [
             'title' => 'Login',
@@ -38,7 +37,8 @@ class Login extends BaseController
         if ($login) {
             if (password_verify($password, $login['password'])) {
                 $data = [
-                    'nis' => $login['nis']
+                    'nis' => $login['nis'],
+                    'st_pemilih' => $login['st_pemilih']
                 ];
                 session()->set($data);
                 return redirect()->to('/dashboard_user');

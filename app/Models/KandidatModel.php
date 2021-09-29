@@ -36,7 +36,15 @@ class KandidatModel extends Model
     {
         $data = $this->db->query("SELECT * FROM kandidat, user, kelas, periode 
             WHERE kandidat.ketua = user.nis AND user.id_kelas = kelas.id_kelas 
-            AND periode.id_periode = kandidat.id_periode");
+            AND periode.id_periode = kandidat.id_periode AND periode.st_periode=1");
+        return $data;
+    }
+
+    public function detail_pemilihan()
+    {
+        $data = $this->db->query("SELECT user.nama_usr as wakil, kelas.nama_kelas as wakil_kelas FROM detail_kandidat, kandidat, user, kelas, periode 
+            WHERE detail_kandidat.wakil = user.nis AND user.id_kelas = kelas.id_kelas AND kandidat.id_kandidat = detail_kandidat.id_kandidat
+            AND periode.id_periode = kandidat.id_periode AND periode.st_periode=1");
         return $data;
     }
 }

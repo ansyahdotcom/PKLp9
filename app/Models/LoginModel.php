@@ -7,5 +7,5 @@ use CodeIgniter\Model;
 class LoginModel extends Model
 {
     protected $table      = 'user';
-    protected $allowedFields = ['nis', 'password'];
+    protected $allowedFields = ['nis', 'password', 'st_pemilih'];
 }
