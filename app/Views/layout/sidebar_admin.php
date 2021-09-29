@@ -14,10 +14,10 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?php $uri = service('uri');
-                        if ($uri->getSegment(1) == 'admin') {
+                        if ($uri->getSegment(1) == 'dashboard') {
                             echo 'active';
                         } ?>">
-        <a class="nav-link" href="/admin">
+        <a class="nav-link" href="/dashboard">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>

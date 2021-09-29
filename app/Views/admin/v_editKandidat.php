@@ -11,7 +11,7 @@
         <form action="/kandidat/save" method="post">
             <?= csrf_field(); ?>
             <div class="card-header bg-primary py-3">
-                <h5 class="text-white font-weight-bold text-center">Form Tambah Data Kandidat</h5>
+                <h5 class="text-white font-weight-bold text-center">Form Edit Data Kandidat</h5>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -23,7 +23,7 @@
                         <label for="ketua"><b>Ketua <span class="text-danger">*</span></b></label>
                         <select class="form-control selectpicker <?= ($validation->hasError('ketua')) ? 'is-invalid' : ''; ?>" id="ketua" name="ketua" data-live-search="true" data-size="5" title="pilih ketua..." autofocus>
                             <?php foreach ($user as $u) : ?>
-                                <option value="<?= $u['nis']; ?> <?= old('ketua'); ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
+                                <option value="<?= $u['nis']; ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">
@@ -36,7 +36,7 @@
                         <label for="wakil"><b>Wakil <span class="text-danger">*</span></b></label>
                         <select class="form-control selectpicker <?= ($validation->hasError('wakil')) ? 'is-invalid' : ''; ?>" id="wakil" name="wakil" data-live-search="true" data-size="5" title="pilih wakil...">
                             <?php foreach ($user as $u) : ?>
-                                <option value="<?= $u['nis']; ?> <?= old('wakil'); ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
+                                <option value="<?= $u['nis']; ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">
@@ -49,7 +49,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nama_psg"><b>Nama Pasangan <span class="text-danger">*</span></b></label>
-                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= old('nama_psg'); ?>" placeholder="nama pasangan (ex: CalonSIP)...">
+                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= $kandidat['nama_pasangan']; ?>" placeholder="nama pasangan (ex: CalonSIP)...">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama_psg'); ?>
                         </div>
@@ -61,14 +61,14 @@
                 </div>
                 <div class="form-group">
                     <label for="nama_psg"><b>Visi <span class="text-danger">*</span></b></label>
-                    <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" name="visi" id="visi"><?= old('visi'); ?></textarea>
+                    <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" name="visi" id="visi"><?= $kandidat['visi']; ?></textarea>
                     <div class="invalid-feedback">
                         <?= $validation->getError('visi'); ?>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="nama_psg"><b>Misi <span class="text-danger">*</span></b></label>
-                    <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" name="misi" id="misi"><?= old('misi'); ?></textarea>
+                    <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" name="misi" id="misi"><?= $kandidat['misi']; ?></textarea>
                     <div class="invalid-feedback">
                         <?= $validation->getError('misi'); ?>
                     </div>

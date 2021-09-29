@@ -36,7 +36,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?= $this->include('layout/sidebar_admin'); ?>
+        <?= $this->include('layout/sidebar_user'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
