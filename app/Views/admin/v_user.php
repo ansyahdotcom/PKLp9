@@ -9,7 +9,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#TambahModal" class="btn btn-success btn-sm">
+            <a href="/user/addUser" class="btn btn-success btn-sm">
                 <i class="fas fa-plus"></i>
                 Add Data
             </a>
@@ -83,7 +83,7 @@
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
                             </div>
                             <div class="form-group form-group-default mx-0">
-                                <label>Nama Siswa</label>
+                                <label></label>
                                 <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="">
                             </div>
                             <div class="form-group form-group-default mx-0">

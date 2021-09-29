@@ -9,7 +9,6 @@ class UserModel extends Model
     protected $table      = 'user';
     protected $primaryKey = 'nis';
 
-    protected $useAutoIncrement = true;
     protected $useTimestamps = true;
     protected $allowedFields = ['nis', 'nama_usr', 'id_kelas', 'jk', 'st_pemilih', 'st_kandidat', 'password'];
 
