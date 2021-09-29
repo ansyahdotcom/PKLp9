@@ -42,7 +42,7 @@
                             <div class="font-weight-bold text-success text-uppercase mb-1">
                                 Jumlah User
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">200</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jm_user; ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -89,6 +89,31 @@
         </div>
     </div>
 
+    <!-- Reset Vote Row -->
+    <div class="row">
+
+        <!-- Info Cards -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-danger text-uppercase mb-1">
+                                Reset Hasil Vote
+                            </div>
+                            <a href="#" class="btn btn-danger btn-sm">
+                                <span class="text">Reset</span>
+                            </a>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-trash fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <!-- Content Row -->
 
     <div class="row">
@@ -100,22 +125,34 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Perolehan Suara Kandidat</h6>
                     <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
                     </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
+                    <div class="col">
+                        <div class="font-weight-bold mb-1">
+                            Bayu Agil & Agil Bayu
+                        </div>
+                        <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 20%"
+                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <hr>
+                        <div class="font-weight-bold mb-1">
+                            Fahrul Irsyad & Irsyad Fahrul                        
+                        </div>
+                        <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%"
+                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <hr>
+                        <div class="font-weight-bold mb-1">
+                            Ainun Ardiansyah & Ardiansyah Ainun
+                        </div>
+                        <div class="progress progress-sm mr-2">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"
+                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
                 </div>
             </div>

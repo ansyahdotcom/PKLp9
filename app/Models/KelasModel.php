@@ -19,6 +19,8 @@ class KelasModel extends Model
     public function getJumlahSiswa()
     {
         $this->select('*');
+        // SELECT kelas.nama_kelas, COUNT('user.id_kelas') as jumlah_siswa 
+        // FROM user, kelas WHERE user.id_kelas=kelas.id_kelas group by kelas.id_kelas
         $this->join('user', 'user.id_kelas=kelas.id_kelas');
         return $this->db->table('user')->countAll();
     }

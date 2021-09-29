@@ -16,9 +16,10 @@ class Dashboard extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Dashboard Admin',
-            'siswa' => $this->AdminModel->findAll(),
-            'jm_kandidat'  => $this->AdminModel->getJumlahKandidat()
+            'title'         => 'Dashboard Admin',
+            'siswa'         => $this->DashboardModel->findAll(),
+            'jm_kandidat'   => $this->DashboardModel->getJumlahKandidat(),
+            'jm_user'       => $this->DashboardModel->getJumlahUser()
         ];
         echo view('admin/v_dashboard', $data);
     }
