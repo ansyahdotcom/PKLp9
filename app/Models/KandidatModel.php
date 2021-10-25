@@ -9,7 +9,7 @@ class KandidatModel extends Model
     protected $table = 'kandidat';
     protected $primaryKey = 'id_kandidat';
     protected $useTimestamps = true;
-    protected $allowedFields = ['ketua', 'wakil', 'nama_pasangan', 'foto', 'visi', 'misi', 'periode'];
+    protected $allowedFields = ['id_kandidat', 'ketua', 'wakil', 'nama_pasangan', 'foto', 'visi', 'misi', 'periode'];
 
     public function getKandidat()
     {
@@ -17,7 +17,25 @@ class KandidatModel extends Model
                     ->join('user as u1', 'u1.nis=kandidat.ketua')
                     ->join('user as u2', 'u2.nis=kandidat.wakil')
                     ->join('periode', 'periode.id_periode=kandidat.periode')
-                    ->orderBy('id_kandidat', 'DESC')
+                    ->orderBy('kandidat.id_kandidat', 'DESC')
+                    ->findAll();
+    }
+
+    public function getKetua()
+    {
+        return $this->select('*')
+                    ->join('user as u1', 'u1.nis=kandidat.ketua')
+                    ->join('periode', 'periode.id_periode=kandidat.periode')
+                    ->orderBy('kandidat.id_kandidat', 'DESC')
+                    ->findAll();
+    }
+
+    public function getWakil()
+    {
+        return $this->select('*')
+                    ->join('user as u2', 'u2.nis=kandidat.wakil')
+                    ->join('periode', 'periode.id_periode=kandidat.periode')
+                    ->orderBy('kandidat.id_kandidat', 'DESC')
                     ->findAll();
     }
 

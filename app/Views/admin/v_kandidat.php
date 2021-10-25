@@ -7,10 +7,10 @@
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
     <!-- Flashdata Message -->
-    <?php 
-        if (session()->getFlashdata('message')) {
-            echo session()->getFlashdata('message');
-        }
+    <?php
+    if (session()->getFlashdata('message')) {
+        echo session()->getFlashdata('message');
+    }
     ?>
     <!-- /.End Flashdata Message -->
 
@@ -66,8 +66,8 @@
                         <?php $no = 1; ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $k['ketua']; ?></td>
-                            <td><?= $k['wakil']; ?></td>
+                            <td><?= $k['nama_usr']; ?></td>
+                            <td><?= $k['nama_usr']; ?></td>
                             <td><?= $k['updated_at']; ?></td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>

@@ -2,3 +2,11 @@
     border: 1px solid #d1d3e2;
     border-radius: .35rem;
 }
+
+.img-resize {
+    width: 330px;
+    height: 226px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: solid 5px #3e64d3;
+}

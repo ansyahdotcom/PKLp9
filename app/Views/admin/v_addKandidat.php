@@ -8,7 +8,7 @@
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <form action="/kandidat/save" method="post">
+        <form action="/kandidat/save" enctype="multipart/form-data" method="post">
             <?= csrf_field(); ?>
             <div class="card-header bg-primary py-3">
                 <h5 class="text-white font-weight-bold text-center">Form Tambah Data Kandidat</h5>
@@ -18,6 +18,10 @@
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
                 </div>
                 <hr>
+                <div class="text-center mb-4">
+                    <h3 class="font-weight-bold">Foto Kandidat</h3>
+                    <img class="img img-responsive img-resize img-preview" src="/assets/img/fotokandidat/default.jpg" class="mt-2" alt="foto kandidat" width="200px">
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="ketua"><b>Ketua <span class="text-danger">*</span></b></label>
@@ -56,21 +60,26 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="wakil"><b>Foto <span class="text-danger">*</span></b></label>
-                        <input type="file" name="foto" class="form-control" id="foto">
+                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" onchange="previewImg()">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('foto'); ?>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="nama_psg"><b>Visi <span class="text-danger">*</span></b></label>
-                    <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" name="visi" id="visi"><?= old('visi'); ?></textarea>
-                    <div class="invalid-feedback">
-                        <?= $validation->getError('visi'); ?>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="visi"><b>Visi <span class="text-danger">*</span></b></label>
+                        <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" rows="5" name="visi" id="visi" placeholder="visi kandidat..."><?= old('visi'); ?></textarea>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('visi'); ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="nama_psg"><b>Misi <span class="text-danger">*</span></b></label>
-                    <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" name="misi" id="misi"><?= old('misi'); ?></textarea>
-                    <div class="invalid-feedback">
-                        <?= $validation->getError('misi'); ?>
+                    <div class="form-group col-md-6">
+                        <label for="misi"><b>Misi <span class="text-danger">*</span></b></label>
+                        <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" rows="5" name="misi" id="misi" placeholder="misi kandidat..."><?= old('misi'); ?></textarea>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('misi'); ?>
+                        </div>
                     </div>
                 </div>
             </div>
