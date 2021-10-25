@@ -37,11 +37,32 @@ class User extends BaseController
     public function addUser()
     {
         $data = [
-            'title' => 'Tambah Kandidat',
-            'user' => $this->KelasModel->findAll(),
+            'title' => 'Tambah User',
+            'kelas' => $this->KelasModel->findAll(),
             'validation' => \Config\Services::validation()
         ];
         echo view('admin/v_addUser', $data);
+    }
+
+    public function editUser($id)
+    {
+        $data = [
+            'title' => 'Edit User',
+            'kelas' => $this->KelasModel->findAll(),
+            'user' => $this->UserModel->editUser($id),
+            'validation' => \Config\Services::validation()
+        ];
+        echo view('admin/v_edit_user', $data);
+    }
+
+    public function detailUser()
+    {
+        $data = [
+            'title' => 'Detail User',
+            'user' => $this->KelasModel->findAll(),
+            'validation' => \Config\Services::validation()
+        ];
+        echo view('admin/v_detail_user', $data);
     }
 
     public function insert()
@@ -52,7 +73,9 @@ class User extends BaseController
          * Validasi Form
          * ===========================================================
          */
-        if (!$this->validate([
+        // konfigurasi validasi (membuat rules)
+        $validation =  \Config\Services::validation();
+        $validation->setRules([
             'nis' => [
                 'rules' => 'required|is_unique[user.nis]',
                 'errors' => [
@@ -78,45 +101,50 @@ class User extends BaseController
                     'required' => 'Field Password harus diisi.'
                 ]
             ],
-        ])) {
-            $validation = \Config\Services::validate();
-            return redirect()->to('/user/addUser')->withInput()->with('validation', $validation);
-        }
+        ]);
+        $isDataValid = $validation->withRequest($this->request)->run();
 
         /**
          * ===========================================================
          * Query builder save data 
          * ===========================================================
          */
-        $this->UserModel->save([
-            'nis' => $this->request->getVar('nis'),
-            'nama_usr' => $this->request->getVar('nama_usr'),
-            'id_kelas' => $this->request->getVar('id_kelas'),
-            'jk' => $this->request->getVar('jk'),
-            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
-            'st_pemilih' => '0',
-            'st_kandidat' => '0'
-        ]);
-
-        // dd($this->request->getVar());
+        // Jika data lolos validasi
+        if ($isDataValid) {
+            // menyimpan data yang diinputkan
+            $nis = $this->request->getVar('nis');
+            $nama = $this->request->getVar('nama_usr');
+            $kelas = $this->request->getVar('id_kelas');
+            $jk = $this->request->getVar('jk');
+            $password = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
+            $insert = [
+                'nis' => $nis,
+                'nama_usr' => $nama,
+                'id_kelas' => $kelas,
+                'jk' => $jk,
+                'password' => $password,
+                'st_pemilih' => '0',
+                'st_kandidat' => '0'
+            ];
+            $this->UserModel->insert($insert);
+            /**
+             * ===========================================================
+             * Mengirim flashdata
+             * ===========================================================
+             */
+            session()->setFlashdata('pesan', $this->notify('Selamat!', 'Berhasil menambah data.', 'success', 'success'));
+            return redirect()->back();
         /**
          * ===========================================================
-         * Mengirim flashdata
-         * ===========================================================
-         */
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
-        /**
-         * ===========================================================
-         * Kembali ke view data kandidat
+         * Kembali ke view data user
          * ===========================================================
          */
         return redirect()->to('/user');
+        } else {
+            //Jika data tidak lolos validasi
+            session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Gagal menambah data. Harap cek kembali masukkan Anda', 'danger', 'error'));
+            return redirect()->to("/user")->withInput()->with('validation', $validation);
+        }
     }
 
     public function prosesExcel()

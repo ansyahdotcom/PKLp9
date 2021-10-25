@@ -1,42 +1,87 @@
-<div class="main-panel">
-    <div class="container">
-        <div class="page-inner">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header bg-secondary">
-                            <div class="card-title text-white text-center">Detail Data Siswa </div>
-                        </div>
-                        <div class="card-body row mt-3">
-                            <div class="col-lg-5 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="nama">Nama Lengkap</label>
-                                    <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan Nama Lengkap" value="<?= $user['nama']; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nis">NIS</label>
-                                    <input type="text" name="nis" class="form-control" id="nis" placeholder="Masukkan NIS" value="<?= $user['nip']; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="jk">Jenis Kelamin</label>
-                                    <input type="text" name="jk" class="form-control" id="jk" placeholder="Masukkan Jenis Kelamin" value="<?= $user['email']; ?>">
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label for="kelas">Kelas</label>
-                                    <input type="text" name="kelas" class="form-control" id="kelas" placeholder="Masukkan Nomor Telepon" value="<?= $user['nohp']; ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-4 mr-3">
-                            <div class="col-md">
-                                <a href="<?php echo base_url('/user') ?>" class="btn btn-primary mr-1 float-right"><i class="fas fa-angle-left"></i>&nbsp;&nbsp;Kembali</a>
-                            </div>
+<?= $this->extend('layout/template'); ?>
+
+<?= $this->section('content'); ?>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
+    <!-- Flashdata Message -->
+    <?php
+    if (session()->getFlashdata('message')) {
+        echo session()->getFlashdata('message');
+    }
+    ?>
+    <!-- /.End Flashdata Message -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <form action="/user/insert" method="post">
+            <?= csrf_field(); ?>
+            <div class="card-header bg-primary py-3">
+                <h5 class="text-white font-weight-bold text-center">Form Edit Data Siswa</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
+                </div>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nama_usr"><b>Nama Siswa<span class="text-danger">*</span></b></label>
+                        <input type="text" name="nama_usr" class="form-control <?= ($validation->hasError('nama_usr')) ? 'is-invalid' : ''; ?>" id="nama_usr" value="<?= $user['nama_usr']; ?>" placeholder="Masukkan Nama Siswa...">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('nama_usr'); ?>
                         </div>
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nis"><b>NIS<span class="text-danger">*</span></b></label>
+                        <input type="text" name="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" id="nis" value="<?= $user['nis']; ?>" placeholder="Masukkan NIS Siswa..." readonly>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('nis'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password"><b>Password<span class="text-danger">*</span></b></label>
+                        <input type="password" name="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" value="<?= old('password'); ?>" placeholder="Masukkan Password...">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('password'); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="kelas"><b>Kelas <span class="text-danger">*</span></b></label>
+                        <select class="form-control selectpicker <?= ($validation->hasError('id_kelas')) ? 'is-invalid' : ''; ?>" id="kelas" name="id_kelas" data-live-search="true" title="Pilih Kelas..." autofocus>
+                            <?php foreach ($kelas as $u) : ?>
+                                <option value="<?= $u['id_kelas']; ?>"><?= $u['nama_kelas']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('id_kelas'); ?>
+                        </div>
+                        <!-- <small class="text-danger" id="alert_ketua"></small> -->
+                        <!-- <input type="text" name="ketua" id="hide_ketua" hidden> -->
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="kelas"><b>Jenis Kelamin <span class="text-danger">*</span></b></label>
+                        <select class="form-control selectpicker <?= ($validation->hasError('jk')) ? 'is-invalid' : ''; ?>" id="jk" name="jk" data-live-search="true" title="Pilih Jenis Kelamin..." autofocus>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="card-footer">
+                <a href="/user" class="btn btn-danger">
+                    <i class="fas fa-arrow-circle-left"></i>
+                    Back
+                </a>
+                <button type="submit" class="btn btn-primary float-right" id="save-btn">
+                    Save <i class="fas fa-save"></i>
+                </button>
+        </form>
     </div>
 </div>
+</div>
+<?= $this->endSection(); ?>
