@@ -53,7 +53,7 @@
                     <div class="form-group col-md-6">
                         <label for="kelas"><b>Kelas <span class="text-danger">*</span></b></label>
                         <select class="form-control selectpicker <?= ($validation->hasError('id_kelas')) ? 'is-invalid' : ''; ?>" id="kelas" name="id_kelas" data-live-search="true" title="Pilih Kelas..." autofocus>
-                            <?php foreach ($user as $u) : ?>
+                            <?php foreach ($kelas as $u) : ?>
                                 <option value="<?= $u['id_kelas']; ?>"><?= $u['nama_kelas']; ?></option>
                             <?php endforeach; ?>
                         </select>

@@ -24,6 +24,14 @@ class UserModel extends Model
         return $this->findAll();
     }
 
+    public function editUser($id)
+    {
+        return $this->select('*')
+            ->where('nis', $id)
+            ->orderBy('nis', 'DESC')
+            ->first();
+    }
+
     public function deleteData($nis)
     {
         return $this->db->table($this->table)->delete(['nis' => $nis]);
