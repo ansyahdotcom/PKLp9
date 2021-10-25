@@ -24,4 +24,12 @@ class DashboardModel extends Model
         $this->join('kandidat', 'kandidat.id_kandidat');
         return $this->db->table('kandidat')->countAll();
     }
+
+    public function getJumlahUser()
+    {
+        $this->select('*');
+        $this->join('user', 'user.nis');
+        return $this->db->table('user')->countAll();
+    }
+
 }

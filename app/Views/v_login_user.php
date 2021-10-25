@@ -1,7 +1,8 @@
 <?= $this->extend('layout/template_login'); ?>
 <?= $this->section('content'); ?>
 
-<div class="container">
+<div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -22,10 +23,16 @@
                                 </div>
                                 <form class="user" action="<?= base_url('login/login_user'); ?>" method="POST">
                                     <div class="form-group">
-                                        <input type="text" name="nis" class="form-control form-control-user" placeholder="NIS" required autofocus autocomplete="off">
+                                        <input type="text" name="nis" class="form-control form-control-user <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" placeholder="NIS" required autofocus autocomplete="off">
+                                        <div class="invalid-feedback">
+                                            <?= $validation->getError('nis'); ?>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required autofocus>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        <?= $validation->getError('password'); ?>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Login</button>
                                     <div class="text-center mt-3">

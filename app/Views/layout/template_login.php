@@ -35,6 +35,9 @@
     <script src="<?= base_url(); ?>/assets/js/sb-admin-2.min.js"></script>
     <!-- Bootstrap Notify -->
     <script src="<?= base_url(); ?>/assets/vendor/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <!-- Sweetalert2 -->
+    <script src="<?= base_url(); ?>/assets/js/sweetalert2.all.min.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/swal.js"></script>
 
 </body>
 

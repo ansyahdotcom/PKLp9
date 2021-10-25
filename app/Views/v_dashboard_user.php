@@ -1,44 +1,86 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layout/template_user'); ?>
 <?= $this->section('content'); ?>
+<?php foreach ($periode as $prd) {
+    $period = $prd['periode'];
+} ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pemilihan Ketua OSIS SMA Negeri 4 Surakarta Periode 2021/2022</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pemilihan Ketua OSIS SMA Negeri 4 Surakarta Periode <?= $period; ?></h1>
     </div>
-    <?php foreach ($kandidat as $knd) : ?>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow mb-4 border-left-primary">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary"><?= $knd['nama_pasangan']; ?></h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row no-gutters">
-                            <div class="col-md-3 mr-3">
-                                <img src="\assets\img\fotokandidat\<?= $knd['foto']; ?>" alt="..." style="width: 100%;">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="font-weight-bold text-primary text-uppercase mb-1">Ketua :</div>
-                                <div class="h5 mb-3 font-weight-bold"><?= $knd['nama_usr'] . ' / ' . $knd['nama_kelas']; ?></div>
-                                <div class="font-weight-bold text-primary text-uppercase mb-1">Wakil :</div>
-                                <div class="h5 mb-3 font-weight-bold">Rendi</div>
-                                <div class="font-weight-bold text-primary text-uppercase mb-1">Visi :</div>
-                                <p class="mb-2"><?= $knd['visi']; ?></p>
-                                <div class="font-weight-bold text-primary text-uppercase mb-1">Misi :</div>
-                                <p class="mb-2"><?= $knd['misi']; ?></p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="form-group">
-                                    <input type="radio"> Pilih
+    <?php if ($st_pemilih == 1) : ?>
+        <p class="mb-4 text-success">Anda sudah memilih!</p>
+    <?php else : ?>
+        <p><strong>*Pilih salah satu pasangan calon lalu klik Submit!</strong></p>
+    <?php endif; ?>
+    <form action="/submit" method="post">
+        <?= csrf_field(); ?>
+        <input type="text" name="nis" hidden value="<?= $nis ?>">
+        <?php $i = 1;
+        foreach ($kandidat as $knd) :
+            $id_kandidat = $knd['id_kandidat']; ?>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card shadow mb-4 border-left-primary">
+                        <div class="card-header py-3">
+                            <h2 class="m-0 font-weight-bold text-primary"><?= $i++ . '. ' . $knd['nama_pasangan']; ?></h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="row no-gutters">
+                                <div class="col-md-3 mr-3">
+                                    <img src="\assets\img\fotokandidat\<?= $knd['foto']; ?>" alt="foto kandidat" style="width: 100%;">
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="font-weight-bold text-primary text-uppercase mb-1">Ketua :</div>
+                                    <div class="h5 mb-3 font-weight-bold"><?= $knd['nama_usr'] . ' / ' . $knd['nama_kelas']; ?></div>
+                                    <?php
+                                    $db = \Config\Database::connect();
+                                    $sql = $db->query("SELECT kandidat.wakil, user.nama_usr as wnama, kelas.nama_kelas as wkelas 
+                                                                    FROM kandidat, user, kelas WHERE kandidat.wakil = user.nis 
+                                                                    AND user.id_kelas = kelas.id_kelas AND kandidat.id_kandidat = $id_kandidat");
+                                    foreach ($sql->getResultArray() as $wakil) :
+                                    ?>
+                                        <div class="font-weight-bold text-primary text-uppercase mb-1">Wakil :</div>
+                                        <div class="h5 mb-3 font-weight-bold"><?= $wakil['wnama'] . ' / ' . $wakil['wkelas']; ?></div>
+                                    <?php endforeach; ?>
+                                    <div class="font-weight-bold text-primary text-uppercase mb-1">Visi :</div>
+                                    <p class="mb-2"><?= htmlspecialchars_decode($knd['visi']); ?></p>
+                                    <div class="font-weight-bold text-primary text-uppercase mb-1">Misi :</div>
+                                    <p class="mb-2"><?= htmlspecialchars_decode($knd['misi']); ?></p>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="custom-control custom-radio radiobut">
+                                        <h5 class="text-primary">Pilih</h5>
+                                        <input type="radio" name="vote" required class="radiobutton" <?= $st_pemilih == 1 ? 'disabled' : '' ?> value="<?= $knd['id_kandidat']; ?>" class="mb-4">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        <?php endforeach; ?>
+        <button type="submit" class="btn-primary btn-block mb-4 btn-lg" <?= $st_pemilih == 1 ? 'disabled' : '' ?>>Submit</button>
+    </form>
+</div>
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Apakah Anda ingin logout?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                <a class="btn btn-danger" href="/logout">Logout</a>
+            </div>
         </div>
-    <?php endforeach; ?>
+    </div>
 </div>
 <?= $this->endSection(); ?>

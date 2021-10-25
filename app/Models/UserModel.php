@@ -9,8 +9,8 @@ class UserModel extends Model
     protected $table      = 'user';
     protected $primaryKey = 'nis';
 
-    protected $useAutoIncrement = true;
-    protected $allowedFields = ['nis', 'nama_usr', 'id_kelas', 'jk', 'st_pemilih', 'st_kandidat', 'password', 'created_at', 'updated_at'];
+    protected $useTimestamps = true;
+    protected $allowedFields = ['nis', 'nama_usr', 'id_kelas', 'jk', 'st_pemilih', 'st_kandidat', 'password'];
 
     public function getUser()
     {
@@ -23,7 +23,7 @@ class UserModel extends Model
     {
         return $this->findAll();
     }
-    
+
     public function deleteData($nis)
     {
         return $this->db->table($this->table)->delete(['nis' => $nis]);

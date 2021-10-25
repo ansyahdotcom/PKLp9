@@ -2,18 +2,20 @@
 
 namespace App\Controllers;
 
-use App\Models\LoginModel;
+use App\Models\KelasModel;
 use App\Models\UserModel;
 
 class User extends BaseController
 {
     protected $UserModel;
+    protected $KelasModel;
 
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
         helper(['form']);
         $this->UserModel = new UserModel;
+        $this->KelasModel = new KelasModel;
     }
 
     public function index()
@@ -30,6 +32,91 @@ class User extends BaseController
         ];
 
         echo view('admin/v_user', $data);
+    }
+
+    public function addUser()
+    {
+        $data = [
+            'title' => 'Tambah Kandidat',
+            'user' => $this->KelasModel->findAll(),
+            'validation' => \Config\Services::validation()
+        ];
+        echo view('admin/v_addUser', $data);
+    }
+
+    public function insert()
+    {
+
+        /**
+         * ===========================================================
+         * Validasi Form
+         * ===========================================================
+         */
+        if (!$this->validate([
+            'nis' => [
+                'rules' => 'required|is_unique[user.nis]',
+                'errors' => [
+                    'required' => 'Field NIS harus diisi.',
+                    'is_unique' => 'NIS telah terdaftar'
+                ]
+            ],
+            'nama_usr' => [
+                'rules' => 'trim|required',
+                'errors' => [
+                    'required' => 'Field Nama Siswa harus diisi.'
+                ]
+            ],
+            'id_kelas' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Field Kelas harus diisi.'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Field Password harus diisi.'
+                ]
+            ],
+        ])) {
+            $validation = \Config\Services::validate();
+            return redirect()->to('/user/addUser')->withInput()->with('validation', $validation);
+        }
+
+        /**
+         * ===========================================================
+         * Query builder save data 
+         * ===========================================================
+         */
+        $this->UserModel->save([
+            'nis' => $this->request->getVar('nis'),
+            'nama_usr' => $this->request->getVar('nama_usr'),
+            'id_kelas' => $this->request->getVar('id_kelas'),
+            'jk' => $this->request->getVar('jk'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'st_pemilih' => '0',
+            'st_kandidat' => '0'
+        ]);
+
+        // dd($this->request->getVar());
+        /**
+         * ===========================================================
+         * Mengirim flashdata
+         * ===========================================================
+         */
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil ditambahkan.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+        /**
+         * ===========================================================
+         * Kembali ke view data kandidat
+         * ===========================================================
+         */
+        return redirect()->to('/user');
     }
 
     public function prosesExcel()

@@ -29,9 +29,6 @@
     <!-- My CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
-    <!-- Cropper -->
-    <link rel="stylesheet" href="/assets/vendor/cropper/cropper.min.css">
-
 </head>
 
 <body id="page-top">
@@ -39,7 +36,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?= $this->include('layout/sidebar_admin'); ?>
+        <?= $this->include('layout/sidebar_user'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -110,7 +107,9 @@
     <!-- Page level plugins -->
     <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <!-- <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script> -->
+    <script src="/assets/js/sweetalert2.all.min.js"></script>
+    <script src="/assets/js/swal.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="/assets/js/demo/datatables-demo.js"></script>
@@ -118,30 +117,39 @@
     <!-- Summer Note -->
     <script src="/assets/vendor/summernote/summernote-bs4.min.js"></script>
     <script>
-        // $('#visi').summernote({
-        //     placeholder: 'visi kandidat',
-        //     tabsize: 2,
-        //     height: 100
-        // });
+        $('#visi').summernote({
+            placeholder: 'visi kandidat',
+            tabsize: 2,
+            height: 100
+        });
 
-        // $('#misi').summernote({
-        //     placeholder: 'misi kandidat',
-        //     tabsize: 2,
-        //     height: 100
-        // });
+        $('#misi').summernote({
+            placeholder: 'visi kandidat',
+            tabsize: 2,
+            height: 100
+        });
     </script>
 
     <!-- Select Picker -->
     <script src="/assets/vendor/selectpicker/dist/js/bootstrap-select.min.js"></script>
     <script src="/assets/vendor/selectpicker/dist/js/defaults-*.min.js"></script>
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('.selectpicker').selectpicker();
-            $('select[name=ketua]').selectpicker('val', +$('#old_ketua').val());
-            $('select[name=wakil]').selectpicker('val', +$('#old_wakil').val());
-            $('.selectpicker').selectpicker('refresh');
+
+            $('#ketua').change(function() {
+                $('#hide_ketua').val($('#ketua').val());
+            });
+
+            $('#wakil').change(function() {
+                $('#hide_wakil').val($('#wakil').val());
+            });
+
+            $('#periode').change(function() {
+                $('#hide_periode').val($('#periode').val());
+            });
         });
-    </script>
+    </script> -->
 
     <script>
         $(document).ready(function() {
@@ -178,27 +186,6 @@
             });
 
         });
-    </script>
-
-    <!-- Cropper -->
-    <script src="/assets/vendor/cropper/cropper.min.js"></script>
-
-    <!-- Image Preview -->
-    <script>
-        function previewImg() {
-            const foto = document.querySelector('#foto');
-            const fotoName = document.querySelector('#foto').value;
-            const imgPreview = document.querySelector('.img-preview');
-
-            fotoName.textContent = foto.files[0].name;
-
-            const fileFoto = new FileReader();
-            fileFoto.readAsDataURL(foto.files[0]);
-
-            fileFoto.onload = function(e) {
-                imgPreview.src = e.target.result;
-            }
-        }
     </script>
 </body>
 

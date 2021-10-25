@@ -18,18 +18,37 @@ class Login extends BaseController
     public function index()
     {
         if (session()->get('username') != NULL) {
-            // session()->setFlashdata('pesan', $this->notify('Peringatan!', 'Anda sudah login!', 'warning', 'error'));
-            // return redirect()->to("/dashboard");
-            echo 'anda sudah login';
+            session()->setFlashdata('message', 'islogin');
+            return redirect()->to("/dashboard_user");
         }
         $data = [
             'title' => 'Login',
+            'validation' => \Config\Services::validation()
         ];
         echo view('v_login_user', $data);
     }
 
     public function login_user()
     {
+        if (!$this->validate([
+            'nis' => [
+                'rules' => 'required|numeric',
+                'errors' => [
+                    'required' => 'NIS harus diisi!',
+                    'numeric' => 'NIS harus angka!'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required|min_length[8]',
+                'errors' => [
+                    'required' => 'Password harus diisi!',
+                    'min_length[8]' => 'Password terlalu pendek!'
+                ]
+            ]
+        ])) {
+            $validation = \Config\Services::validate();
+            return redirect()->to('/login')->withInput()->with('validation', $validation);
+        }
         $nis = $this->request->getVar('nis');
         $password = $this->request->getVar('password');
 
@@ -38,19 +57,18 @@ class Login extends BaseController
         if ($login) {
             if (password_verify($password, $login['password'])) {
                 $data = [
-                    'nis' => $login['nis']
+                    'nis' => $login['nis'],
+                    'st_pemilih' => $login['st_pemilih']
                 ];
                 session()->set($data);
+                session()->setFlashdata('message', 'login');
                 return redirect()->to('/dashboard_user');
             } else {
-                session()->setFlashdata('password', '<small class="form-text text-danger">
-                Password salah
-                </small>');
-                session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Kata sandi salah. Harap cek kembali kata sandi Anda', 'danger', 'error'));
+                session()->setFlashdata('message', 'wrong_passwd');
                 return redirect()->to('/login');
             }
         } else {
-            session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Nama pengguna belum terdaftar', 'danger', 'error'));
+            session()->setFlashdata('message', 'belum_terdaftar');
             return redirect()->to('/login');
         }
     }
@@ -81,46 +99,28 @@ class Login extends BaseController
                     'username' => $login['username']
                 ];
                 session()->set($data);
+                session()->setFlashdata('message', 'login');
                 return redirect()->to('/user');
             } else {
-                session()->setFlashdata('password', '<small class="form-text text-danger">
-                Password salah
-                </small>');
-                session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Kata sandi salah. Harap cek kembali kata sandi Anda', 'danger', 'error'));
+                session()->setFlashdata('message', 'wrong_passwd');
                 return redirect()->to('/login/admin');
             }
         } else {
-            session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Nama pengguna belum terdaftar', 'danger', 'error'));
+            session()->setFlashdata('message', 'belum_terdaftar');
             return redirect()->to('/login/admin');
         }
     }
 
     public function logout()
     {
-        session()->destroy(true);
+        session()->destroy(TRUE);
+        session()->setFlashdata('message', 'logout');
         return redirect()->to('/login');
     }
 
     public function logout_admin()
     {
-        session()->destroy(true);
+        session()->setFlashdata('message', 'logout');
         return redirect()->to('/login/admin');
-    }
-
-    function notify($title, $message, $type, $icon)
-    {
-        $pesan = "$.notify({
-            icon: 'flaticon-$icon',
-            title: '$title',
-            message: '$message',
-        },{
-            type: '$type',
-            placement: {
-                from: 'top',
-                align: 'center'
-            },
-            time: 1000,
-        });";
-        return $pesan;
     }
 }
