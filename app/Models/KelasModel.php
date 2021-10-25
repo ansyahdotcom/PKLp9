@@ -6,9 +6,11 @@ use CodeIgniter\Model;
 
 class KelasModel extends Model
 {
-    protected $table = 'kelas';
-    protected $useTimestamps = true;
-
+    protected $table            = 'kelas';
+    protected $useTimestamps    = true;
+    protected $primaryKey       = 'id_kelas';
+    protected $allowedFields    = ['id_kelas', 'nama_kelas'];
+    
     public function getKelas()
     {
         $this->select('*');
