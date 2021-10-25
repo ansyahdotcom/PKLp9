@@ -68,11 +68,14 @@
                         <!-- Menampilkan nama kandidat -->
                         <?php
                         $db = \Config\Database::connect();
-                        $builder = $db->table('user');
-                        $ketua = $builder->getWhere(['nis' => $k['ketua']])
+                        $user = $db->table('user');
+                        $kd = $db->table('kandidat');
+                        $ketua = $user->getWhere(['nis' => $k['ketua']])
                                 ->getFirstRow();
-                        $wakil = $builder->getWhere(['nis' => $k['wakil']])
+                        $wakil = $user->getWhere(['nis' => $k['wakil']])
                                 ->getFirstRow();
+                        $updated_at = $kd->get()
+                                    ->getResultObject();
                         ?>
                         <!-- /. End menampilkan nama kandidat  -->
 
@@ -80,7 +83,7 @@
                             <td><?= $no++; ?></td>
                             <td><?= $ketua->nama_usr; ?></td>
                             <td><?= $wakil->nama_usr; ?></td>
-                            <td><?= $k['updated_at']; ?></td>
+                            <td><?= $k['updated_kd']; ?></td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
                                 <a href="/kandidat/editKandidat/<?= $k['id_kandidat']; ?>" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>
