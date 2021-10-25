@@ -64,10 +64,22 @@
                 <tbody>
                     <?php foreach ($kandidat as $k) : ?>
                         <?php $no = 1; ?>
+
+                        <!-- Menampilkan nama kandidat -->
+                        <?php
+                        $db = \Config\Database::connect();
+                        $builder = $db->table('user');
+                        $ketua = $builder->getWhere(['nis' => $k['ketua']])
+                                ->getFirstRow();
+                        $wakil = $builder->getWhere(['nis' => $k['wakil']])
+                                ->getFirstRow();
+                        ?>
+                        <!-- /. End menampilkan nama kandidat  -->
+
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $k['nama_usr']; ?></td>
-                            <td><?= $k['nama_usr']; ?></td>
+                            <td><?= $ketua->nama_usr; ?></td>
+                            <td><?= $wakil->nama_usr; ?></td>
                             <td><?= $k['updated_at']; ?></td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
