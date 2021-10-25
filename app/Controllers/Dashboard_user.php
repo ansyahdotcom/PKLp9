@@ -30,8 +30,9 @@ class Dashboard_user extends BaseController
             $data = [
                 'title' => 'Dashboard User',
                 'nis' => $user['nis'],
-                'nama_usr' => $user['nama_usr'],
+                'nama' => $user['nama_usr'],
                 'st_pemilih' => $user['st_pemilih'],
+                'periode' => $this->KandidatModel->periode()->getResultArray(),
                 'kandidat' => $this->KandidatModel->pemilihan()->getResultArray(),
                 'dt_kandidat' => $this->KandidatModel->detail_pemilihan()->getResultArray()
             ];
@@ -46,12 +47,13 @@ class Dashboard_user extends BaseController
             return redirect()->to('/login');
         } else {
             $nis = $user['nis'];
-            // $this->VotingModel->save([
-            //     'nis' => $this->request->getVar('nis'),
-            //     'id_kandidat' => $this->request->getVar('vote')
-            // ]);
+            $this->VotingModel->save([
+                'nis' => $this->request->getVar('nis'),
+                'id_kandidat' => $this->request->getVar('vote')
+            ]);
             $db = \Config\Database::connect();
             $db->query("UPDATE user SET st_pemilih = '1' WHERE nis = $nis");
+            session()->setFlashdata('message', 'vote');
             return redirect()->to('/dashboard_user');
         }
     }
