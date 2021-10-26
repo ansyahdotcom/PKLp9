@@ -42,8 +42,9 @@ $routes->get('/profile', 'Profile_user::index');
 $routes->get('/logout', 'Login::logout');
 
 $routes->get('/kandidat/editKandidat/(:segment)', 'Kandidat::editKandidat/$1');
+$routes->get('/periode/editPeriode/(:segment)', 'Periode::editPeriode/$1');
 $routes->delete('/kandidat/(:num)', 'Kandidat::delete/$1');
-
+$routes->delete('/periode/(:num)', 'Periode::delete/$1');
 $routes->post('/submit', 'Dashboard_user::submit');
 
 /*

@@ -10,3 +10,16 @@
     border-radius: 8px;
     border: solid 5px #3e64d3;
 }
+
+.ui-datepicker-calendar {
+    display: none;
+}
+
+.ui-datepicker-month {
+    display: none;
+}
+
+.ui-datepicker-next,
+.ui-datepicker-prev {
+    display: none;
+}
