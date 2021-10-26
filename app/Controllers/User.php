@@ -55,12 +55,12 @@ class User extends BaseController
         echo view('admin/v_edit_user', $data);
     }
 
-    public function detailUser()
+    public function detailUser($id)
     {
         $data = [
             'title' => 'Detail User',
-            'user' => $this->KelasModel->findAll(),
-            'validation' => \Config\Services::validation()
+            'kelas' => $this->KelasModel->findAll(),
+            'user' => $this->UserModel->editUser($id)
         ];
         echo view('admin/v_detail_user', $data);
     }

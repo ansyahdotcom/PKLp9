@@ -56,7 +56,7 @@
                                         echo '<span class="badge badge-danger"><b>Belum Vote</b></span>';
                                     } ?></td>
                                 <td class="d-flex">
-                                    <a href="/user/detailUser" class="btn btn-info btn-sm mr-2" title="Lihat Detail"><i class="fas fa-eye"></i></a>
+                                    <a href="/user/detailUser/<?= $k['nis']; ?>" class="btn btn-info btn-sm mr-2" title="Lihat Detail"><i class="fas fa-eye"></i></a>
                                     <a href="/user/editUser/<?= $k['nis']; ?>" class="btn btn-primary btn-sm mr-2" title="Edit Data"><i class="fas fa-edit"></i></a>
                                     <button data-tooltip="tooltip" title="Hapus Data" type="button" data-id="<?= $k['nis'] ?>" data-link="/user/delete/" data-nama=" Siswa <?= $k['nama_usr'] ?>" id="hapus_crud" class="btn btn-danger btn-sm hapus_crud"><i class="fas fa-trash"></i></button>
                                 </td>
