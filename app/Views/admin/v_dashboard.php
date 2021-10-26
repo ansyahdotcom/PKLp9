@@ -24,7 +24,10 @@
                         <div class="col mr-2">
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
                                 Vote Masuk</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">150</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php foreach ($vote as $vot) {
+                                    echo $vot['voting'];
+                                } ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check fa-2x text-gray-300"></i>
@@ -42,7 +45,10 @@
                             <div class="font-weight-bold text-success text-uppercase mb-1">
                                 Jumlah User
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jm_user; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php foreach ($user as $us) {
+                                    echo $us['nis'];
+                                } ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -60,7 +66,10 @@
                             <div class="font-weight-bold text-info text-uppercase mb-1">
                                 Jumlah Kandidat
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jm_kandidat; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php foreach ($kandidat as $kan) {
+                                    echo $kan['kandidat'];
+                                } ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-user-tie fa-2x text-gray-300"></i>
@@ -78,7 +87,10 @@
                             <div class="font-weight-bold text-warning text-uppercase mb-1">
                                 Periode
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2021/2022</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php foreach ($periode as $per) {
+                                    echo $per['periode'];
+                                } ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -130,35 +142,40 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="col">
-                        <div class="font-weight-bold mb-1">
-                            Bayu Agil & Agil Bayu
-                        </div>
-                        <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 20%"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <hr>
-                        <div class="font-weight-bold mb-1">
-                            Fahrul Irsyad & Irsyad Fahrul                        
-                        </div>
-                        <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <hr>
-                        <div class="font-weight-bold mb-1">
-                            Ainun Ardiansyah & Ardiansyah Ainun
-                        </div>
-                        <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        <?php foreach ($ketua as $ket) :
+                            $id_kandidat = $ket['id_kandidat']; ?>
+                            <?php
+                            $db = \Config\Database::connect();
+                            $sql = $db->query("SELECT kandidat.wakil, user.nama_usr as wnama, kelas.nama_kelas as wkelas 
+                                                                FROM kandidat, user, kelas WHERE kandidat.wakil = user.nis 
+                                                                AND user.id_kelas = kelas.id_kelas AND kandidat.id_kandidat = $id_kandidat");
+                            foreach ($sql->getResultArray() as $wakil) :
+                            ?>
+                                <div class="font-weight-bold mb-1">
+                                    <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                </div>
+                            <?php endforeach; ?>
+                            <?php
+                            $db = \Config\Database::connect();
+                            $sqll = $db->query("SELECT COUNT(id_kandidat) AS pembilang FROM voting WHERE id_kandidat = $id_kandidat");
+                            foreach ($sqll->getResultArray() as $pemb) {
+                                foreach ($vote as $vot) {
+                                    $penyebut = $vot['voting'];
+                                    $pembilang = $pemb['pembilang'];
+                                    $hasil = $pembilang / $penyebut * 100;
+                                    echo $hasil . '%';
+                                }
+                            } ?>
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: <?= $hasil ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <hr>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 <?= $this->endSection(); ?>

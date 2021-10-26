@@ -19,12 +19,12 @@ $(function() {
         });
     } else if(flashData == 'wrong_passwd') {
         Toast.fire({
-            icon: 'danger',
+            icon: 'error',
             title: 'Maaf Password Salah!'
         });
     } else if(flashData == 'belum_terdaftar') {
         Toast.fire({
-            icon: 'danger',
+            icon: 'error',
             title: 'Maaf User Belum Terdaftar!'
         });
     } else if (flashData == 'vote') {

@@ -34,7 +34,7 @@ class Dashboard_user extends BaseController
                 'st_pemilih' => $user['st_pemilih'],
                 'periode' => $this->KandidatModel->periode()->getResultArray(),
                 'kandidat' => $this->KandidatModel->pemilihan()->getResultArray(),
-                'dt_kandidat' => $this->KandidatModel->detail_pemilihan()->getResultArray()
+                // 'dt_kandidat' => $this->KandidatModel->detail_pemilihan()->getResultArray()
             ];
             echo view('v_dashboard_user', $data);
         }

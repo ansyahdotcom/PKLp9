@@ -31,15 +31,12 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'User::index');
 
-$routes->get('/admin', 'Dashboard::index');
-
-
+$routes->get('/', 'Login::index');
+$routes->get('/admin', 'Login::admin');
 $routes->get('/kelas/addKelas', 'Kelas::addKelas');
 $routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
 $routes->get('/kelas/(:any)', 'Kelas::index/$1');
-
 $routes->get('/profile', 'Profile_user::index');
 
 $routes->get('/logout', 'Login::logout');
