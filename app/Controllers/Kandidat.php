@@ -342,7 +342,11 @@ class Kandidat extends BaseController
             $fotoName = $fotoKandidat->getRandomName();
             $fotoKandidat->move('assets/img/fotokandidat', $fotoName);
 
-            unlink('assets/img/fotokandidat/' . $this->request->getVar('old_foto'));
+            if ($fotoKandidat != "default.jpg") {
+                unlink('assets/img/fotokandidat/' . $this->request->getVar('old_foto'));
+            } else {
+                $fotoName = "default.jpg";
+            }
         }
 
         $this->KandidatModel->save([

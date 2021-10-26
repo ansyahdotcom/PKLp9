@@ -59,7 +59,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="wakil"><b>Foto <span class="text-danger">*</span></b></label>
-                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" onchange="previewImg()">
+                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" accept=".jpg,.jpeg,.png,.gif" onchange="previewImg()">
                         <input type="hidden" name="old_foto" value="<?= $kandidat['foto']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('foto'); ?>
