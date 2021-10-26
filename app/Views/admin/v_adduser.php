@@ -12,7 +12,7 @@
     }
     ?>
     <!-- /.End Flashdata Message -->
-    <!-- DataTales Example -->
+    <!-- DataTables-->
     <div class="card shadow mb-4">
         <form action="/user/insert" method="post">
             <?= csrf_field(); ?>

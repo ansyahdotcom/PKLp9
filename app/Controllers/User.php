@@ -100,7 +100,7 @@ class User extends BaseController
                 'errors' => [
                     'required' => 'Field Password harus diisi.'
                 ]
-            ],
+            ]
         ]);
         $isDataValid = $validation->withRequest($this->request)->run();
 
@@ -132,8 +132,14 @@ class User extends BaseController
              * Mengirim flashdata
              * ===========================================================
              */
-            session()->setFlashdata('pesan', $this->notify('Selamat!', 'Berhasil menambah data.', 'success', 'success'));
-            return redirect()->back();
+            session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil ditambahkan.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+            return redirect()->to('/user');
         /**
          * ===========================================================
          * Kembali ke view data user
@@ -142,9 +148,55 @@ class User extends BaseController
         return redirect()->to('/user');
         } else {
             //Jika data tidak lolos validasi
-            session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Gagal menambah data. Harap cek kembali masukkan Anda', 'danger', 'error'));
+            /**
+             * ===========================================================
+             * Mengirim flashdata
+             * ===========================================================
+             */
+            session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Gagal menambahkan data.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
             return redirect()->to("/user")->withInput()->with('validation', $validation);
         }
+    }
+
+    public function edit($id)
+    {
+        if (!$this->validate([
+            'nama_usr' => [
+                'rules' => 'trim|required',
+                'errors' => [
+                    'required' => 'Field Nama Siswa harus diisi.'
+                ]
+            ],
+            'id_kelas' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Field Kelas harus diisi.'
+                ]
+            ]
+        ])) {
+            return redirect()->to('/user/editUser/' . $this->request->getVar('id'))->withInput();
+        }
+
+        $this->UserModel->save([
+            'nis' => $id,
+            'nama_usr' => $this->request->getVar('nama_usr'),
+            'id_kelas' => $this->request->getVar('id_kelas'),
+            'jk' => $this->request->getVar('jk'),
+        ]);
+        
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil diubah.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+        return redirect()->to('/user');
     }
 
     public function prosesExcel()
@@ -348,11 +400,33 @@ class User extends BaseController
         $hapus = $this->UserModel->deleteData($nis);
         // mengirim pesan berhasil dihapus
         if ($hapus) {
-            session()->setFlashdata('pesan', $this->notify('Selamat!', 'Berhasil menghapus data.', 'success', 'success'));
-            return redirect()->back();
+            /**
+             * ===========================================================
+             * Mengirim flashdata
+             * ===========================================================
+             */
+            session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil dihapus.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+            return redirect()->to('/user');
         } else {
-            session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Gagal menghapus data.', 'danger', 'error'));
-            return redirect()->back();
+            /**
+         * ===========================================================
+         * Mengirim flashdata
+         * ===========================================================
+         */
+        session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                Gagal menghapus data.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
+        return redirect()->to('/kandidat');
         }
     }
 

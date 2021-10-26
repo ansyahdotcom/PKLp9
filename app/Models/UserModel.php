@@ -27,6 +27,7 @@ class UserModel extends Model
     public function editUser($id)
     {
         return $this->select('*')
+            ->join('kelas', 'kelas.id_kelas=user.id_kelas')
             ->where('nis', $id)
             ->orderBy('nis', 'DESC')
             ->first();

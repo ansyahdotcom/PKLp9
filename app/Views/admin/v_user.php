@@ -6,6 +6,14 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
+    <!-- Flashdata Message -->
+    <?php
+    if (session()->getFlashdata('message')) {
+        echo session()->getFlashdata('message');
+    }
+    ?>
+    <!-- /.End Flashdata Message -->
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
