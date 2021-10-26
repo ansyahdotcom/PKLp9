@@ -58,6 +58,15 @@
             <span>Manajemen Kandidat</span>
         </a>
     </li>
+    <li class="nav-item <?php $uri = service('uri');
+                        if ($uri->getSegment(1) == 'periode') {
+                            echo 'active';
+                        } ?>">
+        <a class="nav-link" href="/periode">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Manajemen Periode</span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">

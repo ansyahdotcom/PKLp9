@@ -32,6 +32,12 @@
     <!-- Cropper -->
     <link rel="stylesheet" href="/assets/vendor/cropper/cropper.min.css">
 
+    <!-- JQuery UI -->
+    <link rel="stylesheet" href="/assets/vendor/jquery-ui/jquery-ui.min.css">
+
+    <!-- Datepicker -->
+    <link rel="stylesheet" href="/assets/vendor/datepicker/datepicker.css">
+
 </head>
 
 <body id="page-top">
@@ -200,6 +206,12 @@
             }
         }
     </script>
+
+    <!-- JQuery UI -->
+    <script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="/assets/vendor/datepicker/bootstrap-datepicker.js"></script>
 </body>
 
 </html>
