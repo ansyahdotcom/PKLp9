@@ -82,4 +82,10 @@ class Kelas extends BaseController
          */
         return redirect()->to('/kelas');
     }
+
+    public function delete($id)
+    {
+        $this->KelasModel->delete($id);
+        return redirect()->to('/kelas');
+    }
 }

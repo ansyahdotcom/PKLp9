@@ -143,7 +143,7 @@ class User extends BaseController
         } else {
             //Jika data tidak lolos validasi
             session()->setFlashdata('pesan', $this->notify('Perhatian!', 'Gagal menambah data. Harap cek kembali masukkan Anda', 'danger', 'error'));
-            return redirect()->to("/user")->withInput()->with('validation', $validation);
+            return redirect()->to('/user')->withInput()->with('validation', $validation);
         }
     }
 

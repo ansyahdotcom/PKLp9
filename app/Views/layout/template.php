@@ -144,6 +144,7 @@
     </script>
 
     <script>
+        // Hapus User
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
@@ -156,6 +157,41 @@
             swal({
                 title: 'Perhatian!',
                 text: "Yakin akan menghapus data " + nama + " ?",
+                icon: 'warning',
+
+                buttons: {
+                    cancel: {
+                        visible: true,
+                        text: 'Tidak',
+                        className: 'btn btn-danger'
+                    },
+                    confirm: {
+                        text: 'Ya',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "<?= base_url() ?>" + link + id;
+                } else {
+                    swal.close();
+                }
+            });
+
+        });
+        // Hapus Kelas
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+
+        $('#datatable').on('click', '.hapus_kelas', function() {
+            var id = $(this).data('id');
+            var link = $(this).data('link');
+            var kelas = $(this).data('kelas');
+
+            swal({
+                title: 'Perhatian!',
+                text: "Yakin akan menghapus data " + kelas + " ?",
                 icon: 'warning',
 
                 buttons: {

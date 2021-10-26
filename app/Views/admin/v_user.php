@@ -22,6 +22,7 @@
                 <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>NIS</th>
                             <th>Nama Siswa</th>
                             <th>Status Pemilih</th>
@@ -30,6 +31,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>No</th>
                             <th>NIS</th>
                             <th>Nama Siswa</th>
                             <th>Status Pemilih</th>
@@ -40,6 +42,7 @@
                         <?php foreach ($user as $k) : ?>
                             <?php $no = 1; ?>
                             <tr>
+                                <td><?= $no++; ?></td>
                                 <td><?= $k['nis']; ?></td>
                                 <td><?= $k['nama_usr']; ?></td>
                                 <td><?php if ($k['st_pemilih'] == 1) {
