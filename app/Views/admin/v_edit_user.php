@@ -14,7 +14,7 @@
     <!-- /.End Flashdata Message -->
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <form action="/user/insert" method="post">
+        <form action="/user/edit/<?= $user['nis']; ?>" method="post">
             <?= csrf_field(); ?>
             <div class="card-header bg-primary py-3">
                 <h5 class="text-white font-weight-bold text-center">Form Edit Data Siswa</h5>
@@ -25,27 +25,15 @@
                 </div>
                 <hr>
                 <div class="form-row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
+                        <label for="nis"><b>NIS<span class="text-danger">*</span></b></label>
+                        <input type="text" name="nis" class="form-control" id="nis" value="<?= $user['nis']; ?>" placeholder="NIS Siswa" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="nama_usr"><b>Nama Siswa<span class="text-danger">*</span></b></label>
                         <input type="text" name="nama_usr" class="form-control <?= ($validation->hasError('nama_usr')) ? 'is-invalid' : ''; ?>" id="nama_usr" value="<?= $user['nama_usr']; ?>" placeholder="Masukkan Nama Siswa...">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama_usr'); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nis"><b>NIS<span class="text-danger">*</span></b></label>
-                        <input type="text" name="nis" class="form-control <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" id="nis" value="<?= $user['nis']; ?>" placeholder="Masukkan NIS Siswa..." readonly>
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('nis'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="password"><b>Password<span class="text-danger">*</span></b></label>
-                        <input type="password" name="password" class="form-control <?= ($validation->hasError('password')) ? 'is-invalid' : ''; ?>" id="password" value="<?= old('password'); ?>" placeholder="Masukkan Password...">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('password'); ?>
                         </div>
                     </div>
                 </div>

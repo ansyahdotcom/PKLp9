@@ -17,9 +17,11 @@ class Login extends BaseController
 
     public function index()
     {
-        if (session()->get('username') != NULL) {
-            session()->setFlashdata('message', 'islogin');
+        $user = $this->LoginModel->where(['nis' => session()->get('nis')])->first();
+        if ($user != NULL) {
             return redirect()->to("/dashboard_user");
+        } else if (session()->get('username') != NULL) {
+            return redirect()->to("/admin");
         }
         $data = [
             'title' => 'Login',
@@ -46,8 +48,8 @@ class Login extends BaseController
                 ]
             ]
         ])) {
-            $validation = \Config\Services::validate();
-            return redirect()->to('/login')->withInput()->with('validation', $validation);
+            // $validation = \Config\Services::validate();
+            return redirect()->to('/login')->withInput();
         }
         $nis = $this->request->getVar('nis');
         $password = $this->request->getVar('password');
@@ -75,15 +77,16 @@ class Login extends BaseController
 
     public function admin()
     {
-        if (session()->get('username') != NULL) {
-            // session()->setFlashdata('pesan', $this->notify('Peringatan!', 'Anda sudah login!', 'warning', 'error'));
-            // return redirect()->to("/dashboard");
-            echo 'anda sudah login';
+        if (session()->get('nis') != NULL) {
+            return redirect()->to('/login');
+        } else if (session()->get('username') != NULL) {
+            return redirect()->to('/dashboard');
+        } else {
+            $data = [
+                'title' => 'Login',
+            ];
+            echo view('v_login_admin', $data);
         }
-        $data = [
-            'title' => 'Login',
-        ];
-        echo view('v_login_admin', $data);
     }
 
     public function login_admin()
@@ -100,14 +103,14 @@ class Login extends BaseController
                 ];
                 session()->set($data);
                 session()->setFlashdata('message', 'login');
-                return redirect()->to('/user');
+                return redirect()->to('/dashboard');
             } else {
                 session()->setFlashdata('message', 'wrong_passwd');
-                return redirect()->to('/login/admin');
+                return redirect()->to('/admin');
             }
         } else {
             session()->setFlashdata('message', 'belum_terdaftar');
-            return redirect()->to('/login/admin');
+            return redirect()->to('/admin');
         }
     }
 
@@ -120,6 +123,7 @@ class Login extends BaseController
 
     public function logout_admin()
     {
+        session()->destroy(TRUE);
         session()->setFlashdata('message', 'logout');
         return redirect()->to('/login/admin');
     }

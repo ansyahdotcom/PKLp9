@@ -66,7 +66,24 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Apakah Anda ingin logout?</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                            <a class="btn btn-danger" href="/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- End of Content Wrapper -->
 
@@ -78,24 +95,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Bootstrap core JavaScript-->
     <script src="/assets/vendor/jquery/jquery.min.js"></script>
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -150,6 +149,7 @@
     </script>
 
     <script>
+        // Hapus User
         $(document).ready(function() {
             $('#datatable').DataTable();
         });
@@ -162,6 +162,41 @@
             swal({
                 title: 'Perhatian!',
                 text: "Yakin akan menghapus data " + nama + " ?",
+                icon: 'warning',
+
+                buttons: {
+                    cancel: {
+                        visible: true,
+                        text: 'Tidak',
+                        className: 'btn btn-danger'
+                    },
+                    confirm: {
+                        text: 'Ya',
+                        className: 'btn btn-success'
+                    }
+                }
+            }).then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "<?= base_url() ?>" + link + id;
+                } else {
+                    swal.close();
+                }
+            });
+
+        });
+        // Hapus Kelas
+        $(document).ready(function() {
+            $('#datatable').DataTable();
+        });
+
+        $('#datatable').on('click', '.hapus_kelas', function() {
+            var id = $(this).data('id');
+            var link = $(this).data('link');
+            var kelas = $(this).data('kelas');
+
+            swal({
+                title: 'Perhatian!',
+                text: "Yakin akan menghapus data " + kelas + " ?",
                 icon: 'warning',
 
                 buttons: {

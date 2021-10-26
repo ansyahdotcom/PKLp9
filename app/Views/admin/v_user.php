@@ -6,6 +6,14 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
+    <!-- Flashdata Message -->
+    <?php
+    if (session()->getFlashdata('message')) {
+        echo session()->getFlashdata('message');
+    }
+    ?>
+    <!-- /.End Flashdata Message -->
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -22,6 +30,7 @@
                 <table class="table table-bordered" id="datatable">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>NIS</th>
                             <th>Nama Siswa</th>
                             <th>Status Pemilih</th>
@@ -30,6 +39,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>No</th>
                             <th>NIS</th>
                             <th>Nama Siswa</th>
                             <th>Status Pemilih</th>
@@ -40,6 +50,7 @@
                         <?php foreach ($user as $k) : ?>
                             <?php $no = 1; ?>
                             <tr>
+                                <td><?= $no++; ?></td>
                                 <td><?= $k['nis']; ?></td>
                                 <td><?= $k['nama_usr']; ?></td>
                                 <td><?php if ($k['st_pemilih'] == 1) {
@@ -48,7 +59,7 @@
                                         echo '<span class="badge badge-danger"><b>Belum Vote</b></span>';
                                     } ?></td>
                                 <td class="d-flex">
-                                    <a href="/user/detailUser" class="btn btn-info btn-sm mr-2" title="Lihat Detail"><i class="fas fa-eye"></i></a>
+                                    <a href="/user/detailUser/<?= $k['nis']; ?>" class="btn btn-info btn-sm mr-2" title="Lihat Detail"><i class="fas fa-eye"></i></a>
                                     <a href="/user/editUser/<?= $k['nis']; ?>" class="btn btn-primary btn-sm mr-2" title="Edit Data"><i class="fas fa-edit"></i></a>
                                     <button data-tooltip="tooltip" title="Hapus Data" type="button" data-id="<?= $k['nis'] ?>" data-link="/user/delete/" data-nama=" Siswa <?= $k['nama_usr'] ?>" id="hapus_crud" class="btn btn-danger btn-sm hapus_crud"><i class="fas fa-trash"></i></button>
                                 </td>

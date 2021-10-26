@@ -1,7 +1,8 @@
 <?= $this->extend('layout/template_login'); ?>
 <?= $this->section('content'); ?>
 
-<div class="container">
+<div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -21,6 +22,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Login Admin</h1>
                                 </div>
                                 <form class="user" action="<?= base_url('login/login_admin'); ?>" method="POST">
+                                    <?= csrf_field(); ?>
                                     <div class="form-group">
                                         <input type="text" name="username" class="form-control form-control-user" placeholder="Username" required autofocus autocomplete="off">
                                     </div>

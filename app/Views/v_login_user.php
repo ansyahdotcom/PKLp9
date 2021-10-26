@@ -22,6 +22,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Login Siswa</h1>
                                 </div>
                                 <form class="user" action="<?= base_url('login/login_user'); ?>" method="POST">
+                                    <?= csrf_field(); ?>
                                     <div class="form-group">
                                         <input type="text" name="nis" class="form-control form-control-user <?= ($validation->hasError('nis')) ? 'is-invalid' : ''; ?>" placeholder="NIS" required autofocus autocomplete="off">
                                         <div class="invalid-feedback">

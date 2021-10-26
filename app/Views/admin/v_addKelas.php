@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/user" class="btn btn-danger">
+                <a href="/kelas" class="btn btn-danger">
                     <i class="fas fa-arrow-circle-left"></i>
                     Back
                 </a>
