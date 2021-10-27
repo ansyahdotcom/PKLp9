@@ -32,6 +32,7 @@ class Kandidat extends BaseController
             'activePeriode' => $this->PeriodeModel->activePeriode(),
             'kandidat' => $this->KandidatModel->getKandidat(),
         ];
+
         echo view('admin/v_kandidat', $data);
     }
 
