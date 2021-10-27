@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\KelasModel;
 use App\Models\UserModel;
+use CodeIgniter\HTTP\RequestInterface;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class User extends BaseController
 {
@@ -13,7 +16,7 @@ class User extends BaseController
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
-        helper(['form']);
+        helper(['form', 'url']);
         $this->UserModel = new UserModel;
         $this->KelasModel = new KelasModel;
     }
@@ -219,14 +222,16 @@ class User extends BaseController
         //looping untuk mengambil data
         foreach ($sheet as $data) {
             //skip index 6 karena title excel
-            if ($i >= 6) {
+            if ($i >= 10) {
                 // continue;
                 $insert = [
-                    'nis' => $data['0'],
-                    'nama_usr' => $data['1'],
+                    'nama_usr' => $data['0'],
+                    'nis' => $data['1'],
                     'id_kelas' => $data['2'],
                     'jk' => $data['3'],
-                    'password' => $data['4'],
+                    'password' => password_hash($this->request->getVar($data['4']), PASSWORD_DEFAULT),
+                    'st_pemilih' => '0',
+                    'st_kandidat' => '0',
                     'created_at' => date('Y-m-d H:i:s')
                 ];
                 // dd($data);
@@ -235,19 +240,23 @@ class User extends BaseController
             $i++;
         }
 
-        session()->setFlashdata('pesan', $this->notify('Selamat!', 'Berhasil mengimport data.', 'success', 'success'));
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil ditambahkan.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
         return redirect()->back();
     }
 
     public function export_template()
     {
-        $prodi = $this->m_crud->getAll('prodi')->result_array();
-        $golongan = $this->m_crud->getAll('golongan')->result_array();
+        $prodi = $this->KelasModel->findAll();
 
-        require(APPPATH . 'third_party/PHPExcel/PHPExcel.php');
-        require(APPPATH . 'third_party/PHPExcel/PHPExcel/Writer/Excel2007.php');
+        // require(APPPATH . 'third_party/PHPExcel/PHPExcel.php');
+        // require(APPPATH . 'third_party/PHPExcel/PHPExcel/Writer/Excel2007.php');
         // PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
-        $object = new PHPExcel();
+        $object = new Spreadsheet();
 
         $object->getProperties()->setCreator("Duxeos Software House");
         $object->getProperties()->setLastModifiedBy("Duxeos");
@@ -268,7 +277,7 @@ class User extends BaseController
                 'size' => 12
             ),
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             )
         );
 
@@ -278,7 +287,7 @@ class User extends BaseController
                 'size' => 11
             ),
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             )
         );
 
@@ -286,16 +295,17 @@ class User extends BaseController
         $borderArray = array(
             'borders' => array(
                 'allborders' => array(
-                    'style' => PHPExcel_Style_Border::BORDER_THIN
+                    'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                    'color' => array('rgb' => '000000'),
                 )
             ),
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             )
         );
 
         $backgroound['fill'] = array();
-        $backgroound['fill']['type'] = PHPExcel_Style_Fill::FILL_SOLID;
+        $backgroound['fill']['type'] = \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID;
         $backgroound['fill']['color'] = array();
         $backgroound['fill']['color']['rgb'] = 'DCDCDC';
 
@@ -304,15 +314,15 @@ class User extends BaseController
         $object->getActiveSheet()->setCellValue('A1', 'Perhatian! Mohon jangan merubah posisi atau susunan Template ini, Inputkan kode Program Studi dan Golongan pada kolom yang tersedia');
 
         // Tulis excel prodi
-        $object->getActiveSheet()->setCellValue('B3', 'Kode Prodi');
-        $object->getActiveSheet()->setCellValue('B4', 'Nama Prodi');
+        $object->getActiveSheet()->setCellValue('A3', 'Kode Kelas');
+        $object->getActiveSheet()->setCellValue('A4', 'Nama Kelas');
 
         $indexCol = 2;
         $numBatas = count($prodi) + 1;
         for ($i = $indexCol; $i <= $numBatas; $i++) {
-            $col = PHPExcel_Cell::stringFromColumnIndex($indexCol);
-            $kode_prodi = $prodi[$i - 2]['kode_prodi'];
-            $nama_prodi = $prodi[$i - 2]['prodi'];
+            $col = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($indexCol);
+            $kode_prodi = $prodi[$i - 2]['id_kelas'];
+            $nama_prodi = $prodi[$i - 2]['nama_kelas'];
 
             $object->getActiveSheet()->setCellValue($col . '3', $kode_prodi);
             $object->getActiveSheet()->setCellValue($col . '4', $nama_prodi);
@@ -326,66 +336,30 @@ class User extends BaseController
         $object->getActiveSheet()->getStyle('B3')->applyFromArray($backgroound);
         $object->getActiveSheet()->getStyle('B4')->applyFromArray($backgroound);
 
-        // Tulis excel golongan
-        $object->getActiveSheet()->setCellValue('B6', 'Kode Golongan');
-        $object->getActiveSheet()->setCellValue('B7', 'Nama Golongan');
-
-        $indexCol = 2;
-        $numBatas = count($golongan) + 1;
-        for ($i = $indexCol; $i <= $numBatas; $i++) {
-            $col = PHPExcel_Cell::stringFromColumnIndex($indexCol);
-            $kode_golongan = $golongan[$i - 2]['kode_golongan'];
-            $nama_golongan = $golongan[$i - 2]['golongan'];
-
-            $object->getActiveSheet()->setCellValue($col . '6', $kode_golongan);
-            $object->getActiveSheet()->setCellValue($col . '7', $nama_golongan);
-
-            $indexCol++;
-        }
-
-        $object->getActiveSheet()->getStyle('B6:' . $col . '6')->applyFromArray($borderArray);
-        $object->getActiveSheet()->getStyle('B7:' . $col . '7')->applyFromArray($borderArray);
-
-        $object->getActiveSheet()->getStyle('B6')->applyFromArray($backgroound);
-        $object->getActiveSheet()->getStyle('B7')->applyFromArray($backgroound);
-
-        $object->getActiveSheet()->setCellValue('B9', 'ket: NIM tidak boleh duplikat');
-        $object->getActiveSheet()->setCellValue('C9', 'ket: email tidak boleh duplikat');
-        $object->getActiveSheet()->setCellValue('D9', 'ket: min 8 karakter');
-        $object->getActiveSheet()->setCellValue('G9', 'cth: 3');
-        $object->getActiveSheet()->setCellValue('H9', 'cth: 2000-11-30');
-        $object->getActiveSheet()->setCellValue('I9', 'cth: 085816352xxx');
-        $object->getActiveSheet()->setCellValue('K9', 'cth: 2018/2019');
+        $object->getActiveSheet()->setCellValue('C9', 'ket: Isi kolom Kelas dengan kode kelas yang ada pada tabel kelas di atas');
 
         $object->getActiveSheet()->setCellValue('A10', 'Nama Mahasiswa');
-        $object->getActiveSheet()->setCellValue('B10', 'NIM');
-        $object->getActiveSheet()->setCellValue('C10', 'Email');
-        $object->getActiveSheet()->setCellValue('D10', 'Password');
-        $object->getActiveSheet()->setCellValue('E10', 'Prodi');
-        $object->getActiveSheet()->setCellValue('F10', 'Golongan');
-        $object->getActiveSheet()->setCellValue('G10', 'Semester Tempuh');
-        $object->getActiveSheet()->setCellValue('H10', 'Tanggal Lahir');
-        $object->getActiveSheet()->setCellValue('I10', 'No. HP');
-        $object->getActiveSheet()->setCellValue('J10', 'Alamat');
-        $object->getActiveSheet()->setCellValue('K10', 'Tahun angkatan');
+        $object->getActiveSheet()->setCellValue('B10', 'NIS');
+        $object->getActiveSheet()->setCellValue('C10', 'Kelas');
+        $object->getActiveSheet()->setCellValue('D10', 'Jenis Kelamin');
+        $object->getActiveSheet()->setCellValue('E10', 'Password');
 
-        $object->getActiveSheet()->getStyle('A10:K10')->applyFromArray($borderArray);
-        $object->getActiveSheet()->getStyle('A10:K10')->applyFromArray($styleBoldCenter);
+        $object->getActiveSheet()->getStyle('A10:E10')->applyFromArray($borderArray);
+        $object->getActiveSheet()->getStyle('A10:E10')->applyFromArray($styleBoldCenter);
 
         // Setting format penamaan output
         $today = date('Y-m-d (H.i.s)');
-        $filename = "Template Import Mahasiswa $today" . '.xlsx';
+        $filename = "Template Import Siswa $today" . '.xlsx';
 
-        $object->getActiveSheet()->setTitle("Template Import Mahasiswa");
+        $object->getActiveSheet()->setTitle("Template Import Siswa");
 
-        header('Content-Type: application/
-            vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
 
         ob_clean();
 
-        $writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
+        $writer = new Xlsx($object);
         $writer->save('php://output');
 
         exit;

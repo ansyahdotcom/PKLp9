@@ -186,7 +186,7 @@ foreach ($user as $data) { ?>
                     <li>Klik tombol "Unggah File Excel" untuk unggah <i>File Excel</i> yang telah berisi data siswa</li>
                 </ol><br>
                 <div class="float-right">
-                    <a href="/assets/excel/template_data.xlsx" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;&nbsp;Unduh Template Excel</a>
+                    <a href="<?= base_url('user/export_template')?>" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;&nbsp;Unduh Template Excel</a>
                 </div>
             </div>
         </div>
