@@ -15,7 +15,7 @@ class PeriodeModel extends Model
 
     public function getPeriode()
     {
-        return $this->orderBy('id_periode', 'DESC')
+        return $this->orderBy('id_periode', 'ASC')
                     ->findAll();
     }
 

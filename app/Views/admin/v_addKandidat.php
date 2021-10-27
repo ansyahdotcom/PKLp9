@@ -18,6 +18,7 @@
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
                 </div>
                 <hr>
+                <input type="hidden" name="periode" value="<?= $periode; ?>" readonly>
                 <div class="text-center mb-4">
                     <h3 class="font-weight-bold">Foto Kandidat</h3>
                     <img class="img img-responsive img-resize img-preview" src="/assets/img/fotokandidat/default.jpg" class="mt-2" alt="foto kandidat" width="200px">

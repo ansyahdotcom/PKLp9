@@ -39,12 +39,13 @@ class Kandidat extends BaseController
      * Fungsi menampilkan form tambah kandidat
      * ===========================================================
      */
-    public function addKandidat()
+    public function addKandidat($periode)
     {
         $data = [
             'title' => 'Tambah Kandidat',
             'user' => $this->UserModel->getUser()->getResultArray(),
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'periode' => $periode
         ];
         echo view('admin/v_addKandidat', $data);
     }
@@ -143,7 +144,7 @@ class Kandidat extends BaseController
             'foto' => $fotoName,
             'visi' => $this->request->getVar('visi'),
             'misi' => $this->request->getVar('misi'),
-            'periode' => '1'
+            'periode' => $this->request->getVar('periode')
         ]);
 
         /**

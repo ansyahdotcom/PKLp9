@@ -19,6 +19,7 @@ class KandidatModel extends Model
             ->join('user as u1', 'u1.nis=kandidat.ketua')
             ->join('user as u2', 'u2.nis=kandidat.wakil')
             ->join('periode', 'periode.id_periode=kandidat.periode')
+            ->where('st_periode', '1')
             ->orderBy('id_kandidat', 'DESC')
             ->findAll();
     }

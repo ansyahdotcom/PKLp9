@@ -34,7 +34,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <a href="/kandidat/addKandidat" class="btn btn-success">
+                <a href="" class="btn btn-success btn-addData">
                     <i class="fas fa-plus"></i>
                     Add data
                 </a>
