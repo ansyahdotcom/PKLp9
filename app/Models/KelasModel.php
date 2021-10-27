@@ -18,12 +18,18 @@ class KelasModel extends Model
         return $this->get();
     }
 
-    public function getJumlahSiswa()
+    public function editKelas($id)
     {
-        $this->select('*');
-        // SELECT kelas.nama_kelas, COUNT('user.id_kelas') as jumlah_siswa 
-        // FROM user, kelas WHERE user.id_kelas=kelas.id_kelas group by kelas.id_kelas
-        $this->join('user', 'user.id_kelas=kelas.id_kelas');
-        return $this->db->table('user')->countAll();
+        return $this->getWhere(['id_kelas' => $id])->getRowArray();
+    }
+
+    public function detailKelas($id)
+    {
+        return $this->get('*')->getRowArray();
+    }
+
+    public function add($insert)
+    {
+        $this->db->table('kelas')->insert($insert);
     }
 }

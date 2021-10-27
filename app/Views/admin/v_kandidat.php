@@ -83,7 +83,7 @@
                             <td><?= $no++; ?></td>
                             <td><?= $ketua->nama_usr; ?></td>
                             <td><?= $wakil->nama_usr; ?></td>
-                            <td><?= $k['updated_kd']; ?></td>
+                            <td><?= $k['updated_at']; ?></td>
                             <td class="d-flex">
                                 <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
                                 <a href="/kandidat/editKandidat/<?= $k['id_kandidat']; ?>" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>

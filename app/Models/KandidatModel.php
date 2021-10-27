@@ -9,8 +9,8 @@ class KandidatModel extends Model
     protected $table = 'kandidat';
     protected $primaryKey = 'id_kandidat';
     protected $useTimestamps = true;
-    protected $createdField  = 'created_kd';
-    protected $updatedField  = 'updated_kd';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
     protected $allowedFields = ['id_kandidat', 'ketua', 'wakil', 'nama_pasangan', 'foto', 'visi', 'misi', 'periode'];
 
     public function getKandidat()

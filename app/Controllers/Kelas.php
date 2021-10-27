@@ -17,10 +17,18 @@ class Kelas extends BaseController
     {
         $data = [
             'title'     => 'Data Kelas',
-            'kelas'     => $this->KelasModel->getKelas()->getResultArray(),
-            'jm_siswa'  => $this->KelasModel->getJumlahSiswa()
+            'kelas'     => $this->KelasModel->getKelas()->getResultArray()
         ];
         echo view('admin/v_kelas', $data);
+    }
+    
+    public function detailKelas($id)
+    {
+        $data = [
+            'title'     => 'Detail Kelas',
+            'nama_kelas'     => $this->KelasModel->editKelas($id)
+        ];
+        echo view('admin/v_detailKelas', $data);
     }
 
     public function addKelas()
@@ -49,8 +57,7 @@ class Kelas extends BaseController
                 ]
             ]
         ])) {
-            $validation = \Config\Services::validate();
-            return redirect()->to('/kelas/addKelas')->withInput()->with('validation', $validation);
+            return redirect()->to('/kelas/addKelas')->withInput();
         }
 
         /**
@@ -86,6 +93,44 @@ class Kelas extends BaseController
     public function delete($id)
     {
         $this->KelasModel->delete($id);
+        return redirect()->to('/kelas');
+    }
+
+    public function editKelas($id)
+    {
+        $data = [
+            'title' => 'Edit Kelas',
+            'validation' => \Config\Services::validation(),
+            'kelas' => $this->KelasModel->editKelas($id)
+        ];
+        echo view('admin/v_editKelas', $data);
+    }
+
+    public function update($id)
+    {
+        if (!$this->validate([
+            'nama_kelas' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Field Nama Kelas harus diisi.'
+                ]
+            ]
+        ])) { 
+            return redirect()->to('/kelas/editKelas/' . $id)->withInput();
+        }
+
+        $this->KelasModel->save([
+            'id_kelas' => $id,
+            'nama_kelas' => $this->request->getVar('nama_kelas')
+        ]);
+
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Data berhasil diubah.
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
         return redirect()->to('/kelas');
     }
 }
