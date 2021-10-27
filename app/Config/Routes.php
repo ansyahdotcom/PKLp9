@@ -46,6 +46,7 @@ $routes->get('/logout', 'Login::logout');
 $routes->get('/admin', 'Dashboard::index');
 
 // Route Kelas (Admin)
+$routes->get('/kelas/detailKelas/(:segment)', 'Kelas::detailKelas/$1');
 $routes->get('/kelas/addKelas', 'Kelas::addKelas');
 $routes->get('/kelas/editKelas/(:segment)', 'Kelas::editKelas/$1');
 $routes->delete('/kelas/(:num)', 'Kelas::delete/$1');

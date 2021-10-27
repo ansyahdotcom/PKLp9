@@ -25,9 +25,9 @@ class Kelas extends BaseController
     public function detailKelas($id)
     {
         $data = [
-            'title'     => 'Detail Kelas',
-            'nama_kelas'     => $this->KelasModel->editKelas($id)
-        ];
+            'title'         => 'Detail Kelas',
+            'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray()
+        ];        
         echo view('admin/v_detailKelas', $data);
     }
 

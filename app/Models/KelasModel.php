@@ -25,7 +25,8 @@ class KelasModel extends Model
 
     public function detailKelas($id)
     {
-        return $this->get('*')->getRowArray();
+        $kelas = $this->getWhere(['id_kelas' => $id])->getResultArray();
+        return $kelas;
     }
 
     public function add($insert)
