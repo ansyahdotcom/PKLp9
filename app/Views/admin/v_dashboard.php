@@ -162,7 +162,11 @@
                                 foreach ($vote as $vot) {
                                     $penyebut = $vot['voting'];
                                     $pembilang = $pemb['pembilang'];
-                                    $hasil = $pembilang / $penyebut * 100;
+                                    if ($pembilang == 0 && $penyebut == 0) {
+                                        $hasil = 0;
+                                    } else {
+                                        $hasil = $pembilang / $penyebut * 100 + 0;
+                                    }
                                     echo $hasil . '%';
                                 }
                             } ?>
