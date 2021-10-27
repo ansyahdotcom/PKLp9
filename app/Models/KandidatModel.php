@@ -24,6 +24,17 @@ class KandidatModel extends Model
             ->findAll();
     }
 
+    public function kandidatPeriode($periode)
+    {
+        return $this->select('*')
+            ->join('user as u1', 'u1.nis=kandidat.ketua')
+            ->join('user as u2', 'u2.nis=kandidat.wakil')
+            ->join('periode', 'periode.id_periode=kandidat.periode')
+            ->where('kandidat.periode', $periode)
+            ->orderBy('id_kandidat', 'DESC')
+            ->findAll();
+    }
+
     public function editKandidat($id)
     {
         return $this->select('*')

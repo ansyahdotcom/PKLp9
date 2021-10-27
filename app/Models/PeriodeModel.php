@@ -19,9 +19,21 @@ class PeriodeModel extends Model
                     ->findAll();
     }
 
+    public function activePeriode()
+    {
+        return $this->getWhere(['st_periode' => 1])
+                    ->getRowArray();
+    }
+
     public function editPeriode($id)
     {
         return $this->getWhere(['id_periode' => $id])
+                    ->getRowArray();
+    }
+
+    public function tahunPeriode($periode)
+    {
+        return $this->getWhere(['id_periode' => $periode])
                     ->getRowArray();
     }
 }

@@ -150,12 +150,20 @@
 
     <script>
         $(document).ready(function() {
-            $('.btn-addData').click(function() {
+            $('.selectpicker').selectpicker();
+            $('select[name=periode1]').selectpicker('val', +$('input[name=activePeriode]').val());
+            $('.selectpicker').selectpicker('refresh');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            setInterval(function() {
                 $('.selectpicker').selectpicker();
                 const periode = $('select[name=periode1]').val();
                 $('.btn-addData').attr('href', '/kandidat/addKandidat/' + periode);
                 $('.selectpicker').selectpicker('refresh');
-            });
+            }, 500);
         });
     </script>
 
