@@ -6,20 +6,12 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
-    <!-- Flashdata Message -->
-    <?php
-    if (session()->getFlashdata('message')) {
-        echo session()->getFlashdata('message');
-    }
-    ?>
-    <!-- /.End Flashdata Message -->
-
-    <?php
-    $uri = service('uri');
-    if ($uri->getSegment(2) != 'searchKandidat') :
-    ?>
-        <form action="/kandidat/searchKandidat" method="post">
-            <?= csrf_field(); ?>
+    <form action="/kandidat/searchKandidat" method="post">
+        <?= csrf_field(); ?>
+        <?php
+        $uri = service('uri');
+        if ($uri->getSegment(2) != 'searchKandidat') :
+        ?>
             <div class="form-group">
                 <label for="nama_psg"><b>Periode Kandidat:</b> </label>
                 <input type="hidden" name="activePeriode" value="<?= $activePeriode['id_periode']; ?>" readonly>
@@ -36,12 +28,9 @@
                     </div>
                 </div>
             </div>
-        </form>
-    <?php else : ?>
-        <form action="/kandidat/searchKandidat" method="post">
-            <?= csrf_field(); ?>
+        <?php else : ?>
             <div class="form-group">
-                <label for="nama_psg"><b>Periode Kandidat:</b> </label>
+                <label for="nama_psg"><b>Cari kandidat berdasarkan periode:</b> </label>
                 <input type="hidden" name="activePeriode" value="<?= $kandidatPeriode ?>" readonly>
                 <div class="input-group">
                     <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
@@ -56,13 +45,21 @@
                     </div>
                 </div>
             </div>
-        </form>
-    <?php endif; ?>
+        <?php endif; ?>
+    </form>
+    
+    <!-- Flashdata Message -->
+    <?php
+    if (session()->getFlashdata('message')) {
+        echo session()->getFlashdata('message');
+    }
+    ?>
+    <!-- /.End Flashdata Message -->
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="" class="btn btn-success btn-addData">
+            <a href="/kandidat/addKandidat" class="btn btn-success btn-addData">
                 <i class="fas fa-plus"></i>
                 Add data
             </a>

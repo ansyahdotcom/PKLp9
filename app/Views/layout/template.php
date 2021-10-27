@@ -156,16 +156,16 @@
         });
     </script>
 
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             setInterval(function() {
                 $('.selectpicker').selectpicker();
                 const periode = $('select[name=periode1]').val();
-                $('.btn-addData').attr('href', '/kandidat/addKandidat/' + periode);
                 $('.selectpicker').selectpicker('refresh');
+                $('.btn-addData').attr('href', '/kandidat/addKandidat/' + periode);
             }, 500);
         });
-    </script>
+    </script> -->
 
     <script>
         // Hapus User
