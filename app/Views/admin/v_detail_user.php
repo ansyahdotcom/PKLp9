@@ -7,7 +7,7 @@
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
     <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+<div class="card shadow mb-4">
         <?= csrf_field(); ?>
         <div class="card-header bg-primary py-3">
             <h5 class="text-white font-weight-bold text-center">Detail Data Siswa</h5>

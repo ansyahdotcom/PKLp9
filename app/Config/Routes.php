@@ -32,15 +32,26 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Login::index');
-$routes->get('/admin', 'Login::admin');
-$routes->get('/kelas/addKelas', 'Kelas::addKelas');
-$routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
-$routes->get('/kelas/(:any)', 'Kelas::index/$1');
+// Route Dashboard User
+$routes->get('/', 'User::index');
+$routes->post('/submit', 'Dashboard_user::submit');
+
+// Route Profil (User)
 $routes->get('/profile', 'Profile_user::index');
 
+// Route Logout (User)
 $routes->get('/logout', 'Login::logout');
 
+// Route Dashboard Admin
+$routes->get('/admin', 'Dashboard::index');
+
+// Route Kelas (Admin)
+$routes->get('/kelas/addKelas', 'Kelas::addKelas');
+$routes->get('/kelas/editKelas/(:segment)', 'Kelas::editKelas/$1');
+$routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
+$routes->get('/kelas/(:any)', 'Kelas::index/$1');
+
+// Route Kandidat (Admin)
 $routes->get('/kandidat/editKandidat/(:segment)', 'Kandidat::editKandidat/$1');
 $routes->get('/periode/editPeriode/(:segment)', 'Periode::editPeriode/$1');
 $routes->delete('/kandidat/(:num)', 'Kandidat::delete/$1');
