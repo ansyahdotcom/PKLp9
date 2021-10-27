@@ -150,6 +150,14 @@
 
     <script>
         $(document).ready(function() {
+            $('.selectpicker').selectpicker();
+            $('select[name=periode1]').selectpicker('val', +$('input[name=activePeriode]').val());
+            $('.selectpicker').selectpicker('refresh');
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
             $('.btn-addData').click(function() {
                 $('.selectpicker').selectpicker();
                 const periode = $('select[name=periode1]').val();

@@ -29,8 +29,36 @@ class Kandidat extends BaseController
         $data = [
             'title' => 'Data Kandidat',
             'periode' => $this->PeriodeModel->getPeriode(),
-            'kandidat' => $this->KandidatModel->getKandidat(),
+            'activePeriode' => $this->PeriodeModel->activePeriode(),
+            'kandidat' => $this->KandidatModel->getKandidat()
         ];
+        echo view('admin/v_kandidat', $data);
+    }
+
+    /**
+     * ===========================================================
+     * Fungsi mencari data kandidat berdasarkan periode
+     * ===========================================================
+     */
+    public function searchKandidat()
+    {
+        $periode = $this->request->getVar('periode1');
+        $data = [
+            'title' => 'Data Kandidat',
+            'periode' => $this->PeriodeModel->getPeriode(),
+            'activePeriode' => $this->PeriodeModel->activePeriode(),
+            'tahunPeriode' => $this->PeriodeModel->tahunPeriode($periode),
+            'kandidat' => $this->KandidatModel->kandidatPeriode($periode),
+            'kandidatPeriode' => $periode
+        ];
+
+        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                Hasil pencarian data kandidat periode' . " " . $data['tahunPeriode']['periode'] . '....
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>');
+
         echo view('admin/v_kandidat', $data);
     }
 

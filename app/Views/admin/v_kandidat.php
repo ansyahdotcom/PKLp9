@@ -14,88 +14,115 @@
     ?>
     <!-- /.End Flashdata Message -->
 
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="nama_psg"><b>Periode Kandidat:</b> </label>
-            <div class="input-group">
-                <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
-                    <?php foreach ($periode as $p) : ?>
-                        <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" title="cari">
-                        <i class="fas fa-search"></i>
-                    </button>
+    <?php
+    $uri = service('uri');
+    if ($uri->getSegment(2) != 'searchKandidat') :
+    ?>
+        <form action="/kandidat/searchKandidat" method="post">
+            <?= csrf_field(); ?>
+            <div class="form-group">
+                <label for="nama_psg"><b>Periode Kandidat:</b> </label>
+                <input type="hidden" name="activePeriode" value="<?= $activePeriode['id_periode']; ?>" readonly>
+                <div class="input-group">
+                    <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
+                        <?php foreach ($periode as $p) : ?>
+                            <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" title="cari">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <a href="" class="btn btn-success btn-addData">
-                    <i class="fas fa-plus"></i>
-                    Add data
-                </a>
+        </form>
+    <?php else : ?>
+        <form action="/kandidat/searchKandidat" method="post">
+            <?= csrf_field(); ?>
+            <div class="form-group">
+                <label for="nama_psg"><b>Periode Kandidat:</b> </label>
+                <input type="hidden" name="activePeriode" value="<?= $kandidatPeriode ?>" readonly>
+                <div class="input-group">
+                    <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
+                        <?php foreach ($periode as $p) : ?>
+                            <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" title="cari">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-    </form>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Ketua</th>
-                        <th>Nama Wakil</th>
-                        <th>Last Update</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Ketua</th>
-                        <th>Nama Wakil</th>
-                        <th>Last Update</th>
-                        <th>Aksi</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <?php foreach ($kandidat as $k) : ?>
-                        <?php $no = 1; ?>
+        </form>
+    <?php endif; ?>
 
-                        <!-- Menampilkan nama kandidat -->
-                        <?php
-                        $db = \Config\Database::connect();
-                        $user = $db->table('user');
-                        $kd = $db->table('kandidat');
-                        $ketua = $user->getWhere(['nis' => $k['ketua']])
-                                ->getFirstRow();
-                        $wakil = $user->getWhere(['nis' => $k['wakil']])
-                                ->getFirstRow();
-                        $updated_at = $kd->get()
-                                    ->getResultObject();
-                        ?>
-                        <!-- /. End menampilkan nama kandidat  -->
-
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a href="" class="btn btn-success btn-addData">
+                <i class="fas fa-plus"></i>
+                Add data
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
-                            <td><?= $no++; ?></td>
-                            <td><?= $ketua->nama_usr; ?></td>
-                            <td><?= $wakil->nama_usr; ?></td>
-                            <td><?= $k['updated_kd']; ?></td>
-                            <td class="d-flex">
-                                <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
-                                <a href="/kandidat/editKandidat/<?= $k['id_kandidat']; ?>" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>
-                                <button type="button" class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#delModal<?= $k['id_kandidat']; ?>" title="hapus data"><i class="fas fa-trash"></i></button>
-                            </td>
+                            <th>No</th>
+                            <th>Nama Ketua</th>
+                            <th>Nama Wakil</th>
+                            <th>Last Update</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Ketua</th>
+                            <th>Nama Wakil</th>
+                            <th>Last Update</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <?php foreach ($kandidat as $k) : ?>
+                            <?php $no = 1; ?>
+
+                            <!-- Menampilkan nama kandidat -->
+                            <?php
+                            $db = \Config\Database::connect();
+                            $user = $db->table('user');
+                            $kd = $db->table('kandidat');
+                            $ketua = $user->getWhere(['nis' => $k['ketua']])
+                                ->getFirstRow();
+                            $wakil = $user->getWhere(['nis' => $k['wakil']])
+                                ->getFirstRow();
+                            $updated_at = $kd->get()
+                                ->getResultObject();
+                            ?>
+                            <!-- /. End menampilkan nama kandidat  -->
+
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $ketua->nama_usr; ?></td>
+                                <td><?= $wakil->nama_usr; ?></td>
+                                <td><?= $k['updated_kd']; ?></td>
+                                <td class="d-flex">
+                                    <a href="#" class="btn btn-info btn-sm mr-2" title="lihat detail"><i class="fas fa-eye"></i></a>
+                                    <a href="/kandidat/editKandidat/<?= $k['id_kandidat']; ?>" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>
+                                    <button type="button" class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#delModal<?= $k['id_kandidat']; ?>" title="hapus data"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <!-- Modal Delete -->
@@ -109,7 +136,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="kandidat/<?= $k['id_kandidat']; ?>" method="post">
+                <form action="/kandidat/<?= $k['id_kandidat']; ?>" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="DELETE">
                     <div class="modal-body">
