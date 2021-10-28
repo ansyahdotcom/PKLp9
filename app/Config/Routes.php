@@ -59,6 +59,10 @@ $routes->delete('/kandidat/(:num)', 'Kandidat::delete/$1');
 $routes->delete('/periode/(:num)', 'Periode::delete/$1');
 $routes->post('/submit', 'Dashboard_user::submit');
 
+// Route Periode
+$routes->post('/periode/active/(:num)', 'Periode::active/$1');
+$routes->post('/periode/nonactive/(:num)', 'Periode::nonactive/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

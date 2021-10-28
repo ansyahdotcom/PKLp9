@@ -3,14 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\PeriodeModel;
+use App\Models\UserModel;
 
 class Periode extends BaseController
 {
     protected $PeriodeModel;
+    protected $UserModel;
 
     public function __construct()
     {
         $this->PeriodeModel = new PeriodeModel;
+        $this->UserModel = new UserModel;
     }
 
     public function index()
@@ -24,6 +27,16 @@ class Periode extends BaseController
 
     public function nonactive($id)
     {
+        $this->UserModel
+            ->set('st_pemilih', 0)
+            ->where('st_pemilih', 1)
+            ->update();
+
+        $this->UserModel
+            ->set('st_kandidat', 0)
+            ->where('st_kandidat', 1)
+            ->update();
+            
         $this->PeriodeModel->save([
             'id_periode' => $id,
             'st_periode' => 0
@@ -46,11 +59,20 @@ class Periode extends BaseController
             ->where('st_periode', 1)
             ->update();
 
+        $this->UserModel
+            ->set('st_pemilih', 0)
+            ->where('st_pemilih', 1)
+            ->update();
+
+        $this->UserModel
+            ->set('st_kandidat', 0)
+            ->where('st_kandidat', 1)
+            ->update();
+
         $this->PeriodeModel->save([
             'id_periode' => $id,
             'st_periode' => 1
         ]);
-
 
         session()->setFlashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                                 Periode telah diaktifkan.

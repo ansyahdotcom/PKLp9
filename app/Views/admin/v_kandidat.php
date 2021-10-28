@@ -17,7 +17,7 @@
                 <input type="hidden" name="activePeriode" value="<?= $activePeriode['id_periode']; ?>" readonly>
                 <div class="input-group">
                     <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
-                            <option value="all">Tampilkan semua</option>
+                        <!-- <option value="all">Tampilkan semua</option> -->
                         <?php foreach ($periode as $p) : ?>
                             <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
                         <?php endforeach; ?>
