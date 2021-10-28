@@ -35,8 +35,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        <?php $no = 1; ?>
                         <?php foreach ($periode as $p) : ?>
-                            <?php $no = 1; ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $p['periode']; ?></td>

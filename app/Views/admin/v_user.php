@@ -38,8 +38,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        <?php $no = 1; ?>
                         <?php foreach ($user as $k) : ?>
-                            <?php $no = 1; ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $k['nis']; ?></td>

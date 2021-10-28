@@ -33,8 +33,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        <?php $no = 1; ?>
                         <?php foreach ($kelas as $k) : ?>
-                            <?php $no = 1; ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $k['nama_kelas']; ?></td>

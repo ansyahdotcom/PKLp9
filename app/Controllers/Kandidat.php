@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\KandidatModel;
+use App\Models\LoginAdminModel;
+use App\Models\LoginModel;
 use App\Models\UserModel;
 use App\Models\PeriodeModel;
 
@@ -11,12 +13,14 @@ class Kandidat extends BaseController
     protected $KandidatModel;
     protected $UserModel;
     protected $PeriodeModel;
+    protected $LoginAdminModel;
 
     public function __construct()
     {
         $this->KandidatModel = new KandidatModel;
         $this->UserModel = new UserModel;
         $this->PeriodeModel = new PeriodeModel;
+        $this->LoginAdminModel = new LoginAdminModel;
     }
 
     /**

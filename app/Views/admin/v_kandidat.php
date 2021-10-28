@@ -78,8 +78,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                        <?php $no = 1; ?>
                         <?php foreach ($kandidat as $k) : ?>
-                            <?php $no = 1; ?>
 
                             <!-- Menampilkan nama kandidat -->
                             <?php
