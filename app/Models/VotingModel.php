@@ -8,6 +8,6 @@ class VotingModel extends Model
 {
     protected $table = 'voting';
     protected $useTimestamps = true;
-    protected $allowedFields = ['nis', 'id_kandidat', 'created_at'];
+    protected $allowedFields = ['nis', 'id_kandidat'];
 
 }

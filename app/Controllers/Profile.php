@@ -8,7 +8,6 @@ use App\Models\UserModel;
 class Profile extends BaseController
 {
     protected $LoginModel;
-    protected $VotingModel;
     public function __construct()
     {
         $this->LoginModel = new LoginModel;

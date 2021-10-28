@@ -32,22 +32,22 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-// Route Dashboard User
+// Route User
 $routes->post('/submit', 'Dashboard_user::submit');
-
 $routes->get('/', 'Login::index');
+$routes->get('/profile', 'Profile::index');
+
+// Route Logout
+$routes->get('/logout', 'Login::logout');
+
+// Route Admin
+$routes->get('/admin', 'Login::admin');
+$routes->get('/reset', 'Dashboard::resett');
 $routes->get('/admin', 'Login::admin');
 $routes->get('/kelas/addKelas', 'Kelas::addKelas');
 $routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
 $routes->get('/kelas/(:any)', 'Kelas::index/$1');
-$routes->get('/profile', 'Profile::index');
-$routes->get('/reset', 'Dashboard::resett');
-
-// Route Logout (User)
-$routes->get('/logout', 'Login::logout');
-
-// Route Dashboard Admin
-$routes->get('/admin', 'Dashboard::index');
+$routes->get('/forgot_password', 'Login::forgot_password');
 
 // Route Kelas (Admin)
 $routes->get('/kelas/detailKelas/(:segment)', 'Kelas::detailKelas/$1');

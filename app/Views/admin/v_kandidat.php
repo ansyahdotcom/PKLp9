@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
 
@@ -17,7 +18,7 @@
                 <input type="hidden" name="activePeriode" value="<?= $activePeriode['id_periode']; ?>" readonly>
                 <div class="input-group">
                     <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
-                            <option value="all">Tampilkan semua</option>
+                        <option value="all">Tampilkan semua</option>
                         <?php foreach ($periode as $p) : ?>
                             <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
                         <?php endforeach; ?>
@@ -48,16 +49,6 @@
             </div>
         <?php endif; ?>
     </form>
-
-    <!-- Flashdata Message -->
-    <?php
-    if (session()->getFlashdata('message')) {
-        echo session()->getFlashdata('message');
-    }
-    ?>
-    <!-- /.End Flashdata Message -->
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/kandidat/addKandidat" class="btn btn-success btn-addData">

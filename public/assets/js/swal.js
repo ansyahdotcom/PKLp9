@@ -10,12 +10,12 @@ $(function() {
     if(flashData == 'login'){
         Toast.fire({
             icon: 'success',
-            title:'Anda Berhasil Login!',
+            title:'Anda berhasil login!',
         });
     } else if(flashData == 'logout') {
         Toast.fire({
             icon: 'success',
-            title: 'Anda Berhasil Logout'
+            title: 'Anda berhasil logout'
         });
     } else if(flashData == 'change_passwd') {
         Toast.fire({
@@ -25,17 +25,57 @@ $(function() {
     } else if(flashData == 'wrong_passwd') {
         Toast.fire({
             icon: 'error',
-            title: 'Maaf Password Salah!'
+            title: 'Maaf password salah!'
         });
     } else if(flashData == 'belum_terdaftar') {
         Toast.fire({
             icon: 'error',
-            title: 'Maaf User Belum Terdaftar!'
+            title: 'Maaf user belum terdaftar!'
         });
     } else if (flashData == 'vote') {
         Toast.fire({
             icon: 'success',
-            title: 'Anda Berhasil Memilih Satu Calon!',
+            title: 'Anda berhasil memilih satu calon!',
+        });
+    } else if (flashData == 'reset') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Hasil voting berhasil dihapus',
+        });
+    } else if (flashData == 'save') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Data berhasil disimpan',
+        });
+    } else if (flashData == 'notsave') {
+        Toast.fire({
+            icon: 'error',
+            title: 'Gagal menyimpan data',
+        });
+    } else if (flashData == 'edit') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Data berhasil diubah',
+        });
+    } else if (flashData == 'delete') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Data berhasil dihapus',
+        });
+    } else if (flashData == 'notdelete') {
+        Toast.fire({
+            icon: 'error',
+            title: 'Gagal menghapus data',
+        });
+    } else if (flashData == 'nonactive') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Periode telah dinonaktifkan',
+        });
+    } else if (flashData == 'active') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Periode telah diaktifkan',
         });
     }
 });
