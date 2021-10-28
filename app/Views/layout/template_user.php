@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
 
     <!-- Custom styles for this template-->
-    <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
     <!-- My CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
@@ -43,19 +43,37 @@
 
             <!-- Main Content -->
             <div id="content">
-                <?= $this->include('layout/navbar'); ?>
+                <?= $this->include('layout/navbar_user'); ?>
                 <?= $this->renderSection('content'); ?>
             </div>
             <!-- End of Main Content -->
 
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Apakah Anda ingin logout?</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                            <a class="btn btn-danger" href="/logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Pemilos SMAN 4 Surakarta 2021</span>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>
@@ -167,6 +185,27 @@
                 }
             });
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#password2').keyup(function() {
+                var pw1 = $('#password1').val();
+                var pw2 = $('#password2').val();
+                if (pw2 != pw1) {
+                    // $('#iconerror').addClass('fas fa-times text-danger');
+                    $('#showerror').html('Password tidak sama');
+                    $('#showerror').css('color', 'red');
+                    $('#submit').attr('disabled', true);
+                    return false;
+                } else {
+                    $('#showerror').html('Password sama');
+                    $('#showerror').css('color', 'green');
+                    $('#submit').attr('disabled', false);
+                    return false;
+                }
+            });
         });
     </script>
 </body>

@@ -1,23 +1,18 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layout/template_user'); ?>
 
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-download fa-sm text-white-50"></i>
-            Generate Report
-        </a> -->
+        <h1 class="h3 mb-0 text-gray-800">Landing Page</h1>
     </div>
 
     <!-- Content Row -->
     <div class="row">
 
-        <!-- Info Cards -->
+        <!-- Info Vote Masuk -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -38,6 +33,7 @@
             </div>
         </div>
 
+        <!-- Info Jumlah User -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -59,6 +55,7 @@
             </div>
         </div>
 
+        <!-- Info Jumlah Kandidat -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -80,6 +77,7 @@
             </div>
         </div>
 
+        <!-- Info Periode -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
@@ -102,33 +100,7 @@
         </div>
     </div>
 
-    <!-- Reset Vote Row -->
-    <div class="row">
-
-        <!-- Info Cards -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-danger text-uppercase mb-1">
-                                Reset Hasil Vote
-                            </div>
-                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#resetModal">
-                                <span class="text">Reset</span>
-                            </a>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-trash fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
     <!-- Content Row -->
-
     <div class="row">
 
         <!-- Area Chart -->
@@ -136,7 +108,7 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Perolehan Suara Kandidat</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Kandidat Pemimpin OSIS</h6>
                     <div class="dropdown no-arrow">
                     </div>
                 </div>
@@ -152,25 +124,37 @@
                                                                 AND user.id_kelas = kelas.id_kelas AND kandidat.id_kandidat = $id_kandidat");
                             foreach ($sql->getResultArray() as $wakil) :
                             ?>
-                                <div class="font-weight-bold mb-1">
-                                    <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                <div class="card border-left-primary h-100 py-2">
+                                    <div class="card-navbar font-weight-bold">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mx-2">
+                                                <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php endforeach; ?>
-                            <?php
-                            $db = \Config\Database::connect();
-                            $sqll = $db->query("SELECT COUNT(id_kandidat) AS pembilang FROM voting WHERE id_kandidat = $id_kandidat");
-                            foreach ($sqll->getResultArray() as $pemb) {
-                                foreach ($vote as $vot) {
-                                    $penyebut = $vot['voting'];
-                                    $pembilang = $pemb['pembilang'];
-                                    if ($pembilang == 0 && $penyebut == 0) {
-                                        $hasil = 0;
-                                    } else {
-                                        $hasil = $pembilang / $penyebut * 100 + 0;
+                            <br>
+                            <h4 class="small font-weight-bold">Perolehan Suara
+                                <div class="float-right mr-2">
+                                    <?php
+                                    $db = \Config\Database::connect();
+                                    $sqll = $db->query("SELECT COUNT(id_kandidat) AS pembilang FROM voting WHERE id_kandidat = $id_kandidat");
+                                    foreach ($sqll->getResultArray() as $pemb) {
+                                        foreach ($vote as $vot) {
+                                            $penyebut = $vot['voting'];
+                                            $pembilang = $pemb['pembilang'];
+                                            if ($pembilang == 0 && $penyebut == 0) {
+                                                $hasil = 0;
+                                            } else {
+                                                $hasil = $pembilang / $penyebut * 100 + 0;
+                                            }
+                                            echo $hasil . '%';
+                                        }
                                     }
-                                    echo $hasil . '%';
-                                }
-                            } ?>
+                                    ?>
+                                </div>
+                            </h4>
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: <?= $hasil ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>

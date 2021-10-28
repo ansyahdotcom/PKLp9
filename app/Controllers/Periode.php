@@ -4,25 +4,33 @@ namespace App\Controllers;
 
 use App\Models\PeriodeModel;
 use App\Models\UserModel;
+use App\Models\LoginAdminModel;
 
 class Periode extends BaseController
 {
     protected $PeriodeModel;
     protected $UserModel;
+    protected $LoginAdminModel;
 
     public function __construct()
     {
         $this->PeriodeModel = new PeriodeModel;
         $this->UserModel = new UserModel;
+        $this->LoginAdminModel = new LoginAdminModel;
     }
 
     public function index()
     {
-        $data = [
-            'title' => 'Data Periode',
-            'periode' => $this->PeriodeModel->getPeriode(),
-        ];
-        echo view('admin/v_periode', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Data Periode',
+                'periode' => $this->PeriodeModel->getPeriode(),
+            ];
+            echo view('admin/v_periode', $data);
+        }
     }
 
     public function nonactive($id)
@@ -42,13 +50,7 @@ class Periode extends BaseController
             'st_periode' => 0
         ]);
 
-        session()->setFlashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                Periode telah dinonaktifkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'nonactive');
         return redirect()->to('/periode');
     }
 
@@ -80,17 +82,22 @@ class Periode extends BaseController
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>');
-
+        session()->setFlashdata('message', 'active');
         return redirect()->to('/periode');
     }
 
     public function addPeriode()
     {
-        $data = [
-            'title' => 'Tambah Periode',
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('admin/v_addPeriode', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Tambah Periode',
+                'validation' => \Config\Services::validation()
+            ];
+            echo view('admin/v_addPeriode', $data);
+        }
     }
 
     public function save()
@@ -113,25 +120,24 @@ class Periode extends BaseController
             'st_periode' => '0'
         ]);
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'save');
         return redirect()->to('/periode');
     }
 
     public function editPeriode($id)
     {
-        $data = [
-            'title' => 'Edit Periode',
-            'validation' => \Config\Services::validation(),
-            'periode' => $this->PeriodeModel->editPeriode($id)
-        ];
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Edit Periode',
+                'validation' => \Config\Services::validation(),
+                'periode' => $this->PeriodeModel->editPeriode($id)
+            ];
 
-        echo view('admin/v_editPeriode', $data);
+            echo view('admin/v_editPeriode', $data);
+        }
     }
 
     public function update($id)
@@ -171,13 +177,7 @@ class Periode extends BaseController
             'periode' => $periode
         ]);
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil diubah.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'edit');
         return redirect()->to('/periode');
     }
 
@@ -185,12 +185,7 @@ class Periode extends BaseController
     {
         $this->PeriodeModel->delete($id);
 
-        session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                Data berhasil dihapus.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
+        session()->setFlashdata('message', 'delete');
 
         return redirect()->to('/periode');
     }

@@ -3,18 +3,9 @@
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
-
-    <!-- Flashdata Message -->
-    <?php
-    if (session()->getFlashdata('message')) {
-        echo session()->getFlashdata('message');
-    }
-    ?>
-    <!-- /.End Flashdata Message -->
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/user/addUser" class="btn btn-success">
@@ -101,7 +92,7 @@
                     <li>Klik tombol "Unggah File Excel" untuk unggah <i>File Excel</i> yang telah berisi data siswa</li>
                 </ol><br>
                 <div class="float-right">
-                    <a href="<?= base_url('user/export_template')?>" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;&nbsp;Unduh Template Excel</a>
+                    <a href="<?= base_url('user/export_template') ?>" class="btn btn-success"><i class="fas fa-download"></i>&nbsp;&nbsp;Unduh Template Excel</a>
                 </div>
             </div>
         </div>

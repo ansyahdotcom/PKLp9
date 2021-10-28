@@ -4,68 +4,85 @@ namespace App\Controllers;
 
 use App\Models\KelasModel;
 use App\Models\UserModel;
+use App\Models\LoginAdminModel;
 use CodeIgniter\HTTP\RequestInterface;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class User extends BaseController
 {
-    protected $UserModel;
     protected $KelasModel;
+    protected $UserModel;
+    protected $LoginAdminModel;
 
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
         helper(['form', 'url']);
-        $this->UserModel = new UserModel;
         $this->KelasModel = new KelasModel;
+        $this->UserModel = new UserModel;
+        $this->LoginAdminModel = new LoginAdminModel;
     }
 
     public function index()
     {
-        // $username = $this->loginModel->where(['nama_user' => session()->get('username')])->first();
-        // if ($username == NULL) {
-        //     session()->setFlashdata('pesan', $this->notify('Peringatan!', 'Untuk mengakses halaman admin, login terlebih dahulu!', 'warning', 'error'));
-        //     return redirect()->to("/auth");
-        // }
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Manajemen User',
+                'user' => $this->UserModel->findAll()
+            ];
 
-        $data = [
-            'title' => 'Manajemen User',
-            'user' => $this->UserModel->findAll()
-        ];
-
-        echo view('admin/v_user', $data);
+            echo view('admin/v_user', $data);
+        }
     }
 
     public function addUser()
     {
-        $data = [
-            'title' => 'Tambah User',
-            'kelas' => $this->KelasModel->findAll(),
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('admin/v_addUser', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Tambah User',
+                'kelas' => $this->KelasModel->findAll(),
+                'validation' => \Config\Services::validation()
+            ];
+            echo view('admin/v_addUser', $data);
+        }
     }
 
     public function editUser($id)
     {
-        $data = [
-            'title' => 'Edit User',
-            'kelas' => $this->KelasModel->findAll(),
-            'user' => $this->UserModel->editUser($id),
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('admin/v_edit_user', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Edit User',
+                'kelas' => $this->KelasModel->findAll(),
+                'user' => $this->UserModel->editUser($id),
+                'validation' => \Config\Services::validation()
+            ];
+            echo view('admin/v_edit_user', $data);
+        }
     }
 
     public function detailUser($id)
     {
-        $data = [
-            'title' => 'Detail User',
-            'kelas' => $this->KelasModel->findAll(),
-            'user' => $this->UserModel->editUser($id)
-        ];
-        echo view('admin/v_detail_user', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Detail User',
+                'kelas' => $this->KelasModel->findAll(),
+                'user' => $this->UserModel->editUser($id)
+            ];
+            echo view('admin/v_detail_user', $data);
+        }
     }
 
     public function insert()
@@ -135,20 +152,14 @@ class User extends BaseController
              * Mengirim flashdata
              * ===========================================================
              */
-            session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+            session()->setFlashdata('message', 'save');
             return redirect()->to('/user');
-        /**
-         * ===========================================================
-         * Kembali ke view data user
-         * ===========================================================
-         */
-        return redirect()->to('/user');
+            /**
+             * ===========================================================
+             * Kembali ke view data user
+             * ===========================================================
+             */
+            return redirect()->to('/user');
         } else {
             //Jika data tidak lolos validasi
             /**
@@ -156,12 +167,7 @@ class User extends BaseController
              * Mengirim flashdata
              * ===========================================================
              */
-            session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                Gagal menambahkan data.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
+            session()->setFlashdata('message', 'notsave');
             return redirect()->to("/user")->withInput()->with('validation', $validation);
         }
     }
@@ -191,14 +197,8 @@ class User extends BaseController
             'id_kelas' => $this->request->getVar('id_kelas'),
             'jk' => $this->request->getVar('jk'),
         ]);
-        
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil diubah.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
 
+        session()->setFlashdata('message', 'edit');
         return redirect()->to('/user');
     }
 
@@ -240,12 +240,7 @@ class User extends BaseController
             $i++;
         }
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
+        session()->setFlashdata('message', 'save');
         return redirect()->back();
     }
 
@@ -379,45 +374,17 @@ class User extends BaseController
              * Mengirim flashdata
              * ===========================================================
              */
-            session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil dihapus.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
+            session()->setFlashdata('message', 'delete');
 
             return redirect()->to('/user');
         } else {
             /**
-         * ===========================================================
-         * Mengirim flashdata
-         * ===========================================================
-         */
-        session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                Gagal menghapus data.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
-        return redirect()->to('/kandidat');
+             * ===========================================================
+             * Mengirim flashdata
+             * ===========================================================
+             */
+            session()->setFlashdata('message', 'notdelete');
+            return redirect()->to('/kandidat');
         }
-    }
-
-    function notify($title, $message, $type, $icon)
-    {
-        $pesan = "$.notify({
-            icon: 'flaticon-$icon',
-            title: '$title',
-            message: '$message',
-        },{
-            type: '$type',
-            placement: {
-                from: 'top',
-                align: 'center'
-            },
-            time: 1000,
-        });";
-        return $pesan;
     }
 }

@@ -127,4 +127,9 @@ class Login extends BaseController
         session()->setFlashdata('message', 'logout');
         return redirect()->to('/login/admin');
     }
+    
+    public function forgot_password()
+    {
+        echo view('forgot_password');
+    }
 }

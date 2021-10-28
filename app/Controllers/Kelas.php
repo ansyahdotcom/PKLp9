@@ -3,42 +3,60 @@
 namespace App\Controllers;
 
 use App\Models\KelasModel;
+use App\Models\LoginAdminModel;
 
 class Kelas extends BaseController
 {
     protected $KelasModel;
+    protected $LoginAdminModel;
 
     public function __construct()
     {
         $this->KelasModel = new KelasModel;
+        $this->LoginAdminModel = new LoginAdminModel;
     }
 
     public function index()
     {
-        $data = [
-            'title'     => 'Data Kelas',
-            'kelas'     => $this->KelasModel->getKelas()->getResultArray()
-        ];
-        echo view('admin/v_kelas', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title'     => 'Data Kelas',
+                'kelas'     => $this->KelasModel->getKelas()->getResultArray()
+            ];
+            echo view('admin/v_kelas', $data);
+        }
     }
-    
+
     public function detailKelas($id)
     {
-        $data = [
-            'title'         => 'Detail Kelas',
-            'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray()
-        ];        
-        echo view('admin/v_detailKelas', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title'         => 'Detail Kelas',
+                'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray()
+            ];
+            echo view('admin/v_detailKelas', $data);
+        }
     }
 
     public function addKelas()
     {
-        $data = [
-            'title' => 'Tambah Kelas',
-            'kelas' => $this->KelasModel->findAll(),
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('admin/v_addKelas', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Tambah Kelas',
+                'kelas' => $this->KelasModel->findAll(),
+                'validation' => \Config\Services::validation()
+            ];
+            echo view('admin/v_addKelas', $data);
+        }
     }
 
     public function insertKelas()
@@ -75,12 +93,7 @@ class Kelas extends BaseController
          * Mengirim flashdata
          * ===========================================================
          */
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
+        session()->setFlashdata('message', 'save');
 
         /**
          * ===========================================================
@@ -93,17 +106,23 @@ class Kelas extends BaseController
     public function delete($id)
     {
         $this->KelasModel->delete($id);
+        session()->setFlashdata('message', 'delete');
         return redirect()->to('/kelas');
     }
 
     public function editKelas($id)
     {
-        $data = [
-            'title' => 'Edit Kelas',
-            'validation' => \Config\Services::validation(),
-            'kelas' => $this->KelasModel->editKelas($id)
-        ];
-        echo view('admin/v_editKelas', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Edit Kelas',
+                'validation' => \Config\Services::validation(),
+                'kelas' => $this->KelasModel->editKelas($id)
+            ];
+            echo view('admin/v_editKelas', $data);
+        }
     }
 
     public function update($id)
@@ -115,7 +134,7 @@ class Kelas extends BaseController
                     'required' => 'Field Nama Kelas harus diisi.'
                 ]
             ]
-        ])) { 
+        ])) {
             return redirect()->to('/kelas/editKelas/' . $id)->withInput();
         }
 
@@ -124,13 +143,7 @@ class Kelas extends BaseController
             'nama_kelas' => $this->request->getVar('nama_kelas')
         ]);
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil diubah.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'edit');
         return redirect()->to('/kelas');
     }
 }
