@@ -113,7 +113,7 @@
                             <div class="font-weight-bold text-danger text-uppercase mb-1">
                                 Reset Hasil Vote
                             </div>
-                            <a href="#" class="btn btn-danger btn-sm">
+                            <a href="/reset" class="btn btn-danger btn-sm">
                                 <span class="text">Reset</span>
                             </a>
                         </div>

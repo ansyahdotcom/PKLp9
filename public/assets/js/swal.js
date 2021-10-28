@@ -17,6 +17,11 @@ $(function() {
             icon: 'success',
             title: 'Anda Berhasil Logout'
         });
+    } else if(flashData == 'change_passwd') {
+        Toast.fire({
+            icon: 'success',
+            title: 'Password berhasil diubah'
+        });
     } else if(flashData == 'wrong_passwd') {
         Toast.fire({
             icon: 'error',

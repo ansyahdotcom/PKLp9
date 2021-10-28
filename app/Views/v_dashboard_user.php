@@ -65,22 +65,4 @@
         <button type="submit" class="btn-primary btn-block mb-4 btn-lg" <?= $st_pemilih == 1 ? 'disabled' : '' ?>>Submit</button>
     </form>
 </div>
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Apakah Anda ingin logout?</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                <a class="btn btn-danger" href="/logout">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 <?= $this->endSection(); ?>
