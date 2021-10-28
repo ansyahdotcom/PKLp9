@@ -17,7 +17,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Landing');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -32,8 +32,12 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
+// Route Landing Page
+$routes->get('/landing', 'Landing::index/$1');
+$routes->get('/landing/pilih', 'Landing::pilih/$1');
+
 // Route Dashboard User
-$routes->get('/', 'User::index');
+$routes->get('/user', 'User::index');
 $routes->post('/submit', 'Dashboard_user::submit');
 
 // Route Profil (User)

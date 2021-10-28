@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
 
     <!-- Custom styles for this template-->
-    <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
     <!-- My CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
 
@@ -43,19 +43,19 @@
 
             <!-- Main Content -->
             <div id="content">
-                <?= $this->include('layout/navbar'); ?>
+                <?= $this->include('layout/navbar_user'); ?>
                 <?= $this->renderSection('content'); ?>
             </div>
             <!-- End of Main Content -->
-
+            
             <!-- Footer -->
-            <footer class="sticky-footer bg-white">
+            <!-- <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Pemilos SMAN 4 Surakarta 2021</span>
                     </div>
                 </div>
-            </footer>
+            </footer> -->
             <!-- End of Footer -->
 
         </div>

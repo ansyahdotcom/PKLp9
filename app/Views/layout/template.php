@@ -52,7 +52,7 @@
 
             <!-- Main Content -->
             <div id="content">
-                <?= $this->include('layout/navbar'); ?>
+                <?= $this->include('layout/navbar_admin'); ?>
                 <?= $this->renderSection('content'); ?>
             </div>
             <!-- End of Main Content -->
