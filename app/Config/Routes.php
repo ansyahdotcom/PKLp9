@@ -39,15 +39,20 @@ $routes->get('/landing/pilih', 'Landing::pilih/$1');
 // Route Dashboard User
 $routes->get('/user', 'User::index');
 $routes->post('/submit', 'Dashboard_user::submit');
+$routes->get('/', 'Login::index');
+$routes->get('/profile', 'Profile::index');
 
-// Route Profil (User)
-$routes->get('/profile', 'Profile_user::index');
-
-// Route Logout (User)
+// Route Logout
 $routes->get('/logout', 'Login::logout');
 
-// Route Dashboard Admin
-$routes->get('/admin', 'Dashboard::index');
+// Route Admin
+$routes->get('/admin', 'Login::admin');
+$routes->get('/reset', 'Dashboard::resett');
+$routes->get('/admin', 'Login::admin');
+$routes->get('/kelas/addKelas', 'Kelas::addKelas');
+$routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
+$routes->get('/kelas/(:any)', 'Kelas::index/$1');
+$routes->get('/forgot_password', 'Login::forgot_password');
 
 // Route Kelas (Admin)
 $routes->get('/kelas/detailKelas/(:segment)', 'Kelas::detailKelas/$1');

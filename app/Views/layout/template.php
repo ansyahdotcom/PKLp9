@@ -84,6 +84,24 @@
                     </div>
                 </div>
             </div>
+            <!-- Reset Modal -->
+            <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Reset Vote</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Apakah Anda ingin menghapus hasil voting?</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                            <a class="btn btn-primary" href="/reset">Ya</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- End of Content Wrapper -->
 
@@ -115,10 +133,17 @@
     <!-- Page level plugins -->
     <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="/assets/vendor/sweetalert/sweetalert.min.js"></script>
+    <script src="/assets/js/sweetalert2.all.min.js"></script>
+    <script src="/assets/js/swal.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="/assets/js/demo/datatables-demo.js"></script>
+
+    <!-- JQuery UI -->
+    <script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="/assets/vendor/datepicker/bootstrap-datepicker.js"></script>
 
     <!-- Summer Note -->
     <script src="/assets/vendor/summernote/summernote-bs4.min.js"></script>
@@ -261,11 +286,6 @@
         }
     </script>
 
-    <!-- JQuery UI -->
-    <script src="/assets/vendor/jquery-ui/jquery-ui.min.js"></script>
-
-    <!-- Datepicker -->
-    <script src="/assets/vendor/datepicker/bootstrap-datepicker.js"></script>
 </body>
 
 </html>

@@ -29,10 +29,3 @@
     </div>
 </div>
 <?= $this->endSection(); ?>
-<?= $this->section('script'); ?>
-<script>
-    $(document).ready(function() {
-        <?= session()->getFlashdata('pesan'); ?>
-    });
-</script>
-<?= $this->endSection(); ?>

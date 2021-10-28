@@ -3,6 +3,7 @@
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -113,7 +114,7 @@
                             <div class="font-weight-bold text-danger text-uppercase mb-1">
                                 Reset Hasil Vote
                             </div>
-                            <a href="#" class="btn btn-danger btn-sm">
+                            <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#resetModal">
                                 <span class="text">Reset</span>
                             </a>
                         </div>

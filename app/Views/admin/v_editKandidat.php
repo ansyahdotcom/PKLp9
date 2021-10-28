@@ -3,10 +3,9 @@
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
-
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <form action="/kandidat/update/<?= $kandidat['id_kandidat']; ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field(); ?>

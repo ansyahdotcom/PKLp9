@@ -3,16 +3,9 @@
 <?= $this->section('content'); ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800"><?= $title; ?></h1>
-    <!-- Flashdata Message -->
-    <?php
-    if (session()->getFlashdata('message')) {
-        echo session()->getFlashdata('message');
-    }
-    ?>
-    <!-- /.End Flashdata Message -->
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <form action="/kelas/update/<?= $kelas['id_kelas']; ?>" method="post">
             <?= csrf_field(); ?>
@@ -20,7 +13,7 @@
                 <h5 class="text-white font-weight-bold text-center">Form Edit Data Kelas</h5>
             </div>
             <div class="card-body">
-                <div class="form-group">    
+                <div class="form-group">
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
                 </div>
                 <hr>

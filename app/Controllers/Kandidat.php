@@ -26,14 +26,21 @@ class Kandidat extends BaseController
      */
     public function index()
     {
-        $data = [
-            'title' => 'Data Kandidat',
-            'periode' => $this->PeriodeModel->getPeriode(),
-            'activePeriode' => $this->PeriodeModel->activePeriode(),
-            'kandidat' => $this->KandidatModel->getKandidat(),
-        ];
-        echo view('admin/v_kandidat', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Data Kandidat',
+                'periode' => $this->PeriodeModel->getPeriode(),
+                'activePeriode' => $this->PeriodeModel->activePeriode(),
+                'kandidat' => $this->KandidatModel->getKandidat(),
+            ];
+
+            echo view('admin/v_kandidat', $data);
+        }
     }
+
 
     /**
      * ===========================================================
@@ -69,13 +76,18 @@ class Kandidat extends BaseController
      */
     public function addKandidat()
     {
-        $data = [
-            'title' => 'Tambah Kandidat',
-            'user' => $this->UserModel->getUser()->getResultArray(),
-            'validation' => \Config\Services::validation(),
-            'periode' => $this->PeriodeModel->activePeriode()
-        ];
-        echo view('admin/v_addKandidat', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Tambah Kandidat',
+                'user' => $this->UserModel->getUser()->getResultArray(),
+                'validation' => \Config\Services::validation(),
+                'periode' => $this->PeriodeModel->activePeriode()
+            ];
+            echo view('admin/v_addKandidat', $data);
+        }
     }
 
     /**
@@ -198,13 +210,7 @@ class Kandidat extends BaseController
          * Mengirim flashdata
          * ===========================================================
          */
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil ditambahkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'save');
         /**
          * ===========================================================
          * Kembali ke view data kandidat
@@ -271,13 +277,7 @@ class Kandidat extends BaseController
          * Mengirim flashdata
          * ===========================================================
          */
-        session()->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                Data berhasil dihapus.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'delete');
         return redirect()->to('/kandidat');
     }
 
@@ -288,13 +288,18 @@ class Kandidat extends BaseController
      */
     public function editKandidat($id)
     {
-        $data = [
-            'title' => 'Edit Kandidat',
-            'user' => $this->UserModel->getUser2(),
-            'validation' => \Config\Services::validation(),
-            'kandidat' => $this->KandidatModel->editKandidat($id)
-        ];
-        echo view('admin/v_editKandidat', $data);
+        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        if ($user == NULL) {
+            return redirect()->to('/admin');
+        } else {
+            $data = [
+                'title' => 'Edit Kandidat',
+                'user' => $this->UserModel->getUser2(),
+                'validation' => \Config\Services::validation(),
+                'kandidat' => $this->KandidatModel->editKandidat($id)
+            ];
+            echo view('admin/v_editKandidat', $data);
+        }
     }
 
     /**
@@ -419,13 +424,7 @@ class Kandidat extends BaseController
             $this->UserModel->updateBatch($dataUser, 'nis');
         }
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Data berhasil diubah.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        session()->setFlashdata('message', 'edit');
         return redirect()->to('/kandidat');
     }
 }
