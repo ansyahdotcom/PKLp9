@@ -44,7 +44,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password1" class="form-label text-gray-900">Password baru</label>
-                                <input type="password" class="form-control" name="password1" id="password1" required>
+                                <input type="password" class="form-control <?= ($validation->hasError('password1')) ? 'is-invalid' : ''; ?>" name="password1" id="password1" required>
+                                <div class="invalid-feedback">
+                                    <?= $validation->getError('password1'); ?>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password2" class="form-label text-gray-900">Konfirmasi password baru</label>

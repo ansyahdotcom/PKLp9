@@ -24,6 +24,7 @@ class Profile extends BaseController
                 'title' => 'Profile Siswa',
                 'nis' => $user['nis'],
                 'nama' => $user['nama_usr'],
+                'validation' => \Config\Services::validation()
             ];
             echo view('v_profile_user', $data);
         }
@@ -31,24 +32,35 @@ class Profile extends BaseController
 
     public function change_psswd()
     {
-        $nis = $this->request->getVar('nis');
-        $password = $this->request->getVar('password');
-        $password2 = $this->request->getVar('password2');
-
-        $login = $this->LoginModel->where(['nis' => $nis])->first();
-
-        if ($login) {
-            if (password_verify($password, $login['password'])) {
-                $this->LoginModel->save([
-                    'nis' => $nis,
-                    'password' => password_hash($password2, PASSWORD_DEFAULT)
-                ]);
-                session()->setFlashdata('message', 'change_passwd');
-                return redirect()->to('/profile');
-            } else {
-                session()->setFlashdata('message', 'wrong_oldpasswd');
-                return redirect()->to('/profile');
+        if (!$this->validate([
+            'password1' => [
+                'rules' => 'required|min_length[8]',
+                'errors' => [
+                    'required' => 'Field Password harus diisi.',
+                    'min_length' => 'Password teralalu pendek, minimal 8 karakter',
+                ]
+            ]
+        ])) {
+            return redirect()->to('/profile')->withInput();
             }
-        }
+            $nis = $this->request->getVar('nis');
+            $password = $this->request->getVar('password');
+            $password2 = $this->request->getVar('password2');
+
+            $login = $this->LoginModel->where(['nis' => $nis])->first();
+
+            if ($login) {
+                if (password_verify($password, $login['password'])) {
+                    $this->LoginModel->save([
+                        'nis' => $nis,
+                        'password' => password_hash($password2, PASSWORD_DEFAULT)
+                    ]);
+                    session()->setFlashdata('message', 'change_passwd');
+                    return redirect()->to('/profile');
+                } else {
+                    session()->setFlashdata('message', 'wrong_oldpasswd');
+                    return redirect()->to('/profile');
+                }
+            }
     }
 }

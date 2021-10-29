@@ -209,7 +209,7 @@ class User extends BaseController
                 'psw_usr1' => [
                     'rules' => 'required|min_length[8]|matches[psw_usr2]',
                     'errors' => [
-                        'required' => 'Field Kelas harus diisi.',
+                        'required' => 'Field Password harus diisi.',
                         'min_length' => 'Password teralalu pendek, minimal 8 karakter',
                         'matches' => ''
                     ]
@@ -217,7 +217,7 @@ class User extends BaseController
                 'psw_usr2' => [
                     'rules' => 'required|min_length[8]|matches[psw_usr1]',
                     'errors' => [
-                        'required' => 'Field Kelas harus diisi.',
+                        'required' => 'Field Password harus diisi.',
                         'min_length' => 'Password teralalu pendek, minimal 8 karakter',
                         'matches' => 'Password tidak sama'
                     ]
