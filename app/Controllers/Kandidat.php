@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\KandidatModel;
 use App\Models\LoginAdminModel;
-use App\Models\LoginModel;
 use App\Models\UserModel;
 use App\Models\PeriodeModel;
 
@@ -34,14 +33,20 @@ class Kandidat extends BaseController
         if ($user == NULL) {
             return redirect()->to('/admin');
         } else {
-            $data = [
-                'title' => 'Data Kandidat',
-                'periode' => $this->PeriodeModel->getPeriode(),
-                'activePeriode' => $this->PeriodeModel->activePeriode(),
-                'kandidat' => $this->KandidatModel->getKandidat(),
-            ];
-
-            echo view('admin/v_kandidat', $data);
+            if ($this->PeriodeModel->activePeriode() == "") {
+                $data = [
+                    'title' => 'Periode Belum Aktif'
+                ];
+                echo view('admin/v_noSetPeriode', $data);
+            } else {
+                $data = [
+                    'title' => 'Data Kandidat',
+                    'periode' => $this->PeriodeModel->getPeriode(),
+                    'activePeriode' => $this->PeriodeModel->activePeriode(),
+                    'kandidat' => $this->KandidatModel->getKandidat()
+                ];
+                echo view('admin/v_kandidat', $data);
+            }
         }
     }
 

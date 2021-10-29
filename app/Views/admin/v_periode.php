@@ -54,7 +54,7 @@
                                         $disabled = "disabled";
                                         $buka = "";
                                     ?>
-                                        <button class="btn btn-secondary btn-sm mr-2" data-toggle="modal" data-target="#modalNonactive<?= $p['id_periode']; ?>" title="nonaktifkan" disabled><i class="fas fa-eye-slash"></i></button>
+                                        <button class="btn btn-secondary btn-sm mr-2" data-toggle="modal" data-target="#modalNonactive<?= $p['id_periode']; ?>" title="nonaktifkan"><i class="fas fa-eye-slash"></i></button>
                                     <?php
                                     else :
                                         $disabled = "";
