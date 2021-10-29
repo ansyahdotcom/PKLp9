@@ -35,7 +35,7 @@ class Landing extends BaseController
     public function pilih()
     {
         $data = [
-            'title'         => 'Landing Page User',
+            'title'         => 'Pilih Kandidat',
             'siswa'         => $this->DashboardModel->findAll(),
             'kandidat'      => $this->KandidatModel->findAll(),
             'ketua'         => $this->KandidatModel->pemilihan()->getResultArray()

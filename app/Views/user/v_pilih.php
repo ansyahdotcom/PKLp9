@@ -6,7 +6,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pilih Pemimpin</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pilih Kandidat</h1>
     </div>
 
     <!-- Content Row -->
@@ -28,7 +28,10 @@
                         <div class="card-navbar font-weight-bold">
                             <div class="row no-gutters align-items-center mx-2">
                                 <div class="col mx-2">
-                                    <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                    <?= $ket['nama_pasangan']; ?>
+                                </div>
+                                <div class="row my-2 mx-2">
+                                    <?= $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800 mx-2">
                                     <hr class="sidebar-divider">
