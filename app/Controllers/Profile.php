@@ -46,7 +46,7 @@ class Profile extends BaseController
                 session()->setFlashdata('message', 'change_passwd');
                 return redirect()->to('/profile');
             } else {
-                session()->setFlashdata('message', 'wrong_passwd');
+                session()->setFlashdata('message', 'wrong_oldpasswd');
                 return redirect()->to('/profile');
             }
         }

@@ -70,6 +70,17 @@ class User extends BaseController
         }
     }
 
+    public function editPassword($id)
+    {
+        $data = [
+            'title' => 'Edit User',
+            'kelas' => $this->KelasModel->findAll(),
+            'user' => $this->UserModel->editUser($id),
+            'validation' => \Config\Services::validation()
+        ];
+        echo view('admin/v_edit_user', $data);
+    }
+
     public function detailUser($id)
     {
         $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
@@ -174,29 +185,83 @@ class User extends BaseController
 
     public function edit($id)
     {
-        if (!$this->validate([
-            'nama_usr' => [
-                'rules' => 'trim|required',
-                'errors' => [
-                    'required' => 'Field Nama Siswa harus diisi.'
+        /**
+         * ===========================================================
+         * Validasi Form
+         * ===========================================================
+         */
+        $psw1 = $this->request->getVar('psw_usr1');
+        $psw2 = $this->request->getVar('psw_usr2');
+        if ($psw1 != null || $psw2 != null) {
+            if (!$this->validate([
+                'nama_usr' => [
+                    'rules' => 'trim|required',
+                    'errors' => [
+                        'required' => 'Field Nama Siswa harus diisi.'
+                    ]
+                ],
+                'id_kelas' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field Kelas harus diisi.'
+                    ]
+                ],
+                'psw_usr1' => [
+                    'rules' => 'required|min_length[8]|matches[psw_usr2]',
+                    'errors' => [
+                        'required' => 'Field Kelas harus diisi.',
+                        'min_length' => 'Password teralalu pendek, minimal 8 karakter',
+                        'matches' => ''
+                    ]
+                ],
+                'psw_usr2' => [
+                    'rules' => 'required|min_length[8]|matches[psw_usr1]',
+                    'errors' => [
+                        'required' => 'Field Kelas harus diisi.',
+                        'min_length' => 'Password teralalu pendek, minimal 8 karakter',
+                        'matches' => 'Password tidak sama'
+                    ]
+                ],
+
+            ])) {
+                return redirect()->to('/user/editUser/' . $this->request->getVar('nis'))->withInput();
+            }
+        } else {
+            if (!$this->validate([
+                'nama_usr' => [
+                    'rules' => 'trim|required',
+                    'errors' => [
+                        'required' => 'Field Nama Siswa harus diisi.'
+                    ]
+                ],
+                'id_kelas' => [
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field Kelas harus diisi.'
+                    ]
                 ]
-            ],
-            'id_kelas' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Field Kelas harus diisi.'
-                ]
-            ]
-        ])) {
-            return redirect()->to('/user/editUser/' . $this->request->getVar('id'))->withInput();
+
+            ])) {
+                return redirect()->to('/user/editUser/' . $this->request->getVar('nis'))->withInput();
+            }
         }
 
-        $this->UserModel->save([
-            'nis' => $id,
-            'nama_usr' => $this->request->getVar('nama_usr'),
-            'id_kelas' => $this->request->getVar('id_kelas'),
-            'jk' => $this->request->getVar('jk'),
-        ]);
+        if ($psw1 == null && $psw2 == null) {
+            $this->UserModel->save([
+                'nis' => $id,
+                'nama_usr' => $this->request->getVar('nama_usr'),
+                'id_kelas' => $this->request->getVar('id_kelas'),
+                'jk' => $this->request->getVar('jk'),
+            ]);
+        } else {
+            $this->UserModel->save([
+                'nis' => $id,
+                'nama_usr' => $this->request->getVar('nama_usr'),
+                'id_kelas' => $this->request->getVar('id_kelas'),
+                'jk' => $this->request->getVar('jk'),
+                'password' => password_hash($psw2, PASSWORD_DEFAULT)
+            ]);
+        }
 
         session()->setFlashdata('message', 'edit');
         return redirect()->to('/user');

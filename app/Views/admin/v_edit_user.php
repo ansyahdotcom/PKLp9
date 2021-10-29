@@ -15,6 +15,8 @@
             <div class="card-body">
                 <div class="form-group">
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
+                    <button type="button" class="btn btn-secondary btn-sm mr-2 float-right btn-batalpsw float-right"><i class="fas fa-ban"></i>&nbsp;Batal Ubah Kata Sandi</button>
+                    <button type="button" class="btn btn-primary btn-sm mr-2 float-right btn-ubahpsw float-right"><i class="fas fa-lock"></i>&nbsp;Ubah Kata Sandi</button>
                 </div>
                 <hr>
                 <div class="form-row">
@@ -50,6 +52,24 @@
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6 psw">
+                        <label for="exampleInputPassword1">Kata Sandi</label>
+                        <input type="password" name="psw_usr1" class="form-control <?= ($validation->hasError('psw_usr1')) ? 'is-invalid' : ''; ?>" id="psw_usr1" placeholder="Masukkan Kata Sandi..." value="<?= set_value('psw_usr1'); ?>">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('psw_usr1'); ?>
+                        </div>
+
+                    </div>
+                    <div class="form-group col-md-6 psw1">
+                        <label for="exampleInputPassword1">Ulangi Kata Sandi</label>
+                        <input type="password" name="psw_usr2" class="form-control <?= ($validation->hasError('psw_usr2')) ? 'is-invalid' : ''; ?>" id="psw_usr2" placeholder="Ketik Ulang Kata Sandi..." value="<?= set_value('psw_usr2'); ?>">
+                        <div class="invalid-feedback">
+                            <?= $validation->getError('psw_usr2'); ?>
+                        </div>
+
                     </div>
                 </div>
             </div>

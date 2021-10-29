@@ -27,6 +27,11 @@ $(function() {
             icon: 'error',
             title: 'Maaf password salah!'
         });
+    } else if(flashData == 'wrong_oldpasswd') {
+        Toast.fire({
+            icon: 'error',
+            title: 'Maaf Password Lama Salah!'
+        });
     } else if(flashData == 'belum_terdaftar') {
         Toast.fire({
             icon: 'error',

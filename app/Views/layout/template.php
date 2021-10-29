@@ -264,6 +264,27 @@
 
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('.psw').prop('hidden', true);
+            $('.psw1').prop('hidden', true);
+            $('.btn-batalpsw').prop('hidden', true);
+
+            $('.btn-ubahpsw').click(function() {
+                $('.btn-ubahpsw').prop('hidden', true);
+                $('.btn-batalpsw').prop('hidden', false);
+                $('.psw').prop('hidden', false);
+                $('.psw1').prop('hidden', false);
+            });
+
+            $('.btn-batalpsw').click(function() {
+                $('.btn-ubahpsw').prop('hidden', false);
+                $('.btn-batalpsw').prop('hidden', true);
+                $('.psw').prop('hidden', true);
+                $('.psw1').prop('hidden', true);
+            });
+        });
+    </script>
 
     <!-- Cropper -->
     <script src="/assets/vendor/cropper/cropper.min.js"></script>
