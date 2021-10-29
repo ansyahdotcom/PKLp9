@@ -11,7 +11,7 @@ class PeriodeModel extends Model
     protected $useTimestamps = true;
     protected $createdField = 'created_pd';
     protected $updatedField = 'updated_pd';
-    protected $allowedFields = ['id_periode', 'periode', 'st_periode'];
+    protected $allowedFields = ['id_periode', 'periode', 'st_periode', 'st_buka'];
 
     public function getPeriode()
     {

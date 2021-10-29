@@ -3,7 +3,7 @@ $(function() {
         toast: true,
         position: 'top',
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
     });
 
     const flashData = $('.flash-data').data('flashdata');
@@ -76,6 +76,21 @@ $(function() {
         Toast.fire({
             icon: 'success',
             title: 'Periode telah diaktifkan',
+        });
+    } else if (flashData == 'open') {
+        Toast.fire({
+            icon: 'info',
+            title: 'Voting telah dibuka',
+        });
+    } else if (flashData == 'close') {
+        Toast.fire({
+            icon: 'info',
+            title: 'Voting telah ditutup',
+        });
+    } else if (flashData == 'search') {
+        Toast.fire({
+            icon: 'info',
+            title: 'Hasil pencarian ditemukan',
         });
     }
 });

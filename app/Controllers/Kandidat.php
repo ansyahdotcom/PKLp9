@@ -63,13 +63,13 @@ class Kandidat extends BaseController
             'kandidatPeriode' => $periode
         ];
 
-        session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                Hasil pencarian data kandidat periode' . " " . $data['tahunPeriode']['periode'] . '....
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
-
+        // session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        //                                         Hasil pencarian data kandidat periode' . " " . $data['tahunPeriode']['periode'] . '....
+        //                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //                                             <span aria-hidden="true">&times;</span>
+        //                                         </button>
+        //                                     </div>');
+        session()->setFlashdata('message', 'search');
         echo view('admin/v_kandidat', $data);
     }
 

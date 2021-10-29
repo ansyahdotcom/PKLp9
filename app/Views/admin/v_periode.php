@@ -49,11 +49,26 @@
                                 </td>
                                 <td><?= $p['updated_pd']; ?></td>
                                 <td class="d-flex">
-                                    <?php if ($p['st_periode'] == "1") : $disabled = "disabled" ?>
+                                    <?php
+                                    if ($p['st_periode'] == "1") :
+                                        $disabled = "disabled";
+                                        $buka = "";
+                                    ?>
                                         <button class="btn btn-secondary btn-sm mr-2" data-toggle="modal" data-target="#modalNonactive<?= $p['id_periode']; ?>" title="nonaktifkan" disabled><i class="fas fa-eye-slash"></i></button>
-                                    <?php else : $disabled = "" ?>
+                                    <?php
+                                    else :
+                                        $disabled = "";
+                                        $buka = "disabled";
+                                    ?>
                                         <button class="btn btn-info btn-sm mr-2" data-toggle="modal" data-target="#modalActive<?= $p['id_periode']; ?>" title="aktifkan"><i class="fas fa-eye"></i></button>
                                     <?php endif; ?>
+
+                                    <?php if ($p['st_buka'] == "1") : ?>
+                                        <a href="/periode/close/<?= $p['id_periode']; ?>" class="btn btn-warning btn-sm mr-2" title="tutup vote"><i class="fas fa-fw fa-sign-out-alt"></i></a>
+                                    <?php else : ?>
+                                        <a href="/periode/open/<?= $p['id_periode']; ?>" class="btn btn-success btn-sm mr-2 <?= $buka; ?>" title="buka vote"><i class="fas fa-fw fa-sign-in-alt"></i></a>
+                                    <?php endif; ?>
+
                                     <a href="/periode/editPeriode/<?= $p['id_periode']; ?>" class="btn btn-primary btn-sm mr-2" title="edit data"><i class="fas fa-edit"></i></a>
                                     <button type="button" class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#delModal<?= $p['id_periode']; ?>" title="hapus data" <?= $disabled; ?>><i class="fas fa-trash"></i></button>
                                 </td>
@@ -81,7 +96,7 @@
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="ACTIVE">
                     <div class="modal-body">
-                        Apakah anda yakin ingin mengaktifkan periode ini? 
+                        Apakah anda yakin ingin mengaktifkan periode ini?
                         jika iya maka voting periode sebelumnya akan ditutup
                     </div>
                     <div class="modal-footer">
@@ -110,7 +125,7 @@
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="NONACTIVE">
                     <div class="modal-body">
-                        Apakah anda yakin ingin menonaktifkan periode ini? 
+                        Apakah anda yakin ingin menonaktifkan periode ini?
                         jika iya maka voting pada periode ini akan ditutup
                     </div>
                     <div class="modal-footer">

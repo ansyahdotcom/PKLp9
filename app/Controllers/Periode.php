@@ -35,6 +35,12 @@ class Periode extends BaseController
 
     public function nonactive($id)
     {
+        $this->PeriodeModel
+            ->save([
+                'id_periode' => $id,
+                'st_buka' => 0
+            ]);
+
         $this->UserModel
             ->set('st_pemilih', 0)
             ->where('st_pemilih', 1)
@@ -44,7 +50,7 @@ class Periode extends BaseController
             ->set('st_kandidat', 0)
             ->where('st_kandidat', 1)
             ->update();
-            
+
         $this->PeriodeModel->save([
             'id_periode' => $id,
             'st_periode' => 0
@@ -56,6 +62,11 @@ class Periode extends BaseController
 
     public function active($id)
     {
+        $this->PeriodeModel
+            ->set('st_buka', 0)
+            ->where('st_buka', 1)
+            ->update();
+
         $this->PeriodeModel
             ->set('st_periode', 0)
             ->where('st_periode', 1)
@@ -83,6 +94,30 @@ class Periode extends BaseController
                                                 </button>
                                             </div>');
         session()->setFlashdata('message', 'active');
+        return redirect()->to('/periode');
+    }
+
+    public function open($id)
+    {
+        $this->PeriodeModel
+            ->save([
+                'id_periode' => $id,
+                'st_buka' => '1'
+            ]);
+
+        session()->setFlashdata('message', 'open');
+        return redirect()->to('/periode');
+    }
+
+    public function close($id)
+    {
+        $this->PeriodeModel
+            ->save([
+                'id_periode' => $id,
+                'st_buka' => '0'
+            ]);
+
+        session()->setFlashdata('message', 'close');
         return redirect()->to('/periode');
     }
 
@@ -117,7 +152,8 @@ class Periode extends BaseController
 
         $this->PeriodeModel->save([
             'periode' => $this->request->getVar('periode'),
-            'st_periode' => '0'
+            'st_periode' => '0',
+            'st_buka' => '0'
         ]);
 
         session()->setFlashdata('message', 'save');
