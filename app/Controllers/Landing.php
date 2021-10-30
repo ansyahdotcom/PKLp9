@@ -4,34 +4,32 @@ namespace App\Controllers;
 
 use App\Models\DashboardModel;
 use App\Models\KandidatModel;
+use App\Models\LoginModel;
 
 class Landing extends BaseController
 {
     // protected $loginModel;
     protected $DashboardModel;
     protected $KandidatModel;
-    
+    protected $LoginModel;
+
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
         $this->DashboardModel   = new DashboardModel();
         $this->KandidatModel    = new KandidatModel();
+        $this->LoginModel    = new LoginModel();
     }
 
     public function index()
     {
-        $user = $this->LoginModel->where(['nis' => session()->get('nis')])->first();
-        if ($user != NULL) {
-            return redirect()->to("/dashboard_user");
-        } else if (session()->get('username') != NULL) {
-            return redirect()->to("/admin");
-        }
+        // LANDING PAGE GAK USAH SESSION
         $data = [
             'title' => 'Login',
             'validation' => \Config\Services::validation()
         ];
         echo view('v_login_user', $data);
-        
+
         $data = [
             'title'         => 'Landing Page User',
             'siswa'         => $this->DashboardModel->findAll(),

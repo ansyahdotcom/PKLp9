@@ -64,7 +64,7 @@ class Login extends BaseController
                 ];
                 session()->set($data);
                 session()->setFlashdata('message', 'login');
-                return redirect()->to('/landing');
+                return redirect()->to('/dashboard_user');
             } else {
                 session()->setFlashdata('message', 'wrong_passwd');
                 return redirect()->to('/login');
@@ -127,7 +127,7 @@ class Login extends BaseController
         session()->setFlashdata('message', 'logout');
         return redirect()->to('/login/admin');
     }
-    
+
     public function forgot_password()
     {
         echo view('forgot_password');

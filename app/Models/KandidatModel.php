@@ -50,7 +50,8 @@ class KandidatModel extends Model
     {
         $data = $this->db->query("SELECT * FROM kandidat, user, kelas, periode 
             WHERE kandidat.ketua = user.nis AND user.id_kelas = kelas.id_kelas 
-            AND periode.id_periode = kandidat.periode AND periode.st_periode=1");
+            AND periode.id_periode = kandidat.periode AND periode.st_periode=1
+            AND periode.st_buka = 1");
         return $data;
     }
 
@@ -64,6 +65,6 @@ class KandidatModel extends Model
 
     public function periode()
     {
-        return $this->db->query("SELECT periode FROM periode WHERE st_periode = 1");
+        return $this->db->query("SELECT * FROM periode WHERE st_periode = 1");
     }
 }
