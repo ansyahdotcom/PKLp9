@@ -65,6 +65,7 @@ class KandidatModel extends Model
 
     public function periode()
     {
-        return $this->db->query("SELECT * FROM periode WHERE st_periode = 1");
+        $data = $this->db->query("SELECT * FROM periode WHERE st_periode = 1");
+        return $data;
     }
 }

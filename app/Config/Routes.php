@@ -38,7 +38,7 @@ $routes->setAutoRoute(true);
 // Route Dashboard Userrr
 $routes->get('/user', 'User::index');
 $routes->post('/submit', 'Dashboard_user::submit');
-$routes->get('/(:any)', 'Login::index');
+$routes->get('/', 'Login::index');
 $routes->get('/profile', 'Profile::index');
 
 // Route Logout

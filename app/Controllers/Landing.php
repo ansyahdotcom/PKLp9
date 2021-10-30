@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-<<<<<<< Updated upstream
 use App\Models\DashboardModel;
 use App\Models\KandidatModel;
 use App\Models\LoginModel;
@@ -24,13 +23,6 @@ class Landing extends BaseController
 
     public function index()
     {
-        // LANDING PAGE GAK USAH SESSION
-        $data = [
-            'title' => 'Login',
-            'validation' => \Config\Services::validation()
-        ];
-        echo view('v_login_user', $data);
-
         $data = [
             'title'         => 'Landing Page User',
             'siswa'         => $this->DashboardModel->findAll(),
@@ -53,9 +45,4 @@ class Landing extends BaseController
         ];
         echo view('user/v_pilih', $data);
     }
-=======
-class Landing extends BaseController
-{
-    
->>>>>>> Stashed changes
 }
