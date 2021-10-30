@@ -2,24 +2,20 @@
 
 namespace App\Controllers;
 
-<<<<<<< Updated upstream
 use App\Models\DashboardModel;
 use App\Models\KandidatModel;
-use App\Models\LoginModel;
 
 class Landing extends BaseController
 {
     // protected $loginModel;
     protected $DashboardModel;
     protected $KandidatModel;
-    protected $LoginModel;
 
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
         $this->DashboardModel   = new DashboardModel();
         $this->KandidatModel    = new KandidatModel();
-        $this->LoginModel    = new LoginModel();
     }
 
     public function index()
@@ -53,9 +49,4 @@ class Landing extends BaseController
         ];
         echo view('user/v_pilih', $data);
     }
-=======
-class Landing extends BaseController
-{
-    
->>>>>>> Stashed changes
 }
