@@ -38,7 +38,8 @@ class Kelas extends BaseController
         } else {
             $data = [
                 'title'         => 'Detail Kelas',
-                'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray()
+                'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray(),
+                'nama_kelas'    =>  $this->KelasModel->getdetailKelas($id)->getRowArray()
             ];
             echo view('admin/v_detailKelas', $data);
         }

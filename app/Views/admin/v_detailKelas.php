@@ -15,7 +15,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nama_kelas"><b>Nama Kelas</b></label>
-                    <input type="text" name="nama_kelas" class="form-control" id="nama_kelas" value="<?= $kelas['nama_kelas']; ?>" placeholder="Masukkan Nama Kelas..." readonly>
+                    <input type="text" name="nama_kelas" class="form-control" id="nama_kelas" value="<?= $nama_kelas['nama_kelas']; ?>" placeholder="Masukkan Nama Kelas..." readonly>
 
                 </div>
             </div>

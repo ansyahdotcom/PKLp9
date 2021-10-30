@@ -132,11 +132,12 @@
     <div class="row">
 
         <!-- Area Chart -->
+        <!-- Area Chart -->
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Perolehan Suara Kandidat</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Kandidat Pemimpin OSIS</h6>
                     <div class="dropdown no-arrow">
                     </div>
                 </div>
@@ -152,25 +153,37 @@
                                                                 AND user.id_kelas = kelas.id_kelas AND kandidat.id_kandidat = $id_kandidat");
                             foreach ($sql->getResultArray() as $wakil) :
                             ?>
-                                <div class="font-weight-bold mb-1">
-                                    <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                <div class="card border-left-primary h-100 py-2">
+                                    <div class="card-navbar font-weight-bold">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mx-2">
+                                                <?= $ket['nama_pasangan'] . ' | ' . $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             <?php endforeach; ?>
-                            <?php
-                            $db = \Config\Database::connect();
-                            $sqll = $db->query("SELECT COUNT(id_kandidat) AS pembilang FROM voting WHERE id_kandidat = $id_kandidat");
-                            foreach ($sqll->getResultArray() as $pemb) {
-                                foreach ($vote as $vot) {
-                                    $penyebut = $vot['voting'];
-                                    $pembilang = $pemb['pembilang'];
-                                    if ($pembilang == 0 && $penyebut == 0) {
-                                        $hasil = 0;
-                                    } else {
-                                        $hasil = $pembilang / $penyebut * 100 + 0;
+                            <br>
+                            <h4 class="small font-weight-bold">Perolehan Suara
+                                <div class="float-right mr-2">
+                                    <?php
+                                    $db = \Config\Database::connect();
+                                    $sqll = $db->query("SELECT COUNT(id_kandidat) AS pembilang FROM voting WHERE id_kandidat = $id_kandidat");
+                                    foreach ($sqll->getResultArray() as $pemb) {
+                                        foreach ($vote as $vot) {
+                                            $penyebut = $vot['voting'];
+                                            $pembilang = $pemb['pembilang'];
+                                            if ($pembilang == 0 && $penyebut == 0) {
+                                                $hasil = 0;
+                                            } else {
+                                                $hasil = $pembilang / $penyebut * 100 + 0;
+                                            }
+                                            echo $hasil . '%';
+                                        }
                                     }
-                                    echo $hasil . '%';
-                                }
-                            } ?>
+                                    ?>
+                                </div>
+                            </h4>
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: <?= $hasil ?>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>

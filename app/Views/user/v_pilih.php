@@ -27,10 +27,10 @@
                     <div class="card border-left-primary h-100 py-2">
                         <div class="card-navbar font-weight-bold">
                             <div class="row no-gutters align-items-center mx-2">
-                                <div class="col mx-2">
+                                <div class="col my-2 mx-2">
                                     <?= $ket['nama_pasangan']; ?>
                                 </div>
-                                <div class="row my-2 mx-2">
+                                <div class="row mx-2">
                                     <?= $ket['nama_usr'] . ' & ' . $wakil['wnama']; ?>
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800 mx-2">
@@ -41,7 +41,6 @@
                             </div>
                             <div class="text-center">
                                 <a href="#" class="btn btn-success ">
-                                    <!-- <i class="fas fa-plus"></i> -->
                                     Vote
                                 </a>
                             </div>

@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
 
     <!-- Custom styles for this template-->
-    <link href="/assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- My CSS -->
     <link href="/assets/css/style.css" rel="stylesheet">
 

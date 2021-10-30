@@ -96,8 +96,26 @@
                         </div>
                         <div class="modal-body">Apakah Anda ingin menghapus hasil voting?</div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                            <a class="btn btn-primary" href="/reset">Ya</a>
+                            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>
+                            <a class="btn btn-danger" href="/reset">Hapus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Vote Modal -->
+            <div class="modal fade" id="voteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Vote</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Apakah Anda yakin ingin vote kandidat ini??</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Tidak</button>
+                            <a class="btn btn-success" href="/vote">Vote</a>
                         </div>
                     </div>
                 </div>

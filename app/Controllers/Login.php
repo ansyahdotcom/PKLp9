@@ -64,7 +64,7 @@ class Login extends BaseController
                 ];
                 session()->set($data);
                 session()->setFlashdata('message', 'login');
-                return redirect()->to('/dashboard_user');
+                return redirect()->to('/landing');
             } else {
                 session()->setFlashdata('message', 'wrong_passwd');
                 return redirect()->to('/login');

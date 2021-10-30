@@ -33,13 +33,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 // Route Landing Page
-$routes->get('/landing', 'Landing::index/$1');
-$routes->get('/landing/pilih', 'Landing::pilih/$1');
+// $routes->get('/(:any)', 'Login::index');
 
 // Route Dashboard User
 $routes->get('/user', 'User::index');
 $routes->post('/submit', 'Dashboard_user::submit');
-$routes->get('/', 'Login::index');
+$routes->get('/(:any)', 'Login::index');
 $routes->get('/profile', 'Profile::index');
 
 // Route Logout
@@ -55,7 +54,7 @@ $routes->get('/kelas/(:any)', 'Kelas::index/$1');
 $routes->get('/forgot_password', 'Login::forgot_password');
 
 // Route Kelas (Admin)
-$routes->get('/kelas/detailKelas/(:segment)', 'Kelas::detailKelas/$1');
+// $routes->get('/kelas/detailKelas', 'Kelas::detailKelas/$1');
 $routes->get('/kelas/addKelas', 'Kelas::addKelas');
 $routes->get('/kelas/editKelas/(:segment)', 'Kelas::editKelas/$1');
 $routes->delete('/kelas/(:num)', 'Kelas::delete/$1');

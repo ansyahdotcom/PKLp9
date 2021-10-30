@@ -20,6 +20,18 @@ class Landing extends BaseController
 
     public function index()
     {
+        $user = $this->LoginModel->where(['nis' => session()->get('nis')])->first();
+        if ($user != NULL) {
+            return redirect()->to("/dashboard_user");
+        } else if (session()->get('username') != NULL) {
+            return redirect()->to("/admin");
+        }
+        $data = [
+            'title' => 'Login',
+            'validation' => \Config\Services::validation()
+        ];
+        echo view('v_login_user', $data);
+        
         $data = [
             'title'         => 'Landing Page User',
             'siswa'         => $this->DashboardModel->findAll(),
