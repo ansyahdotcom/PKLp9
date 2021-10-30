@@ -35,7 +35,7 @@ $routes->setAutoRoute(true);
 // Route Landing Page
 // $routes->get('/(:any)', 'Login::index');
 
-// Route Dashboard User
+// Route Dashboard Userrr
 $routes->get('/user', 'User::index');
 $routes->post('/submit', 'Dashboard_user::submit');
 $routes->get('/(:any)', 'Login::index');
