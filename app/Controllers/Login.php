@@ -19,7 +19,7 @@ class Login extends BaseController
     {
         $user = $this->LoginModel->where(['nis' => session()->get('nis')])->first();
         if ($user != NULL) {
-            return redirect()->to("/dashboard_user");
+            return redirect()->to("/landingpage");
         } else if (session()->get('username') != NULL) {
             return redirect()->to("/admin");
         }
@@ -64,7 +64,7 @@ class Login extends BaseController
                 ];
                 session()->set($data);
                 session()->setFlashdata('message', 'login');
-                return redirect()->to('/dashboard_user');
+                return redirect()->to('/landingpage/vote');
             } else {
                 session()->setFlashdata('message', 'wrong_passwd');
                 return redirect()->to('/login');

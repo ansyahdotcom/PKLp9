@@ -6,15 +6,19 @@ use App\Models\KandidatModel;
 use App\Models\LoginModel;
 use App\Models\VotingModel;
 use App\Models\UserModel;
+use App\Models\DashboardModel;
 
-class Dashboard_user extends BaseController
+class Landingpage extends BaseController
 {
     protected $KandidatModel;
     protected $LoginModel;
     protected $VotingModel;
     protected $UserModel;
+    protected $DashboardModel;
+
     public function __construct()
     {
+        $this->DashboardModel = new DashboardModel;
         $this->KandidatModel = new KandidatModel;
         $this->LoginModel = new LoginModel;
         $this->VotingModel = new VotingModel;
@@ -22,6 +26,21 @@ class Dashboard_user extends BaseController
     }
 
     public function index()
+    {
+        $data = [
+            'title'         => 'Landing Page',
+            'siswa'         => $this->DashboardModel->findAll(),
+            'vote'          => $this->DashboardModel->getVoting()->getResultArray(),
+            'user'          => $this->DashboardModel->getJumlahUser()->getResultArray(),
+            'kandidat'      => $this->DashboardModel->getJumlahKandidat()->getResultArray(),
+            'periode'       => $this->DashboardModel->getPeriode()->getResultArray(),
+            'ketua'         => $this->KandidatModel->pemilihan()->getResultArray(),
+            'user'          => $this->LoginModel->where(['nis' => session()->get('nis')])->first()
+        ];
+        echo view('user/v_landing', $data);
+    }
+
+    public function vote()
     {
         $user = $this->LoginModel->where(['nis' => session()->get('nis')])->first();
         if ($user == NULL) {
@@ -34,6 +53,7 @@ class Dashboard_user extends BaseController
                 'st_pemilih' => $user['st_pemilih'],
                 'periode' => $this->KandidatModel->periode()->getResultArray(),
                 'kandidat' => $this->KandidatModel->pemilihan()->getResultArray(),
+                'user'          => $this->LoginModel->where(['nis' => session()->get('nis')])->first()
                 // 'dt_kandidat' => $this->KandidatModel->detail_pemilihan()->getResultArray()
             ];
             echo view('v_dashboard_user', $data);
@@ -54,7 +74,7 @@ class Dashboard_user extends BaseController
             $db = \Config\Database::connect();
             $db->query("UPDATE user SET st_pemilih = '1' WHERE nis = $nis");
             session()->setFlashdata('message', 'vote');
-            return redirect()->to('/dashboard_user');
+            return redirect()->to('/landingpage/vote');
         }
     }
 }

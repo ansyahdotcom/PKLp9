@@ -14,8 +14,8 @@ class Landing extends BaseController
     public function __construct()
     {
         // $this->loginModel = new LoginModel;
-        $this->DashboardModel   = new DashboardModel();
-        $this->KandidatModel    = new KandidatModel();
+        $this->DashboardModel   = new DashboardModel;
+        $this->KandidatModel    = new KandidatModel;
     }
 
     public function index()

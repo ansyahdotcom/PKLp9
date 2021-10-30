@@ -37,8 +37,9 @@ $routes->setAutoRoute(true);
 
 // Route Dashboard Userrr
 $routes->get('/user', 'User::index');
-$routes->post('/submit', 'Dashboard_user::submit');
-$routes->get('/', 'Login::index');
+$routes->post('/submit', 'Landingpage::submit');
+$routes->get('/', 'Landingpage::index');
+$routes->get('/login', 'Login::index');
 $routes->get('/profile', 'Profile::index');
 
 // Route Logout
@@ -65,7 +66,7 @@ $routes->get('/kandidat/editKandidat/(:segment)', 'Kandidat::editKandidat/$1');
 $routes->get('/periode/editPeriode/(:segment)', 'Periode::editPeriode/$1');
 $routes->delete('/kandidat/(:num)', 'Kandidat::delete/$1');
 $routes->delete('/periode/(:num)', 'Periode::delete/$1');
-$routes->post('/submit', 'Dashboard_user::submit');
+$routes->post('/submit', 'Landingpage::submit');
 
 // Route Periode
 $routes->post('/periode/active/(:num)', 'Periode::active/$1');

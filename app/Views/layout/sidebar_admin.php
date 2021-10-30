@@ -27,7 +27,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Manajemen
+        Data Master
     </div>
 
     <!-- List Master Menu -->
