@@ -52,7 +52,8 @@
                                 <td class="d-flex">
                                     <a href="/user/detailUser/<?= $k['nis']; ?>" class="btn btn-info btn-sm mr-2" title="Lihat Detail"><i class="fas fa-eye"></i></a>
                                     <a href="/user/editUser/<?= $k['nis']; ?>" class="btn btn-primary btn-sm mr-2" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                    <button data-tooltip="tooltip" title="Hapus Data" type="button" data-id="<?= $k['nis'] ?>" data-link="/user/delete/" data-nama=" Siswa <?= $k['nama_usr'] ?>" id="hapus_crud" class="btn btn-danger btn-sm hapus_crud"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm mr-2" data-toggle="modal" data-target="#delModal<?= $k['nis']; ?>" title="hapus data"><i class="fas fa-trash"></i></button>
+                                    <!-- <button data-tooltip="tooltip" title="Hapus Data" type="button" data-id="<?= $k['nis'] ?>" data-link="/user/delete/" data-nama="Siswa <?= $k['nama_usr'] ?>" id="hapus_crud" class="btn btn-danger btn-sm hapus_crud"><i class="fas fa-trash"></i></button> -->
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -99,4 +100,32 @@
     </div>
 </div>
 <!-- /.container-fluid -->
+
+<!-- Modal Delete -->
+<?php foreach ($user as $u) : ?>
+    <div class="modal fade" id="delModal<?= $u['nis']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/user/delete/<?= $u['nis']; ?>" method="post">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <div class="modal-body">
+                        Apakah ingin menghapus data ini?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fas fa-ban"></i></button>
+                        <button type="submit" class="btn btn-danger">Yes <i class="fas fa-trash"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- /.End Modal Delete -->
 <?= $this->endSection(); ?>

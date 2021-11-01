@@ -41,6 +41,7 @@ $routes->post('/submit', 'Landingpage::submit');
 $routes->get('/', 'Landingpage::index');
 $routes->get('/login', 'Login::index');
 $routes->get('/profile', 'Profile::index');
+$routes->get('/user/delete/(:num)', 'User::delete/$1');
 
 // Route Logout
 $routes->get('/logout', 'Login::logout');
