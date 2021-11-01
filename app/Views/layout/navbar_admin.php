@@ -10,7 +10,7 @@
         <div class="sidebar-brand-icon">
             <img src="/assets/img/logo.png" alt="" width="40px">
         </div>
-        <h3 class="text-primary font-weight-bold mx-3 my-3">SMAN 4 Surakarta</h3>
+        <h3 class="font-weight-bold mx-3 my-3" style="color: #6579b4;">SMAN 8 Surakarta</h3>
     </div>
 
     <!-- Topbar Navbar -->

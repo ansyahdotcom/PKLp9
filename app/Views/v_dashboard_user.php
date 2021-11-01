@@ -9,7 +9,7 @@
     <div class="flash-data" data-flashdata="<?= session()->get('message') ?>"></div>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Pemilihan Ketua OSIS SMA Negeri 4 Surakarta Periode <?= $period; ?></h1>
+        <h1 class="h3 mb-0 text-gray-800">Pemilihan Ketua OSIS SMA Negeri 8 Surakarta Periode <?= $period; ?></h1>
     </div>
     <?php if ($st_pemilih == 1) : ?>
         <p class="mb-4 text-success">Anda sudah memilih!</p>

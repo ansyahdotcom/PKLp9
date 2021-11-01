@@ -61,7 +61,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Pemilos SMAN 4 Surakarta 2021</span>
+                        <span>Copyright &copy; Pemilos SMAN 8 Surakarta 2021</span>
                     </div>
                 </div>
             </footer>
@@ -201,12 +201,9 @@
 
     <!-- <script>
         $(document).ready(function() {
-            setInterval(function() {
-                $('.selectpicker').selectpicker();
-                const periode = $('select[name=periode1]').val();
-                $('.selectpicker').selectpicker('refresh');
-                $('.btn-addData').attr('href', '/kandidat/addKandidat/' + periode);
-            }, 500);
+            $('.selectpicker').selectpicker();
+            $('select[name=id_kelas]').selectpicker('val', +$('#old_kelas').val());
+            $('.selectpicker').selectpicker('refresh');
         });
     </script> -->
 
@@ -284,10 +281,6 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('.psw').prop('hidden', true);
-            $('.psw1').prop('hidden', true);
-            $('.btn-batalpsw').prop('hidden', true);
-
             $('.btn-ubahpsw').click(function() {
                 $('.btn-ubahpsw').prop('hidden', true);
                 $('.btn-batalpsw').prop('hidden', false);
