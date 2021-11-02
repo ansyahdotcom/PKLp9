@@ -302,10 +302,10 @@ class Kandidat extends BaseController
             return redirect()->to('/admin');
         } else {
             $data = [
-                'title' => 'Edit Kandidat',
-                'user' => $this->UserModel->getUser2(),
-                'validation' => \Config\Services::validation(),
-                'kandidat' => $this->KandidatModel->editKandidat($id)
+                'title'         => 'Edit Kandidat',
+                'user'          => $this->UserModel->getUser2(),
+                'validation'    => \Config\Services::validation(),
+                'kandidat'      => $this->KandidatModel->editKandidat($id)
             ];
             echo view('admin/v_editKandidat', $data);
         }

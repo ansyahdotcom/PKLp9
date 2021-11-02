@@ -28,12 +28,11 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/kelas" class="btn btn-danger">
-                    <i class="fas fa-arrow-circle-left"></i>
-                    Back
+                <a href="/kelas" class="btn btn-outline-secondary">
+                    Kembali
                 </a>
                 <button type="submit" class="btn btn-primary float-right" id="save-btn">
-                    Save <i class="fas fa-save"></i>
+                    Tambah
                 </button>
         </form>
     </div>

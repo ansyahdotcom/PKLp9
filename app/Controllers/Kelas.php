@@ -38,8 +38,7 @@ class Kelas extends BaseController
         } else {
             $data = [
                 'title'         => 'Detail Kelas',
-                'kelas'         =>  $this->KelasModel->getKelas($id)->getRowArray(),
-                'nama_kelas'    =>  $this->KelasModel->getdetailKelas($id)->getRowArray()
+                'nama_kelas'    =>  $this->KelasModel->detailKelas($id)
             ];
             echo view('admin/v_detailKelas', $data);
         }
@@ -118,9 +117,9 @@ class Kelas extends BaseController
             return redirect()->to('/admin');
         } else {
             $data = [
-                'title' => 'Edit Kelas',
-                'validation' => \Config\Services::validation(),
-                'kelas' => $this->KelasModel->editKelas($id)
+                'title'         => 'Edit Kelas',
+                'validation'    => \Config\Services::validation(),
+                'kelas'         => $this->KelasModel->editKelas($id)
             ];
             echo view('admin/v_editKelas', $data);
         }

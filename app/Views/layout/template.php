@@ -78,7 +78,7 @@
                         </div>
                         <div class="modal-body">Apakah Anda ingin logout?</div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>
                             <a class="btn btn-danger" href="/logout">Logout</a>
                         </div>
                     </div>

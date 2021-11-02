@@ -50,17 +50,14 @@ $routes->get('/logout', 'Login::logout');
 $routes->get('/admin', 'Login::admin');
 $routes->get('/reset', 'Dashboard::resett');
 $routes->get('/admin', 'Login::admin');
-$routes->get('/kelas/addKelas', 'Kelas::addKelas');
-$routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
-$routes->get('/kelas/(:any)', 'Kelas::index/$1');
 $routes->get('/forgot_password', 'Login::forgot_password');
 
 // Route Kelas (Admin)
-// $routes->get('/kelas/detailKelas', 'Kelas::detailKelas/$1');
+$routes->get('/kelas/delete/(:any)', 'Kelas::index/$1');
 $routes->get('/kelas/addKelas', 'Kelas::addKelas');
+$routes->get('/kelas/detailKelas/(:segment)', 'Kelas::detailKelas/$1');
 $routes->get('/kelas/editKelas/(:segment)', 'Kelas::editKelas/$1');
 $routes->delete('/kelas/(:num)', 'Kelas::delete/$1');
-$routes->get('/kelas/(:any)', 'Kelas::index/$1');
 
 // Route Kandidat (Admin)
 $routes->get('/kandidat/editKandidat/(:segment)', 'Kandidat::editKandidat/$1');

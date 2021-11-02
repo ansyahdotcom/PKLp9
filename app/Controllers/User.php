@@ -31,7 +31,7 @@ class User extends BaseController
             return redirect()->to('/admin');
         } else {
             $data = [
-                'title' => 'Manajemen User',
+                'title' => 'Data User',
                 'user' => $this->UserModel->findAll()
             ];
 
@@ -428,7 +428,7 @@ class User extends BaseController
     public function delete($nis)
     {
         $data = [
-            'title' => 'Manajemen User',
+            'title' => 'Data User',
             'train' => $this->UserModel->findAll()
         ];
         $hapus = $this->UserModel->deleteData($nis);

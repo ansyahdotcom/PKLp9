@@ -96,12 +96,12 @@
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="ACTIVE">
                     <div class="modal-body">
-                        Apakah anda yakin ingin mengaktifkan periode ini?
+                        Apakah Anda yakin ingin mengaktifkan periode ini?
                         jika iya maka voting periode sebelumnya akan ditutup
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel <i class="fas fa-ban"></i></button>
-                        <button type="submit" class="btn btn-primary">Yes <i class="fas fa-check"></i></button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-primary">Iya</button>
                     </div>
                 </form>
             </div>
@@ -125,12 +125,12 @@
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="NONACTIVE">
                     <div class="modal-body">
-                        Apakah anda yakin ingin menonaktifkan periode ini?
+                        Apakah Anda yakin ingin menonaktifkan periode ini?
                         jika iya maka voting pada periode ini akan ditutup
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel <i class="fas fa-ban"></i></button>
-                        <button type="submit" class="btn btn-primary">Yes <i class="fas fa-check"></i></button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Tidak</button>
+                        <button type="submit" class="btn btn-primary">Iya</button>
                     </div>
                 </form>
             </div>
@@ -157,8 +157,8 @@
                         Apakah ingin menghapus data ini?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fas fa-ban"></i></button>
-                        <button type="submit" class="btn btn-danger">Yes <i class="fas fa-trash"></i></button>
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">Hapus</i></button>
                     </div>
                 </form>
             </div>

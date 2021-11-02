@@ -25,7 +25,7 @@ class KelasModel extends Model
 
     public function detailKelas($id)
     {
-        $kelas = $this->getWhere(['id_kelas' => $id])->getResultArray();
+        $kelas = $this->getWhere(['id_kelas' => $id])->getRowArray();
         return $kelas;
     }
 

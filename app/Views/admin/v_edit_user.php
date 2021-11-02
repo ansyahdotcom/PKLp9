@@ -15,8 +15,8 @@
             <div class="card-body">
                 <div class="form-group">
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
-                    <button type="button" class="btn btn-secondary btn-sm mr-2 float-right btn-batalpsw float-right" hidden><i class="fas fa-ban"></i>&nbsp;Batal Ubah Kata Sandi</button>
-                    <button type="button" class="btn btn-primary btn-sm mr-2 float-right btn-ubahpsw float-right"><i class="fas fa-lock"></i>&nbsp;Ubah Kata Sandi</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm mr-2 float-right btn-batalpsw float-right" hidden>&nbsp;Batal Ubah Kata Sandi</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm mr-2 float-right btn-ubahpsw float-right">&nbsp;Ubah Kata Sandi</button>
                 </div>
                 <hr>
                 <div class="form-row">
@@ -75,12 +75,11 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/user" class="btn btn-danger">
-                    <i class="fas fa-arrow-circle-left"></i>
-                    Back
+                <a href="/user" class="btn btn-outline-secondary">
+                    Kembali
                 </a>
                 <button type="submit" class="btn btn-primary float-right" id="save-btn">
-                    Save <i class="fas fa-save"></i>
+                    Simpan
                 </button>
         </form>
     </div>

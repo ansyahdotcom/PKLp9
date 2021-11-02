@@ -21,9 +21,8 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="/kelas" class="btn btn-danger">
-                <i class="fas fa-arrow-circle-left"></i>
-                Back
+            <a href="/kelas" class="btn btn-outline-secondary">
+                Kembali
             </a>
         </div>
     </div>
