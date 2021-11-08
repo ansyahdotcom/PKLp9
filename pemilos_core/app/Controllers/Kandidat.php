@@ -68,12 +68,6 @@ class Kandidat extends BaseController
             'kandidatPeriode' => $periode
         ];
 
-        // session()->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        //                                         Hasil pencarian data kandidat periode' . " " . $data['tahunPeriode']['periode'] . '....
-        //                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        //                                             <span aria-hidden="true">&times;</span>
-        //                                         </button>
-        //                                     </div>');
         session()->setFlashdata('message', 'search');
         echo view('admin/v_kandidat', $data);
     }
@@ -125,10 +119,9 @@ class Kandidat extends BaseController
                 ]
             ],
             'nama_psg' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'field nama pasangan harus diisi.',
-                    'alpha_space' => 'field harus berisi huruf abjad.'
+                    'required' => 'field nama pasangan harus diisi.'
                 ]
             ],
             'visi' => [
@@ -305,7 +298,8 @@ class Kandidat extends BaseController
                 'title'         => 'Edit Kandidat',
                 'user'          => $this->UserModel->getUser2(),
                 'validation'    => \Config\Services::validation(),
-                'kandidat'      => $this->KandidatModel->editKandidat($id)
+                'kandidat'      => $this->KandidatModel->editKandidat($id),
+                'periode'       => $this->PeriodeModel->activePeriode()
             ];
             echo view('admin/v_editKandidat', $data);
         }
@@ -332,10 +326,9 @@ class Kandidat extends BaseController
                 ]
             ],
             'nama_psg' => [
-                'rules' => 'required|alpha_space',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'field nama pasangan harus diisi.',
-                    'alpha_space' => 'field harus berisi huruf abjad.'
+                    'required' => 'field nama pasangan harus diisi.'
                 ]
             ],
             'visi' => [
@@ -400,7 +393,7 @@ class Kandidat extends BaseController
             'foto' => $fotoName,
             'visi' => $this->request->getVar('visi'),
             'misi' => $this->request->getVar('misi'),
-            'periode' => '1'
+            'periode' => $this->request->getVar('periode')
         ]);
 
         if ($this->request->getVar('ketua') != $this->request->getVar('old_ketua')) {

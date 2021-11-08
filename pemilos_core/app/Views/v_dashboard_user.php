@@ -12,7 +12,7 @@
         <h1 class="h3 mb-0 text-gray-800">Pemilihan Ketua OSIS SMA Negeri 8 Surakarta Periode <?= $period; ?></h1>
     </div>
     <?php if ($st_pemilih == 1) : ?>
-        <p class="mb-4 text-success">Anda sudah memilih!</p>
+        <div class="alert alert-success">Anda sudah melakukan voting!</div>
     <?php else : ?>
         <p><strong>*Pilih salah satu pasangan calon lalu klik Submit!</strong></p>
     <?php endif; ?>
@@ -32,7 +32,11 @@
                             <div class="card-body">
                                 <div class="row no-gutters">
                                     <div class="col-md-3 mr-3">
+<<<<<<< Updated upstream:pemilos_core/app/Views/v_dashboard_user.php
                                         <img src="<?= base_url(); ?>\assets\img\fotokandidat\<?= $knd['foto']; ?>" alt="foto kandidat" style="width: 100%;">
+=======
+                                        <img src="<?= base_url(); ?>/assets/img/fotokandidat/<?= $knd['foto']; ?>" alt="foto kandidat" style="width: 100%;">
+>>>>>>> Stashed changes:app/Views/v_dashboard_user.php
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="font-weight-bold text-primary text-uppercase mb-1">Ketua :</div>

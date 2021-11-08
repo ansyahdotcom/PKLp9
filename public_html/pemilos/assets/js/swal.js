@@ -87,6 +87,11 @@ $(function() {
             icon: 'success',
             title: 'Periode telah diaktifkan',
         });
+    } else if (flashData == 'cek_buka') {
+        Toast.fire({
+            icon: 'error',
+            title: 'Tidak ada kandidat. Harap isi data kandidat dahulu',
+        });
     } else if (flashData == 'open') {
         Toast.fire({
             icon: 'info',

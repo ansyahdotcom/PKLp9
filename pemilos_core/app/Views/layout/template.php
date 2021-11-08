@@ -9,7 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
     <title>SMAN 8 Surakarta | Pemilihan OSIS</title>
+=======
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <title>SMAN 8 Surakarta | Pemilihan Osis <?= $title; ?></title>
+>>>>>>> Stashed changes:app/Views/layout/template.php
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -17,9 +23,12 @@
 
     <!-- style CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/style.css">
+<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
 
     <!-- Select Picker -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
+=======
+>>>>>>> Stashed changes:app/Views/layout/template.php
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -145,6 +154,7 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/assets/js/demo/datatables-demo.js"></script>
 
+<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
     <!-- Select Picker -->
     <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/defaults-*.min.js"></script>
@@ -155,23 +165,25 @@
             $('select[name=wakil]').selectpicker('val', +$('#old_wakil').val());
             $('.selectpicker').selectpicker('refresh');
         });
+=======
+    <script type="text/javascript">
+        function getValue1(ketua) {
+            if (ketua != '') {
+                $("select[name=wakil] option[value='" + ketua + "']").hide();
+                $("select[name=wakil] option[value!='" + ketua + "']").show();
+            }
+        }
+>>>>>>> Stashed changes:app/Views/layout/template.php
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('.selectpicker').selectpicker();
-            $('select[name=periode1]').selectpicker('val', +$('input[name=activePeriode]').val());
-            $('.selectpicker').selectpicker('refresh');
-        });
+    <script type="text/javascript">
+        function getValue2(wakil) {
+            if (wakil != '') {
+                $("select[name=ketua] option[value='" + wakil + "']").hide();
+                $("select[name=ketua] option[value!='" + wakil + "']").show();
+            }
+        }
     </script>
-
-    <!-- <script>
-        $(document).ready(function() {
-            $('.selectpicker').selectpicker();
-            $('select[name=id_kelas]').selectpicker('val', +$('#old_kelas').val());
-            $('.selectpicker').selectpicker('refresh');
-        });
-    </script> -->
 
     <script>
         // Hapus User
