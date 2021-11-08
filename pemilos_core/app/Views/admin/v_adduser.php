@@ -45,7 +45,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="kelas"><b>Kelas <span class="text-danger">*</span></b></label>
-                        <select class="form-control selectpicker <?= ($validation->hasError('id_kelas')) ? 'is-invalid' : ''; ?>" id="kelas" name="id_kelas" data-live-search="true" title="Pilih Kelas..." autofocus>
+                        <select class="form-control <?= ($validation->hasError('id_kelas')) ? 'is-invalid' : ''; ?>" id="kelas" name="id_kelas" title="Pilih Kelas...">
                             <?php foreach ($kelas as $u) : ?>
                                 <option value="<?= $u['id_kelas']; ?>"><?= $u['nama_kelas']; ?></option>
                             <?php endforeach; ?>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="kelas"><b>Jenis Kelamin <span class="text-danger">*</span></b></label>
-                        <select class="form-control selectpicker <?= ($validation->hasError('jk')) ? 'is-invalid' : ''; ?>" id="jk" name="jk" data-live-search="true" title="Pilih Jenis Kelamin..." autofocus>
+                        <select class="form-control <?= ($validation->hasError('jk')) ? 'is-invalid' : ''; ?>" id="jk" name="jk" title="Pilih Jenis Kelamin...">
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>

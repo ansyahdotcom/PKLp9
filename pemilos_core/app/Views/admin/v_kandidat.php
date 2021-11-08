@@ -17,8 +17,7 @@
                 <label for="nama_psg"><b>Cari kandidat berdasarkan periode:</b> </label>
                 <input type="hidden" name="activePeriode" value="<?= $activePeriode['id_periode']; ?>" readonly>
                 <div class="input-group">
-                    <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
-                        <!-- <option value="all">Tampilkan semua</option> -->
+                    <select class="form-control col-md-3" id="periode" name="periode1">
                         <?php foreach ($periode as $p) : ?>
                             <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
                         <?php endforeach; ?>
@@ -35,7 +34,7 @@
                 <label for="nama_psg"><b>Cari kandidat berdasarkan periode:</b> </label>
                 <input type="hidden" name="activePeriode" value="<?= $kandidatPeriode ?>" readonly>
                 <div class="input-group">
-                    <select class="form-control col-md-3 selectpicker" id="periode" name="periode1" data-live-search="true">
+                    <select class="form-control col-md-3" id="periode" name="periode1">
                         <?php foreach ($periode as $p) : ?>
                             <option value="<?= $p['id_periode']; ?>"><?= $p['periode']; ?></option>
                         <?php endforeach; ?>

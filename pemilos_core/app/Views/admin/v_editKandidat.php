@@ -17,6 +17,7 @@
                     <small class="text-muted font-italic"><b>Keterangan: field yang bertanda <span class="text-danger">*</span> wajib diisi.</b></small>
                 </div>
                 <hr>
+                <input type="hidden" name="periode" value="<?= $periode['id_periode']; ?>" readonly>
                 <div class="text-center mb-4">
                     <h3 class="font-weight-bold">Foto Kandidat</h3>
                     <img class="img img-responsive img-resize img-preview" src="<?= base_url(); ?>/assets/img/fotokandidat/<?= $kandidat['foto']; ?>" class="mt-2" alt="foto kandidat" width="200px">
@@ -25,24 +26,24 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="ketua"><b>Ketua <span class="text-danger">*</span></b></label>
-                        <select class="form-control selectpicker <?= ($validation->hasError('ketua')) ? 'is-invalid' : ''; ?>" id="ketua" name="ketua" data-live-search="true" data-size="5" title="pilih ketua..." required autofocus>
+                        <select class="form-control <?= ($validation->hasError('ketua')) ? 'is-invalid' : ''; ?>" id="ketua" name="ketua" title="pilih ketua..." onchange="getValue1(this.value)">
+                            <option value="" selected>pilih ketua...</option>
                             <?php foreach ($user as $u) : ?>
-                                <option value="<?= $u['nis']; ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
+                                <option value="<?= $u['nis']; ?>" <?= ($u['nis'] == $kandidat['ketua']) ? "selected" : "" ?>><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="hidden" name="old_ketua" id="old_ketua" value="<?= $kandidat['ketua']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('ketua'); ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="wakil"><b>Wakil <span class="text-danger">*</span></b></label>
-                        <select class="form-control selectpicker <?= ($validation->hasError('wakil')) ? 'is-invalid' : ''; ?>" id="wakil" name="wakil" data-live-search="true" data-size="5" required title="pilih wakil...">
+                        <select class="form-control <?= ($validation->hasError('wakil')) ? 'is-invalid' : ''; ?>" id="wakil" name="wakil" required title="pilih wakil..." onchange="getValue2(this.value)">
+                            <option value="" selected>pilih wakil...</option>
                             <?php foreach ($user as $u) : ?>
-                                <option value="<?= $u['nis']; ?>"><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
+                                <option value="<?= $u['nis']; ?>" <?= ($u['nis'] == $kandidat['wakil']) ? "selected" : "" ?>><?= $u['nama_usr']; ?> (NIS: <?= $u['nis']; ?>)</option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="hidden" name="old_wakil" id="old_wakil" value="<?= $kandidat['wakil']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('wakil'); ?>
                         </div>
@@ -51,14 +52,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nama_psg"><b>Nama Pasangan <span class="text-danger">*</span></b></label>
-                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= $kandidat['nama_pasangan']; ?>" placeholder="nama pasangan (ex: CalonSIP)...">
+                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= $kandidat['nama_pasangan']; ?>" placeholder="nama pasangan (contoh: Pasangan Sip)..."  autocomplete="off">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama_psg'); ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="wakil"><b>Foto <span class="text-danger">*</span></b></label>
-                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" accept=".jpg,.jpeg,.png,.gif" onchange="previewImg()">
+                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" accept=".jpg,.jpeg,.png,.gif" onchange="previewImg()"  autocomplete="off">
                         <input type="hidden" name="old_foto" value="<?= $kandidat['foto']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('foto'); ?>
@@ -68,14 +69,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nama_psg"><b>Visi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" rows="5" name="visi" id="visi" placeholder="visi kandidat..."><?= $kandidat['visi']; ?></textarea>
+                        <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" rows="5" name="visi" id="visi" placeholder="visi kandidat..." autocomplete="off"><?= $kandidat['visi']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('visi'); ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="nama_psg"><b>Misi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" rows="5" name="misi" id="misi" placeholder="misi kandidat..."><?= $kandidat['misi']; ?></textarea>
+                        <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" rows="5" name="misi" id="misi" placeholder="misi kandidat..." autocomplete="off"><?= $kandidat['misi']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('misi'); ?>
                         </div>

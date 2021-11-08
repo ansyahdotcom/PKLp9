@@ -5,18 +5,21 @@ namespace App\Controllers;
 use App\Models\PeriodeModel;
 use App\Models\UserModel;
 use App\Models\LoginAdminModel;
+use App\Models\KandidatModel;
 
 class Periode extends BaseController
 {
     protected $PeriodeModel;
     protected $UserModel;
     protected $LoginAdminModel;
+    protected $KandidatModel;
 
     public function __construct()
     {
         $this->PeriodeModel = new PeriodeModel;
         $this->UserModel = new UserModel;
         $this->LoginAdminModel = new LoginAdminModel;
+        $this->KandidatModel = new KandidatModel;
     }
 
     public function index()
@@ -87,26 +90,26 @@ class Periode extends BaseController
             'st_periode' => 1
         ]);
 
-        session()->setFlashdata('message', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                Periode telah diaktifkan.
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>');
         session()->setFlashdata('message', 'active');
         return redirect()->to('/periode');
     }
 
     public function open($id)
     {
-        $this->PeriodeModel
-            ->save([
-                'id_periode' => $id,
-                'st_buka' => '1'
-            ]);
+        $cek = $this->KandidatModel->like('created_kd', '' . date('Y') . '%')->findAll();
+        if ($cek == null) {
+            session()->setFlashdata('message', 'cek_buka');
+            return redirect()->to('/periode');
+        } else {
+            $this->PeriodeModel
+                ->save([
+                    'id_periode' => $id,
+                    'st_buka' => '1'
+                ]);
 
-        session()->setFlashdata('message', 'open');
-        return redirect()->to('/periode');
+            session()->setFlashdata('message', 'open');
+            return redirect()->to('/periode');
+        }
     }
 
     public function close($id)
