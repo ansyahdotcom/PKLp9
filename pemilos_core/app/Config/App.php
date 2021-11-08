@@ -23,12 +23,8 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-<<<<<<< Updated upstream:pemilos_core/app/Config/App.php
-	public $baseURL = 'https://pemilos-test.000webhostapp.com/';
-=======
 	// public $baseURL = 'http://localhost:8080/';
 	public $baseURL = BASE;
->>>>>>> Stashed changes:app/Config/App.php
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -60,10 +56,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-<<<<<<< Updated upstream:pemilos_core/app/Config/App.php
-=======
 	// public $uriProtocol = 'REQUEST_URI';
->>>>>>> Stashed changes:app/Config/App.php
 	public $uriProtocol = 'PATH_INFO';
 
 	/**

@@ -9,13 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
     <title>SMAN 8 Surakarta | Pemilihan OSIS</title>
-=======
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-
-    <title>SMAN 8 Surakarta | Pemilihan Osis <?= $title; ?></title>
->>>>>>> Stashed changes:app/Views/layout/template.php
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,12 +17,6 @@
 
     <!-- style CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/style.css">
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
-
-    <!-- Select Picker -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
-=======
->>>>>>> Stashed changes:app/Views/layout/template.php
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -154,18 +142,6 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/assets/js/demo/datatables-demo.js"></script>
 
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template.php
-    <!-- Select Picker -->
-    <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/bootstrap-select.min.js"></script>
-    <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/defaults-*.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.selectpicker').selectpicker();
-            $('select[name=ketua]').selectpicker('val', +$('#old_ketua').val());
-            $('select[name=wakil]').selectpicker('val', +$('#old_wakil').val());
-            $('.selectpicker').selectpicker('refresh');
-        });
-=======
     <script type="text/javascript">
         function getValue1(ketua) {
             if (ketua != '') {
@@ -173,7 +149,6 @@
                 $("select[name=wakil] option[value!='" + ketua + "']").show();
             }
         }
->>>>>>> Stashed changes:app/Views/layout/template.php
     </script>
 
     <script type="text/javascript">
@@ -185,78 +160,6 @@
         }
     </script>
 
-    <script>
-        // Hapus User
-        $(document).ready(function() {
-            $('#datatable').DataTable();
-        });
-
-        $('#datatable').on('click', '.hapus_crud', function() {
-            var id = $(this).data('id');
-            var link = $(this).data('link');
-            var nama = $(this).data('nama');
-
-            swal({
-                title: 'Perhatian!',
-                text: "Yakin akan menghapus data " + nama + " ?",
-                icon: 'warning',
-
-                buttons: {
-                    cancel: {
-                        visible: true,
-                        text: 'Tidak',
-                        className: 'btn btn-danger'
-                    },
-                    confirm: {
-                        text: 'Ya',
-                        className: 'btn btn-success'
-                    }
-                }
-            }).then((willDelete) => {
-                if (willDelete) {
-                    window.location.href = "<?= base_url() ?>" + link + id;
-                } else {
-                    swal.close();
-                }
-            });
-
-        });
-        // Hapus Kelas
-        $(document).ready(function() {
-            $('#datatable').DataTable();
-        });
-
-        $('#datatable').on('click', '.hapus_kelas', function() {
-            var id = $(this).data('id');
-            var link = $(this).data('link');
-            var kelas = $(this).data('kelas');
-
-            swal({
-                title: 'Perhatian!',
-                text: "Yakin akan menghapus data " + kelas + " ?",
-                icon: 'warning',
-
-                buttons: {
-                    cancel: {
-                        visible: true,
-                        text: 'Tidak',
-                        className: 'btn btn-danger'
-                    },
-                    confirm: {
-                        text: 'Ya',
-                        className: 'btn btn-success'
-                    }
-                }
-            }).then((willDelete) => {
-                if (willDelete) {
-                    window.location.href = "<?= base_url() ?>" + link + id;
-                } else {
-                    swal.close();
-                }
-            });
-
-        });
-    </script>
     <script>
         $(document).ready(function() {
             $('.btn-ubahpsw').click(function() {

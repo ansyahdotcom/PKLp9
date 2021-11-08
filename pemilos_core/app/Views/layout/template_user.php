@@ -19,16 +19,6 @@
 
     <!-- style CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/style.css">
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template_user.php
-=======
-
-    <!-- Summer Note -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendor/summernote/summernote-bs4.min.css">
-
-    <!-- Select Picker -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/assets/vendor/selectpicker/dist/css/bootstrap-select.min.css">
-
->>>>>>> Stashed changes:app/Views/layout/template_user.php
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- My CSS -->
@@ -66,11 +56,7 @@
                         <div class="modal-body">Apakah Anda ingin logout?</div>
                         <div class="modal-footer">
                             <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Batal</button>
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template_user.php
-                            <a class="btn btn-danger" href="<?= base_url(''); ?>/logout">Logout</a>
-=======
                             <a class="btn btn-danger" href="<?= base_url(); ?>/logout">Logout</a>
->>>>>>> Stashed changes:app/Views/layout/template_user.php
                         </div>
                     </div>
                 </div>
@@ -117,56 +103,12 @@
     <!-- Page level plugins -->
     <script src="<?= base_url(); ?>/assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="<?= base_url(); ?>/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template_user.php
     
-=======
-    <!-- <script src="<?= base_url(); ?>/assets/vendor/sweetalert/sweetalert.min.js"></script> -->
->>>>>>> Stashed changes:app/Views/layout/template_user.php
     <script src="<?= base_url(); ?>/assets/js/sweetalert2.all.min.js"></script>
     <script src="<?= base_url(); ?>/assets/js/swal.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/assets/js/demo/datatables-demo.js"></script>
-<<<<<<< Updated upstream:pemilos_core/app/Views/layout/template_user.php
-=======
-
-    <!-- Summer Note -->
-    <script src="<?= base_url(); ?>/assets/vendor/summernote/summernote-bs4.min.js"></script>
-    <script>
-        $('#visi').summernote({
-            placeholder: 'visi kandidat',
-            tabsize: 2,
-            height: 100
-        });
-
-        $('#misi').summernote({
-            placeholder: 'visi kandidat',
-            tabsize: 2,
-            height: 100
-        });
-    </script>
-
-    <!-- Select Picker -->
-    <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/bootstrap-select.min.js"></script>
-    <script src="<?= base_url(); ?>/assets/vendor/selectpicker/dist/js/defaults-*.min.js"></script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('.selectpicker').selectpicker();
-
-            $('#ketua').change(function() {
-                $('#hide_ketua').val($('#ketua').val());
-            });
-
-            $('#wakil').change(function() {
-                $('#hide_wakil').val($('#wakil').val());
-            });
-
-            $('#periode').change(function() {
-                $('#hide_periode').val($('#periode').val());
-            });
-        });
-    </script> -->
->>>>>>> Stashed changes:app/Views/layout/template_user.php
 
     <script>
         $(document).ready(function() {
