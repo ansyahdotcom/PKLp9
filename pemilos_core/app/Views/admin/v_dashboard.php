@@ -125,7 +125,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- Content Row -->
 
@@ -178,7 +177,7 @@
                                             } else {
                                                 $hasil = $pembilang / $penyebut * 100 + 0;
                                             }
-                                            echo $hasil . '%';
+                                            echo round($hasil, 2) . '%';
                                         }
                                     }
                                     ?>

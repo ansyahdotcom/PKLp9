@@ -52,14 +52,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nama_psg"><b>Nama Pasangan <span class="text-danger">*</span></b></label>
-                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= $kandidat['nama_pasangan']; ?>" placeholder="nama pasangan (contoh: Pasangan Sip)..."  autocomplete="off">
+                        <input type="text" name="nama_psg" class="form-control <?= ($validation->hasError('nama_psg')) ? 'is-invalid' : ''; ?>" id="nama_psg" value="<?= $kandidat['nama_pasangan']; ?>" placeholder="nama pasangan (contoh: Pasangan Sip)..." autocomplete="off">
                         <div class="invalid-feedback">
                             <?= $validation->getError('nama_psg'); ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="wakil"><b>Foto <span class="text-danger">*</span></b></label>
-                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" accept=".jpg,.jpeg,.png,.gif" onchange="previewImg()"  autocomplete="off">
+                        <input type="file" name="foto" class="form-control <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="foto" accept=".jpg,.jpeg,.png,.gif" onchange="previewImg()" autocomplete="off">
                         <input type="hidden" name="old_foto" value="<?= $kandidat['foto']; ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('foto'); ?>
@@ -67,16 +67,16 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="nama_psg"><b>Visi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" rows="5" name="visi" id="visi" placeholder="visi kandidat..." autocomplete="off"><?= $kandidat['visi']; ?></textarea>
+                        <textarea class="summernote form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" name="visi" id="visi" placeholder="visi kandidat..." required autocomplete="off"><?= $kandidat['visi']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('visi'); ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="nama_psg"><b>Misi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" rows="5" name="misi" id="misi" placeholder="misi kandidat..." autocomplete="off"><?= $kandidat['misi']; ?></textarea>
+                        <textarea class="summernote form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" name="misi" id="misi" placeholder="misi kandidat..." required autocomplete="off"><?= $kandidat['misi']; ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('misi'); ?>
                         </div>

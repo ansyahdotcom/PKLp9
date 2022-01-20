@@ -67,16 +67,16 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="visi"><b>Visi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" rows="5" name="visi" id="visi" placeholder="visi kandidat..." autocomplete="off"><?= old('visi'); ?></textarea>
+                        <textarea class="summernote form-control <?= ($validation->hasError('visi')) ? 'is-invalid' : ''; ?>" name="visi" id="visi" placeholder="visi kandidat..." required autocomplete="off"><?= old('visi'); ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('visi'); ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="misi"><b>Misi <span class="text-danger">*</span></b></label>
-                        <textarea class="form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" rows="5" name="misi" id="misi" placeholder="misi kandidat..." autocomplete="off"><?= old('misi'); ?></textarea>
+                        <textarea class="summernote form-control <?= ($validation->hasError('misi')) ? 'is-invalid' : ''; ?>" name="misi" id="misi" placeholder="misi kandidat..." required autocomplete="off"><?= old('misi'); ?></textarea>
                         <div class="invalid-feedback">
                             <?= $validation->getError('misi'); ?>
                         </div>

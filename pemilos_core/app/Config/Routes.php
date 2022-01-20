@@ -51,6 +51,7 @@ $routes->get('/admin', 'Login::admin');
 $routes->get('/reset', 'Dashboard::resett');
 $routes->get('/admin', 'Login::admin');
 $routes->get('/forgot_password', 'Login::forgot_password');
+$routes->get('/laporan', 'Dashboard::laporan');
 
 // Route Kelas (Admin)
 $routes->get('/kelas/delete/(:any)', 'Kelas::index/$1');

@@ -22,6 +22,8 @@
     <link href="<?= base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- My CSS -->
     <link href="<?= base_url(); ?>/assets/css/style.css" rel="stylesheet">
+    <!-- Summernote -->
+    <link href="<?= base_url(); ?>/assets/vendor/summernote/summernote-bs4.min.css" rel="stylesheet">
 
 </head>
 
@@ -142,6 +144,9 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/assets/js/demo/datatables-demo.js"></script>
 
+    <!-- Summernote -->
+    <script src="<?= base_url(); ?>/assets/vendor/summernote/summernote-bs4.min.js"></script>
+
     <script type="text/javascript">
         function getValue1(ketua) {
             if (ketua != '') {
@@ -194,6 +199,15 @@
                 imgPreview.src = e.target.result;
             }
         }
+    </script>
+
+    <script>
+        $(function() {
+            //Add text editor
+            $('.summernote').summernote({
+                height: 150
+            })
+        })
     </script>
 
 </body>

@@ -32,11 +32,7 @@
                             <div class="card-body">
                                 <div class="row no-gutters">
                                     <div class="col-md-3 mr-3">
-<<<<<<< Updated upstream:pemilos_core/app/Views/v_dashboard_user.php
-                                        <img src="<?= base_url(); ?>\assets\img\fotokandidat\<?= $knd['foto']; ?>" alt="foto kandidat" style="width: 100%;">
-=======
                                         <img src="<?= base_url(); ?>/assets/img/fotokandidat/<?= $knd['foto']; ?>" alt="foto kandidat" style="width: 100%;">
->>>>>>> Stashed changes:app/Views/v_dashboard_user.php
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="font-weight-bold text-primary text-uppercase mb-1">Ketua :</div>
