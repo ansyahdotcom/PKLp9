@@ -88,7 +88,7 @@
                     Kembali
                 </a>
                 <button type="submit" class="btn btn-primary float-right" id="save-btn">
-                    Tambah
+                    Simpan
                 </button>
         </form>
     </div>

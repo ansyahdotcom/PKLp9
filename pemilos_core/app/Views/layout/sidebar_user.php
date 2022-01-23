@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon">
             <i class="fas fa-user"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Siswa <b>PEMILOS</b></div>
+        <div class="sidebar-brand-text mx-3">Siswa <b>PILKETOS</b></div>
     </a>
 
     <!-- Divider -->

@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    <title>SMAN 8 Surakarta | Pemilihan OSIS</title>
+    <title>SMAN 8 Surakarta | PILKETOS</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

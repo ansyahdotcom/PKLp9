@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMAN 8 Surakarta | Pemilihan OSIS</title>
+    <title>SMAN 8 Surakarta | PILKETOS</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Pemilos SMAN 8 Surakarta 2021</span>
+                        <span>Copyright &copy; PILKETOS SMAN 8 Surakarta 2021</span>
                     </div>
                 </div>
             </footer>

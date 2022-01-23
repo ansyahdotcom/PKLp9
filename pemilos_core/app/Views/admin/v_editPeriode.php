@@ -10,7 +10,7 @@
         <form action="<?= base_url(); ?>/periode/update/<?= $periode['id_periode']; ?>" method="post">
             <?= csrf_field(); ?>
             <div class="card-header bg-primary py-3">
-                <h5 class="text-white font-weight-bold text-center">Form Tambah Data Periode</h5>
+                <h5 class="text-white font-weight-bold text-center">Form Edit Data Periode</h5>
             </div>
             <div class="card-body">
                 <div class="form-group">
