@@ -150,10 +150,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>periode/<?= $p['id_periode']; ?>" method="post">
+                <form action="<?= base_url(); ?>/periode/delete" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="DELETE">
                     <div class="modal-body">
+                        <input type="hidden" name="id" value="<?= $p['id_periode']; ?>">
                         Apakah ingin menghapus data ini?
                     </div>
                     <div class="modal-footer">

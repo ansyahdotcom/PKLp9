@@ -24,7 +24,9 @@ class Periode extends BaseController
 
     public function index()
     {
-        $user = $this->LoginAdminModel->where(['username' => session()->get('username')])->first();
+        $user = $this->LoginAdminModel
+                    ->where(['username' => session()->get('username')])
+                    ->first();
         if ($user == NULL) {
             return redirect()->to('/admin');
         } else {
@@ -220,8 +222,10 @@ class Periode extends BaseController
         return redirect()->to('/periode');
     }
 
-    public function delete($id)
+    public function delete()
     {
+        $id = $this->request->getVar('id');
+        
         $this->PeriodeModel->delete($id);
 
         session()->setFlashdata('message', 'delete');

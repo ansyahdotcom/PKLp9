@@ -100,11 +100,7 @@ class Kandidat extends BaseController
      */
     public function save()
     {
-        /**
-         * ===========================================================
-         * Validasi Form
-         * ===========================================================
-         */
+        /** Validasi Form */
         if (!$this->validate([
             'ketua' => [
                 'rules' => 'required',
@@ -147,38 +143,17 @@ class Kandidat extends BaseController
         ])) {
             return redirect()->to('/kandidat/addKandidat')->withInput();
         }
-
-        /**
-         * ===========================================================
-         * Ambil gambar
-         * ===========================================================
-         */
+        /** Ambil gambar */
         $fotoKandidat = $this->request->getFile('foto');
-
         if ($fotoKandidat != "") {
-            /**
-             * ===========================================================
-             * Ambil nama gambar untuk disave di database
-             * ===========================================================
-             */
+            /** Ambil nama gambar untuk disave di database */
             $fotoName = $fotoKandidat->getRandomName();
-
-            /**
-             * ===========================================================
-             * upload gambar
-             * ===========================================================
-             */
+            /**=upload gambar */
             $fotoKandidat->move('assets/img/fotokandidat', $fotoName);
         } else {
             $fotoName = "default.jpg";
         }
-
-
-        /**
-         * ===========================================================
-         * Query builder save data kandidat
-         * ===========================================================
-         */
+        /** Query builder save data kandidat */
         $this->KandidatModel->save([
             'ketua' => $this->request->getVar('ketua'),
             'wakil' => $this->request->getVar('wakil'),
@@ -188,12 +163,7 @@ class Kandidat extends BaseController
             'misi' => $this->request->getVar('misi'),
             'periode' => $this->request->getVar('periode')
         ]);
-
-        /**
-         * ===========================================================
-         * Query builder update user
-         * ===========================================================
-         */
+        /** Query builder update user */
         $dataUser = [
             [
                 'nis' => $this->request->getVar('ketua'),
@@ -204,82 +174,10 @@ class Kandidat extends BaseController
                 'st_kandidat' => '1'
             ]
         ];
-
         $this->UserModel->updateBatch($dataUser, 'nis');
-
-        /**
-         * ===========================================================
-         * Mengirim flashdata
-         * ===========================================================
-         */
+        /** Mengirim flashdata */
         session()->setFlashdata('message', 'save');
-        /**
-         * ===========================================================
-         * Kembali ke view data kandidat
-         * ===========================================================
-         */
-        return redirect()->to('/kandidat');
-    }
-
-    /**
-     * ===========================================================
-     * Fungsi delete data kandidat
-     * ===========================================================
-     */
-    public function delete($id)
-    {
-        /**
-         * ===========================================================
-         * Cari gambar berdasarkan id
-         * ===========================================================
-         */
-        $kandidat = $this->KandidatModel->editKandidat($id);
-
-        /**
-         * ===========================================================
-         * Cek jika gambarnya default
-         * ===========================================================
-         */
-        if ($kandidat['foto'] != 'default.jpg') {
-            /**
-             * ===========================================================
-             * Hapus gambar di folder
-             * ===========================================================
-             */
-            unlink('assets/img/fotokandidat/' . $kandidat['foto']);
-        }
-
-        /**
-         * ===========================================================
-         * Query builder delete kandidat
-         * ===========================================================
-         */
-        $this->KandidatModel->delete($id);
-
-        /**
-         * ===========================================================
-         * Query builder update user
-         * ===========================================================
-         */
-        $dataUser = [
-            [
-                'nis' => $this->request->getVar('ketua'),
-                'st_kandidat' => '0'
-            ],
-            [
-                'nis' => $this->request->getVar('wakil'),
-                'st_kandidat' => '0'
-            ]
-        ];
-
-        $this->UserModel->updateBatch($dataUser, 'nis');
-
-        /**
-         * ===========================================================
-         * Mengirim flashdata
-         * ===========================================================
-         */
-        session()->setFlashdata('message', 'delete');
+        /** Kembali ke view data kandidat */
         return redirect()->to('/kandidat');
     }
 
@@ -352,39 +250,25 @@ class Kandidat extends BaseController
                 ]
             ]
         ])) {
-            return redirect()->to('/kandidat/editKandidat/' . $this->request->getVar('id'))->withInput();
+            return redirect()
+                ->to('/kandidat/editKandidat/' . $this->request->getVar('id'))
+                ->withInput();
         }
-
         $fotoKandidat = $this->request->getFile('foto');
-
-        /**
-         * ===========================================================
-         * Cek old foto
-         * ===========================================================
-         */
+        /** Cek old foto */
         if ($fotoKandidat == "") {
-            /**
-             * ===========================================================
-             * Jika field foto kosong biarkan foto lama
-             * ===========================================================
-             */
+            /** Jika field foto kosong biarkan foto lama */
             $fotoName = $this->request->getVar('old_foto');
         } else {
-            /**
-             * ===========================================================
-             * Jika field foto terisi upload foto baru
-             * ===========================================================
-             */
+            /** Jika field foto terisi upload foto baru */
             $fotoName = $fotoKandidat->getRandomName();
             $fotoKandidat->move('assets/img/fotokandidat', $fotoName);
-
             if ($fotoKandidat != "default.jpg") {
                 unlink('assets/img/fotokandidat/' . $this->request->getVar('old_foto'));
             } else {
                 $fotoName = "default.jpg";
             }
         }
-
         $this->KandidatModel->save([
             'id_kandidat' => $id,
             'ketua' => $this->request->getVar('ketua'),
@@ -395,7 +279,6 @@ class Kandidat extends BaseController
             'misi' => $this->request->getVar('misi'),
             'periode' => $this->request->getVar('periode')
         ]);
-
         if ($this->request->getVar('ketua') != $this->request->getVar('old_ketua')) {
             $dataUser = [
                 [
@@ -410,7 +293,6 @@ class Kandidat extends BaseController
 
             $this->UserModel->updateBatch($dataUser, 'nis');
         }
-
         if ($this->request->getVar('wakil') != $this->request->getVar('old_wakil')) {
             $dataUser = [
                 [
@@ -425,8 +307,42 @@ class Kandidat extends BaseController
 
             $this->UserModel->updateBatch($dataUser, 'nis');
         }
-
         session()->setFlashdata('message', 'edit');
+        return redirect()->to('/kandidat');
+    }
+
+    /**
+     * ===========================================================
+     * Fungsi delete data kandidat
+     * ===========================================================
+     */
+    public function delete()
+    {
+        /** Mengambil id dari form input */
+        $id = $this->request->getVar('id');
+        /** Cari gambar berdasarkan id */
+        $kandidat = $this->KandidatModel->editKandidat($id);
+        /** Cek jika gambarnya default */
+        if ($kandidat['foto'] != 'default.jpg') {
+            /** Hapus gambar di folder */
+            unlink('assets/img/fotokandidat/' . $kandidat['foto']);
+        }
+        /** Query builder delete kandidat */
+        $this->KandidatModel->delete($id);
+        /** Query builder update user */
+        $dataUser = [
+            [
+                'nis' => $this->request->getVar('ketua'),
+                'st_kandidat' => '0'
+            ],
+            [
+                'nis' => $this->request->getVar('wakil'),
+                'st_kandidat' => '0'
+            ]
+        ];
+        $this->UserModel->updateBatch($dataUser, 'nis');
+        /** Mengirim flashdata */
+        session()->setFlashdata('message', 'delete');
         return redirect()->to('/kandidat');
     }
 }

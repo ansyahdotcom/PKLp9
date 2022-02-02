@@ -179,11 +179,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url(); ?>/kandidat/<?= $k['id_kandidat']; ?>" method="post">
+                <form action="<?= base_url(); ?>/kandidat/delete" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="DELETE">
                     <div class="modal-body">
                         Apakah ingin menghapus data ini?
+                        <input type="text" name="id" value="<?= $k['id_kandidat']; ?>">
                         <input type="hidden" name="ketua" value="<?= $k['ketua']; ?>">
                         <input type="hidden" name="wakil" value="<?= $k['wakil']; ?>">
                     </div>
